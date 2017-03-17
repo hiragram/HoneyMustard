@@ -13,6 +13,12 @@
 		6011A38E1E7C5DD10061F3A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6011A38D1E7C5DD10061F3A6 /* Assets.xcassets */; };
 		6011A3911E7C5DD10061F3A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6011A38F1E7C5DD10061F3A6 /* LaunchScreen.storyboard */; };
 		6011A39C1E7C5DD10061F3A6 /* HoneyMustardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6011A39B1E7C5DD10061F3A6 /* HoneyMustardTests.swift */; };
+		6011A3AC1E7C61450061F3A6 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A61E7C61450061F3A6 /* CommonCrypto.framework */; };
+		6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A71E7C61450061F3A6 /* Crypto.framework */; };
+		6011A3AE1E7C61450061F3A6 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A81E7C61450061F3A6 /* RxBlocking.framework */; };
+		6011A3AF1E7C61450061F3A6 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A91E7C61450061F3A6 /* RxCocoa.framework */; };
+		6011A3B01E7C61450061F3A6 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AA1E7C61450061F3A6 /* RxSwift.framework */; };
+		6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AB1E7C61450061F3A6 /* Somen.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +42,12 @@
 		6011A3971E7C5DD10061F3A6 /* HoneyMustardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HoneyMustardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6011A39B1E7C5DD10061F3A6 /* HoneyMustardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoneyMustardTests.swift; sourceTree = "<group>"; };
 		6011A39D1E7C5DD10061F3A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6011A3A61E7C61450061F3A6 /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = Carthage/Build/iOS/CommonCrypto.framework; sourceTree = "<group>"; };
+		6011A3A71E7C61450061F3A6 /* Crypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crypto.framework; path = Carthage/Build/iOS/Crypto.framework; sourceTree = "<group>"; };
+		6011A3A81E7C61450061F3A6 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		6011A3A91E7C61450061F3A6 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		6011A3AA1E7C61450061F3A6 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		6011A3AB1E7C61450061F3A6 /* Somen.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Somen.framework; path = Carthage/Build/iOS/Somen.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +55,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6011A3B01E7C61450061F3A6 /* RxSwift.framework in Frameworks */,
+				6011A3AF1E7C61450061F3A6 /* RxCocoa.framework in Frameworks */,
+				6011A3AC1E7C61450061F3A6 /* CommonCrypto.framework in Frameworks */,
+				6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */,
+				6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */,
+				6011A3AE1E7C61450061F3A6 /* RxBlocking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +80,7 @@
 				6011A3851E7C5DD10061F3A6 /* HoneyMustard */,
 				6011A39A1E7C5DD10061F3A6 /* HoneyMustardTests */,
 				6011A3841E7C5DD10061F3A6 /* Products */,
+				6011A3B21E7C614B0061F3A6 /* Dependencies */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +115,19 @@
 			path = HoneyMustardTests;
 			sourceTree = "<group>";
 		};
+		6011A3B21E7C614B0061F3A6 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				6011A3A61E7C61450061F3A6 /* CommonCrypto.framework */,
+				6011A3A71E7C61450061F3A6 /* Crypto.framework */,
+				6011A3A81E7C61450061F3A6 /* RxBlocking.framework */,
+				6011A3A91E7C61450061F3A6 /* RxCocoa.framework */,
+				6011A3AA1E7C61450061F3A6 /* RxSwift.framework */,
+				6011A3AB1E7C61450061F3A6 /* Somen.framework */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,6 +138,7 @@
 				6011A37F1E7C5DD10061F3A6 /* Sources */,
 				6011A3801E7C5DD10061F3A6 /* Frameworks */,
 				6011A3811E7C5DD10061F3A6 /* Resources */,
+				6011A3B31E7C616B0061F3A6 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -195,6 +228,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6011A3B31E7C616B0061F3A6 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CommonCrypto.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Crypto.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Somen.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6011A37F1E7C5DD10061F3A6 /* Sources */ = {
@@ -340,6 +396,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q3N95Y73WF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HoneyMustard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.yura.HoneyMustard;
@@ -353,6 +413,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q3N95Y73WF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HoneyMustard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.yura.HoneyMustard;
