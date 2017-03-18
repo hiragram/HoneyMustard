@@ -8,6 +8,18 @@
 
 import Foundation
 
-struct TweetEntity {
-  
+public struct TweetEntity {
+  let id: Int
+  let createdAt: Date
+  let text: String
+
+  public init(json: [String: Any]) throws {
+    id = try json.get(valueForKey: "id")
+    let createdAtStr: String = try json.get(valueForKey: "created_at")
+    guard let date = Date.init(twitterDateString: createdAtStr) else {
+      throw JSONMappingError.mappingFailed(message: "Failed to parse date string \(createdAtStr))")
+    }
+    createdAt = date
+    text = try json.get(valueForKey: "text")
+  }
 }

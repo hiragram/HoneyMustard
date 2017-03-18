@@ -29,13 +29,30 @@ public struct TweetRepository {
       accessToken: accessToken,
       accessTokenSecret: accessTokenSecret
     )
-
     return Variable.init(somen)
   }()
 }
+
+// - MARK: API Observables
+
+public extension TweetRepository {
+  public static func userstream() throws -> Observable<SomenEvent> {
+    guard let somen = somen.value else {
+      throw TweetRepositoryError.authorizationIsNotProvided
+    }
+
+    return somen.userstream()
+  }
+}
+
+// - MARK: States
 
 public extension TweetRepository {
   public static var isAuthorized: Observable<Bool> {
     return somen.asObservable().map { $0 != nil }
   }
+}
+
+enum TweetRepositoryError: Error {
+  case authorizationIsNotProvided
 }
