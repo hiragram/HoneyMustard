@@ -8,43 +8,53 @@
 
 import UIKit
 import SplitViewController
+import Models
+import RxSwift
+import OAuthSwift
 
 class GlobalController: UIViewController {
+
+  private let bag = DisposeBag.init()
 
   private var rootViewController: UIViewController!
 
   override func loadView() {
     super.loadView()
 
-    let editVC = TweetEditViewController.instantiateFromStoryboard()
-    let timelineVC = TimelineViewController.instantiateFromStoryboard()
-    let splitVC = SplitViewController.init(upperViewController: timelineVC, lowerViewController: editVC)
+    TweetRepository.isAuthorized
+      .filter { $0 == true }
+      .subscribe(onNext: { [unowned self] (_) in
+        let editVC = TweetEditViewController.instantiateFromStoryboard()
+        let timelineVC = TimelineViewController.instantiateFromStoryboard()
+        let splitVC = SplitViewController.init(upperViewController: timelineVC, lowerViewController: editVC)
 
-    addChildViewController(splitVC)
-    view.addSubview(splitVC.view)
-    splitVC.view.translatesAutoresizingMaskIntoConstraints = false
-    splitVC.didMove(toParentViewController: self)
-    rootViewController = splitVC
+        self.addChildViewController(splitVC)
+        self.view.addSubview(splitVC.view)
+        splitVC.view.translatesAutoresizingMaskIntoConstraints = false
+        splitVC.didMove(toParentViewController: self)
+        self.rootViewController = splitVC
+      }).addDisposableTo(bag)
   }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
-  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+    TweetRepository.isAuthorized.subscribe(onNext: { (isAuthorized) in
+      if !isAuthorized {
+        // OAuthSwiftの実装やる
+      }
+    }).addDisposableTo(bag)
   }
 
   override func updateViewConstraints() {
     super.updateViewConstraints()
 
-    let constraints = [NSLayoutAttribute.top, .bottom, .right, .left].map { (attribute) -> NSLayoutConstraint in
-      return NSLayoutConstraint.init(item: view, attribute: attribute, relatedBy: .equal, toItem: rootViewController.view, attribute: attribute, multiplier: 1, constant: 0)
+    if let rootViewController = rootViewController {
+      let constraints = [NSLayoutAttribute.top, .bottom, .right, .left].map { (attribute) -> NSLayoutConstraint in
+        return NSLayoutConstraint.init(item: view, attribute: attribute, relatedBy: .equal, toItem: rootViewController.view, attribute: attribute, multiplier: 1, constant: 0)
+      }
+      view.addConstraints(constraints)
     }
-
-    view.addConstraints(constraints)
   }
 }
 

@@ -4,3 +4,4 @@ github "RxSwiftCommunity/RxKeyboard" ~> 0.4.0
 github "kishikawakatsumi/KeychainAccess" ~> 3.0.0
 github "hiragram/SplitViewController" ~> 0.1.0
 github "RxSwiftCommunity/RxDataSources" ~> 1.0.0
+github "OAuthSwift/OAuthSwift" ~> 1.1.0
