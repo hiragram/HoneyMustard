@@ -19,6 +19,7 @@
 		6011A3AF1E7C61450061F3A6 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A91E7C61450061F3A6 /* RxCocoa.framework */; };
 		6011A3B01E7C61450061F3A6 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AA1E7C61450061F3A6 /* RxSwift.framework */; };
 		6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AB1E7C61450061F3A6 /* Somen.framework */; };
+		6011A3B51E7CCAE60061F3A6 /* RxKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3B41E7CCAE60061F3A6 /* RxKeyboard.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		6011A3A91E7C61450061F3A6 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		6011A3AA1E7C61450061F3A6 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		6011A3AB1E7C61450061F3A6 /* Somen.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Somen.framework; path = Carthage/Build/iOS/Somen.framework; sourceTree = "<group>"; };
+		6011A3B41E7CCAE60061F3A6 /* RxKeyboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxKeyboard.framework; path = Carthage/Build/iOS/RxKeyboard.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */,
 				6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */,
 				6011A3AE1E7C61450061F3A6 /* RxBlocking.framework in Frameworks */,
+				6011A3B51E7CCAE60061F3A6 /* RxKeyboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +121,7 @@
 		6011A3B21E7C614B0061F3A6 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				6011A3B41E7CCAE60061F3A6 /* RxKeyboard.framework */,
 				6011A3A61E7C61450061F3A6 /* CommonCrypto.framework */,
 				6011A3A71E7C61450061F3A6 /* Crypto.framework */,
 				6011A3A81E7C61450061F3A6 /* RxBlocking.framework */,
@@ -242,6 +246,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Somen.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxKeyboard.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -474,6 +479,7 @@
 				6011A3A21E7C5DD10061F3A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6011A3A31E7C5DD10061F3A6 /* Build configuration list for PBXNativeTarget "HoneyMustardTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +488,7 @@
 				6011A3A51E7C5DD10061F3A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
