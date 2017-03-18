@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SplitViewController
 
 class GlobalController: UIViewController {
 
@@ -14,6 +15,16 @@ class GlobalController: UIViewController {
 
   override func loadView() {
     super.loadView()
+
+    let editVC = TweetEditViewController.instantiateFromStoryboard()
+    let timelineVC = TimelineViewController.instantiateFromStoryboard()
+    let splitVC = SplitViewController.init(upperViewController: timelineVC, lowerViewController: editVC)
+
+    addChildViewController(splitVC)
+    view.addSubview(splitVC.view)
+    splitVC.view.translatesAutoresizingMaskIntoConstraints = false
+    splitVC.didMove(toParentViewController: self)
+    rootViewController = splitVC
   }
 
   override func viewDidLoad() {
@@ -26,6 +37,14 @@ class GlobalController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
 
+  override func updateViewConstraints() {
+    super.updateViewConstraints()
 
+    let constraints = [NSLayoutAttribute.top, .bottom, .right, .left].map { (attribute) -> NSLayoutConstraint in
+      return NSLayoutConstraint.init(item: view, attribute: attribute, relatedBy: .equal, toItem: rootViewController.view, attribute: attribute, multiplier: 1, constant: 0)
+    }
+
+    view.addConstraints(constraints)
+  }
 }
 

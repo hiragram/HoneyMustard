@@ -20,6 +20,7 @@
 		6011A3B01E7C61450061F3A6 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AA1E7C61450061F3A6 /* RxSwift.framework */; };
 		6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AB1E7C61450061F3A6 /* Somen.framework */; };
 		6011A3B51E7CCAE60061F3A6 /* RxKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3B41E7CCAE60061F3A6 /* RxKeyboard.framework */; };
+		601FAE431E7CFEDA00E6F23C /* SplitViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601FAE421E7CFEDA00E6F23C /* SplitViewController.framework */; };
 		6042EE971E7CCC7F004C0485 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6042EE8E1E7CCC7F004C0485 /* Models.framework */; };
 		6042EE9E1E7CCC7F004C0485 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EE9D1E7CCC7F004C0485 /* ModelsTests.swift */; };
 		6042EEA01E7CCC7F004C0485 /* Models.h in Headers */ = {isa = PBXBuildFile; fileRef = 6042EE901E7CCC7F004C0485 /* Models.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -102,6 +103,7 @@
 		6011A3AA1E7C61450061F3A6 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		6011A3AB1E7C61450061F3A6 /* Somen.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Somen.framework; path = Carthage/Build/iOS/Somen.framework; sourceTree = "<group>"; };
 		6011A3B41E7CCAE60061F3A6 /* RxKeyboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxKeyboard.framework; path = Carthage/Build/iOS/RxKeyboard.framework; sourceTree = "<group>"; };
+		601FAE421E7CFEDA00E6F23C /* SplitViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SplitViewController.framework; path = Carthage/Build/iOS/SplitViewController.framework; sourceTree = "<group>"; };
 		6042EE8E1E7CCC7F004C0485 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6042EE901E7CCC7F004C0485 /* Models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Models.h; sourceTree = "<group>"; };
 		6042EE911E7CCC7F004C0485 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				6011A3AC1E7C61450061F3A6 /* CommonCrypto.framework in Frameworks */,
 				6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */,
 				6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */,
+				601FAE431E7CFEDA00E6F23C /* SplitViewController.framework in Frameworks */,
 				6011A3AE1E7C61450061F3A6 /* RxBlocking.framework in Frameworks */,
 				6011A3B51E7CCAE60061F3A6 /* RxKeyboard.framework in Frameworks */,
 			);
@@ -217,6 +220,7 @@
 		6011A3B21E7C614B0061F3A6 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				601FAE421E7CFEDA00E6F23C /* SplitViewController.framework */,
 				6042EEB21E7CCF1E004C0485 /* KeychainAccess.framework */,
 				6011A3B41E7CCAE60061F3A6 /* RxKeyboard.framework */,
 				6011A3A61E7C61450061F3A6 /* CommonCrypto.framework */,
@@ -445,6 +449,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxKeyboard.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SplitViewController.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -817,6 +822,7 @@
 				6042EEA81E7CCC7F004C0485 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6042EEA91E7CCC7F004C0485 /* Build configuration list for PBXNativeTarget "ModelsTests" */ = {
 			isa = XCConfigurationList;
@@ -825,6 +831,7 @@
 				6042EEAB1E7CCC7F004C0485 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
