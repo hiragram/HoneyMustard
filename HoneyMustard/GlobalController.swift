@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GlobalController.swift
 //  HoneyMustard
 //
 //  Created by Yuya Hirayama on 2017/03/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GlobalController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
