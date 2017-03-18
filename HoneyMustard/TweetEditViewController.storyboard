@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="g7k-jr-JlC">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tweet Edit View Controller-->
+        <scene sceneID="yY8-Am-Xad">
+            <objects>
+                <viewController id="g7k-jr-JlC" customClass="TweetEditViewController" customModule="HoneyMustard" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vZ5-6f-8xn"/>
+                        <viewControllerLayoutGuide type="bottom" id="d4m-Xc-Y2m"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xrb-fZ-duE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8a-7a-aAx" userLabel="textContainer">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="114"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="exn-4a-GJy">
+                                        <rect key="frame" x="8" y="8" width="359" height="98"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="exn-4a-GJy" secondAttribute="bottom" priority="250" constant="8" id="0yh-GH-bfh"/>
+                                    <constraint firstItem="exn-4a-GJy" firstAttribute="leading" secondItem="q8a-7a-aAx" secondAttribute="leading" constant="8" id="1a9-Nk-Sh9"/>
+                                    <constraint firstItem="exn-4a-GJy" firstAttribute="top" secondItem="q8a-7a-aAx" secondAttribute="top" priority="250" constant="8" id="69l-nC-BsF"/>
+                                    <constraint firstAttribute="height" priority="250" constant="114" id="aXW-nB-SId"/>
+                                    <constraint firstAttribute="trailing" secondItem="exn-4a-GJy" secondAttribute="trailing" constant="8" id="aeT-zG-F7Z"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQU-VO-43q" userLabel="attachmentContainer">
+                                <rect key="frame" x="0.0" y="114" width="375" height="42"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INg-QV-uN4" userLabel="controlContainer">
+                                <rect key="frame" x="0.0" y="156" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SnN-zU-Nrw">
+                                        <rect key="frame" x="336" y="7" width="31" height="30"/>
+                                        <state key="normal" title="送信"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" constant="44" id="60U-da-3fR"/>
+                                    <constraint firstItem="SnN-zU-Nrw" firstAttribute="centerY" secondItem="INg-QV-uN4" secondAttribute="centerY" id="DlL-Ns-Xd6"/>
+                                    <constraint firstAttribute="trailing" secondItem="SnN-zU-Nrw" secondAttribute="trailing" constant="8" id="qdU-ku-mh4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="q8a-7a-aAx" secondAttribute="trailing" id="SZe-ET-FbH"/>
+                            <constraint firstItem="GQU-VO-43q" firstAttribute="leading" secondItem="xrb-fZ-duE" secondAttribute="leading" id="WGH-Sh-rdn"/>
+                            <constraint firstAttribute="trailing" secondItem="GQU-VO-43q" secondAttribute="trailing" id="WtT-Tw-RO0"/>
+                            <constraint firstItem="q8a-7a-aAx" firstAttribute="leading" secondItem="xrb-fZ-duE" secondAttribute="leading" id="cvK-H8-ush"/>
+                            <constraint firstItem="GQU-VO-43q" firstAttribute="top" secondItem="q8a-7a-aAx" secondAttribute="bottom" id="ebH-fT-KLH"/>
+                            <constraint firstItem="d4m-Xc-Y2m" firstAttribute="top" secondItem="INg-QV-uN4" secondAttribute="bottom" id="kS7-VD-XyS"/>
+                            <constraint firstAttribute="trailing" secondItem="INg-QV-uN4" secondAttribute="trailing" id="lOD-iz-OXs"/>
+                            <constraint firstItem="INg-QV-uN4" firstAttribute="leading" secondItem="xrb-fZ-duE" secondAttribute="leading" id="seV-MZ-IVS"/>
+                            <constraint firstItem="q8a-7a-aAx" firstAttribute="top" secondItem="vZ5-6f-8xn" secondAttribute="bottom" id="tfo-PY-Mvq"/>
+                            <constraint firstItem="INg-QV-uN4" firstAttribute="top" secondItem="GQU-VO-43q" secondAttribute="bottom" id="v2u-c9-8eO"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="200"/>
+                    <connections>
+                        <outlet property="submitButton" destination="SnN-zU-Nrw" id="S9w-n8-Mll"/>
+                        <outlet property="textField" destination="exn-4a-GJy" id="nig-r3-ATZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qOR-cl-sUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="548" y="-116.04197901049476"/>
+        </scene>
+    </scenes>
+</document>

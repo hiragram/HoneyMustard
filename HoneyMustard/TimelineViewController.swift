@@ -10,6 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class TimelineViewController: UIViewController {
+final class TimelineViewController: UIViewController, StoryboardInstantiatable {
   
 }
