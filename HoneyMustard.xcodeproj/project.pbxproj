@@ -24,6 +24,9 @@
 		601FAE451E7D077200E6F23C /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 601FAE441E7D077200E6F23C /* TweetCell.xib */; };
 		601FAE471E7D272300E6F23C /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE461E7D272300E6F23C /* TweetCell.swift */; };
 		601FAE4C1E7D283900E6F23C /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE4B1E7D283900E6F23C /* UITableView.swift */; };
+		601FAE4E1E7D2A5200E6F23C /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601FAE4D1E7D2A5200E6F23C /* RxDataSources.framework */; };
+		601FAE501E7D2A7E00E6F23C /* TweetEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE4F1E7D2A7E00E6F23C /* TweetEntity.swift */; };
+		601FAE521E7D2AC900E6F23C /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE511E7D2AC900E6F23C /* Dictionary.swift */; };
 		6042EE971E7CCC7F004C0485 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6042EE8E1E7CCC7F004C0485 /* Models.framework */; };
 		6042EE9E1E7CCC7F004C0485 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EE9D1E7CCC7F004C0485 /* ModelsTests.swift */; };
 		6042EEA01E7CCC7F004C0485 /* Models.h in Headers */ = {isa = PBXBuildFile; fileRef = 6042EE901E7CCC7F004C0485 /* Models.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -110,6 +113,9 @@
 		601FAE441E7D077200E6F23C /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
 		601FAE461E7D272300E6F23C /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		601FAE4B1E7D283900E6F23C /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		601FAE4D1E7D2A5200E6F23C /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
+		601FAE4F1E7D2A7E00E6F23C /* TweetEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetEntity.swift; sourceTree = "<group>"; };
+		601FAE511E7D2AC900E6F23C /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		6042EE8E1E7CCC7F004C0485 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6042EE901E7CCC7F004C0485 /* Models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Models.h; sourceTree = "<group>"; };
 		6042EE911E7CCC7F004C0485 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 				6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */,
 				6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */,
 				601FAE431E7CFEDA00E6F23C /* SplitViewController.framework in Frameworks */,
+				601FAE4E1E7D2A5200E6F23C /* RxDataSources.framework in Frameworks */,
 				6011A3AE1E7C61450061F3A6 /* RxBlocking.framework in Frameworks */,
 				6011A3B51E7CCAE60061F3A6 /* RxKeyboard.framework in Frameworks */,
 			);
@@ -201,9 +208,9 @@
 			children = (
 				6011A3861E7C5DD10061F3A6 /* AppDelegate.swift */,
 				6011A3881E7C5DD10061F3A6 /* GlobalController.swift */,
-				601FAE481E7D27FE00E6F23C /* Cell */,
-				601FAE491E7D280A00E6F23C /* ViewController */,
-				601FAE4A1E7D282900E6F23C /* Protocol/Extension */,
+				601FAE481E7D27FE00E6F23C /* Cells */,
+				601FAE491E7D280A00E6F23C /* ViewControllers */,
+				601FAE4A1E7D282900E6F23C /* Protocols/Extensions */,
 				6011A38A1E7C5DD10061F3A6 /* Main.storyboard */,
 				6011A38D1E7C5DD10061F3A6 /* Assets.xcassets */,
 				6011A38F1E7C5DD10061F3A6 /* LaunchScreen.storyboard */,
@@ -224,6 +231,7 @@
 		6011A3B21E7C614B0061F3A6 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				601FAE4D1E7D2A5200E6F23C /* RxDataSources.framework */,
 				601FAE421E7CFEDA00E6F23C /* SplitViewController.framework */,
 				6042EEB21E7CCF1E004C0485 /* KeychainAccess.framework */,
 				6011A3B41E7CCAE60061F3A6 /* RxKeyboard.framework */,
@@ -237,16 +245,16 @@
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		601FAE481E7D27FE00E6F23C /* Cell */ = {
+		601FAE481E7D27FE00E6F23C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				601FAE441E7D077200E6F23C /* TweetCell.xib */,
 				601FAE461E7D272300E6F23C /* TweetCell.swift */,
 			);
-			name = Cell;
+			name = Cells;
 			sourceTree = "<group>";
 		};
-		601FAE491E7D280A00E6F23C /* ViewController */ = {
+		601FAE491E7D280A00E6F23C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				6042EEB61E7CE3D8004C0485 /* TimelineViewController.swift */,
@@ -254,16 +262,24 @@
 				6042EEBE1E7CE676004C0485 /* TweetEditViewController.storyboard */,
 				6042EEB81E7CE3F7004C0485 /* TimelineViewController.storyboard */,
 			);
-			name = ViewController;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		601FAE4A1E7D282900E6F23C /* Protocol/Extension */ = {
+		601FAE4A1E7D282900E6F23C /* Protocols/Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				6042EEBA1E7CE442004C0485 /* StoryboardInstantiatable.swift */,
 				601FAE4B1E7D283900E6F23C /* UITableView.swift */,
 			);
-			name = Protocol/Extension;
+			name = Protocols/Extensions;
+			sourceTree = "<group>";
+		};
+		601FAE531E7D2ACE00E6F23C /* Protocols/Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				601FAE511E7D2AC900E6F23C /* Dictionary.swift */,
+			);
+			name = Protocols/Extensions;
 			sourceTree = "<group>";
 		};
 		6042EE8F1E7CCC7F004C0485 /* Models */ = {
@@ -272,6 +288,8 @@
 				6042EE901E7CCC7F004C0485 /* Models.h */,
 				6042EE911E7CCC7F004C0485 /* Info.plist */,
 				6042EEAC1E7CCD1E004C0485 /* TweetRepository.swift */,
+				601FAE4F1E7D2A7E00E6F23C /* TweetEntity.swift */,
+				601FAE531E7D2ACE00E6F23C /* Protocols/Extensions */,
 				6042EEB41E7CD33C004C0485 /* Keychain.swift */,
 			);
 			path = Models;
@@ -484,6 +502,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxKeyboard.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SplitViewController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -522,6 +541,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6042EEAD1E7CCD1E004C0485 /* TweetRepository.swift in Sources */,
+				601FAE521E7D2AC900E6F23C /* Dictionary.swift in Sources */,
+				601FAE501E7D2A7E00E6F23C /* TweetEntity.swift in Sources */,
 				6042EEB51E7CD33C004C0485 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
