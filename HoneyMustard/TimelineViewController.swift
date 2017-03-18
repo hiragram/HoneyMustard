@@ -11,5 +11,6 @@ import RxSwift
 import RxCocoa
 
 final class TimelineViewController: UIViewController, StoryboardInstantiatable {
+  @IBOutlet fileprivate weak var tableView: UITableView!
   
 }
