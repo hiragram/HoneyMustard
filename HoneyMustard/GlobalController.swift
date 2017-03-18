@@ -10,6 +10,12 @@ import UIKit
 
 class GlobalController: UIViewController {
 
+  private var rootViewController: UIViewController!
+
+  override func loadView() {
+    super.loadView()
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.

@@ -32,6 +32,8 @@
 		6042EEB11E7CCD36004C0485 /* Somen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AB1E7C61450061F3A6 /* Somen.framework */; };
 		6042EEB31E7CCF1E004C0485 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6042EEB21E7CCF1E004C0485 /* KeychainAccess.framework */; };
 		6042EEB51E7CD33C004C0485 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EEB41E7CD33C004C0485 /* Keychain.swift */; };
+		6042EEB71E7CE3D8004C0485 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EEB61E7CE3D8004C0485 /* TimelineViewController.swift */; };
+		6042EEB91E7CE3F7004C0485 /* TimelineViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6042EEB81E7CE3F7004C0485 /* TimelineViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,8 @@
 		6042EEAC1E7CCD1E004C0485 /* TweetRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetRepository.swift; sourceTree = "<group>"; };
 		6042EEB21E7CCF1E004C0485 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		6042EEB41E7CD33C004C0485 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		6042EEB61E7CE3D8004C0485 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		6042EEB81E7CE3F7004C0485 /* TimelineViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TimelineViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,8 @@
 			children = (
 				6011A3861E7C5DD10061F3A6 /* AppDelegate.swift */,
 				6011A3881E7C5DD10061F3A6 /* GlobalController.swift */,
+				6042EEB61E7CE3D8004C0485 /* TimelineViewController.swift */,
+				6042EEB81E7CE3F7004C0485 /* TimelineViewController.storyboard */,
 				6011A38A1E7C5DD10061F3A6 /* Main.storyboard */,
 				6011A38D1E7C5DD10061F3A6 /* Assets.xcassets */,
 				6011A38F1E7C5DD10061F3A6 /* LaunchScreen.storyboard */,
@@ -386,6 +392,7 @@
 			files = (
 				6011A3911E7C5DD10061F3A6 /* LaunchScreen.storyboard in Resources */,
 				6011A38E1E7C5DD10061F3A6 /* Assets.xcassets in Resources */,
+				6042EEB91E7CE3F7004C0485 /* TimelineViewController.storyboard in Resources */,
 				6011A38C1E7C5DD10061F3A6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +452,7 @@
 			files = (
 				6011A3891E7C5DD10061F3A6 /* GlobalController.swift in Sources */,
 				6011A3871E7C5DD10061F3A6 /* AppDelegate.swift in Sources */,
+				6042EEB71E7CE3D8004C0485 /* TimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
