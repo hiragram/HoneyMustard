@@ -14,22 +14,34 @@ public struct TweetRepository {
   static let consumerKey = "C518wxiwwHsfUWORezGgnM1MH"
   static let consumerSecret = "fnuzGVK61pjPm3TgeWeTS4BpgiNkOlffFntYPxV7aJFJaipyY2"
 
+  static let bag = DisposeBag.init()
+
   fileprivate static let somen: Variable<Somen?> = { _ -> Variable<Somen?> in
-    guard let accessToken = Keychain.accessToken() else {
-      return Variable.init(nil)
+
+    let variable: Variable<Somen?>
+
+    if let accessToken = Keychain.accessToken(), let accessTokenSecret = Keychain.accessTokenSecret() {
+      let somen = Somen.init(
+        consumerKey: consumerKey,
+        consumerSecret: consumerSecret,
+        accessToken: accessToken,
+        accessTokenSecret: accessTokenSecret
+      )
+      variable = Variable.init(somen)
+    } else {
+      variable = Variable.init(nil)
     }
 
-    guard let accessTokenSecret = Keychain.accessTokenSecret() else {
-      return Variable.init(nil)
-    }
+    Keychain.credential.map { credential -> Somen in
+      return Somen.init(
+        consumerKey: consumerKey,
+        consumerSecret: consumerSecret,
+        accessToken: credential.accessToken,
+        accessTokenSecret: credential.accessTokenSecret
+      )
+    }.bindTo(variable).addDisposableTo(bag)
 
-    let somen = Somen.init(
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret
-    )
-    return Variable.init(somen)
+    return variable
   }()
 }
 

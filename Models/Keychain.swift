@@ -8,8 +8,15 @@
 
 import Foundation
 import KeychainAccess
+import RxSwift
 
-struct Keychain {
+public struct Keychain {
+
+  private static let _credential = PublishSubject<(accessToken: String, accessTokenSecret: String)>.init()
+  static var credential: Observable<(accessToken: String, accessTokenSecret: String)> {
+    return _credential.asObservable()
+  }
+
   private static let keychain = KeychainAccess.Keychain.init(service: "me.yura.HoneyMustard")
 
   static func accessToken() -> String? {
@@ -18,6 +25,20 @@ struct Keychain {
 
   static func accessTokenSecret() -> String? {
     return get(key: "accessTokenSecret")
+  }
+
+  public static func set(accessToken: String, accessTokenSecret: String) {
+    set(value: accessToken, forKey: "accessToken")
+    set(value: accessTokenSecret, forKey: "accessTokenSecret")
+    _credential.onNext((accessToken: accessToken, accessTokenSecret: accessTokenSecret))
+  }
+
+  private static func set(value: String, forKey key: String) {
+    do {
+      try keychain.set(value, key: key)
+    } catch let error {
+      print(error)
+    }
   }
 
   private static func get(key: String) -> String? {
