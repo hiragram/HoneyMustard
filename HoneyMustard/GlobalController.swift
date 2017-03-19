@@ -35,6 +35,7 @@ class GlobalController: UIViewController {
         splitVC.view.translatesAutoresizingMaskIntoConstraints = false
         splitVC.didMove(toParentViewController: self)
         self.rootViewController = splitVC
+        self.updateViewConstraints()
       }).addDisposableTo(bag)
   }
 
