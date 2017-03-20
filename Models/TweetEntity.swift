@@ -9,9 +9,9 @@
 import Foundation
 
 public struct TweetEntity {
-  let id: Int
-  let createdAt: Date
-  let text: String
+  public let id: Int
+  public let createdAt: Date
+  public let text: String
 
   public init(json: [String: Any]) throws {
     id = try json.get(valueForKey: "id")

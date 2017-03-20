@@ -9,7 +9,10 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Models
 
 final class TweetCell: UITableViewCell {
-
+  func setup(tweet: TweetEntity) {
+    
+  }
 }

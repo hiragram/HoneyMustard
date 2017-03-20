@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Dictionary {
+public extension Dictionary {
   func get<T>(valueForKey key: Key) throws -> T {
     guard let value = self[key] as? T else {
       throw DictionaryExtractionError.castFailed(key: String.init(describing: key), actualValue: self[key])
