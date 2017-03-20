@@ -11,9 +11,17 @@ import RxSwift
 import RxCocoa
 
 final class TweetEditViewController: UIViewController, StoryboardInstantiatable {
-  @IBOutlet fileprivate weak var textField: UITextView!
+  @IBOutlet fileprivate weak var textField: UITextView! {
+    didSet {
+      textField.layer.cornerRadius = 5
+      textField.layer.borderColor = UIColor.lightGray.cgColor
+      textField.layer.borderWidth = 0.5
+    }
+  }
   @IBOutlet fileprivate weak var submitButton: UIButton!
-  
+
+  private let images = Variable<[UIImage]>.init([])
+
 }
 
 // - MARK: Observables
