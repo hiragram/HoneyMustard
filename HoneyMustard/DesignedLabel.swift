@@ -28,13 +28,6 @@ class DesignedLabel: UILabel {
     }
   }
 
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    if textColor == UIColor.black {
-      textColor = UIColor.undesigned
-    }
-  }
-
   var typography: Typography? {
     didSet {
       font = typography?.font

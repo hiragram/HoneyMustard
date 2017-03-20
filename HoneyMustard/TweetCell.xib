@@ -17,36 +17,36 @@
             <rect key="frame" x="0.0" y="0.0" width="380" height="209"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Swp-g2-cWY" id="1OT-6a-aHP">
-                <rect key="frame" x="0.0" y="0.0" width="380" height="208"/>
+                <rect key="frame" x="0.0" y="0.0" width="380" height="208.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nrd-MO-5oC" userLabel="userIcon">
-                        <rect key="frame" x="8" y="8" width="60" height="60"/>
+                        <rect key="frame" x="8" y="8" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Nrd-MO-5oC" secondAttribute="height" multiplier="1:1" id="0FM-Uj-bxO"/>
-                            <constraint firstAttribute="width" constant="60" id="dju-MK-iIg"/>
+                            <constraint firstAttribute="width" constant="40" id="dju-MK-iIg"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgE-Az-bvT" userLabel="usernameLabel">
-                        <rect key="frame" x="76" y="8" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgE-Az-bvT" userLabel="usernameLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                        <rect key="frame" x="56" y="8" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av0-oP-mAJ" userLabel="screennameLabel">
-                        <rect key="frame" x="126" y="8" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av0-oP-mAJ" userLabel="screennameLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                        <rect key="frame" x="102" y="8" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4X-7z-17G" userLabel="bodyLabel">
-                        <rect key="frame" x="76" y="37" width="296" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4X-7z-17G" userLabel="bodyLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                        <rect key="frame" x="56" y="33" width="316" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jh-lq-neG" userLabel="mediaContainer">
-                        <rect key="frame" x="76" y="72" width="296" height="128"/>
+                        <rect key="frame" x="56" y="58" width="316" height="142"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
@@ -54,16 +54,16 @@
                     <constraint firstItem="b4X-7z-17G" firstAttribute="trailing" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" id="4db-bz-C3a"/>
                     <constraint firstItem="3jh-lq-neG" firstAttribute="trailing" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" id="9AM-jV-FVG"/>
                     <constraint firstAttribute="bottomMargin" secondItem="3jh-lq-neG" secondAttribute="bottom" id="Dzo-c7-tX5"/>
-                    <constraint firstItem="av0-oP-mAJ" firstAttribute="leading" secondItem="NgE-Az-bvT" secondAttribute="trailing" constant="8" id="E9Z-Kl-dWy"/>
+                    <constraint firstItem="av0-oP-mAJ" firstAttribute="leading" secondItem="NgE-Az-bvT" secondAttribute="trailing" constant="4" id="E9Z-Kl-dWy"/>
                     <constraint firstItem="av0-oP-mAJ" firstAttribute="baseline" secondItem="NgE-Az-bvT" secondAttribute="baseline" id="Nh3-X3-YaS"/>
                     <constraint firstItem="NgE-Az-bvT" firstAttribute="leading" secondItem="Nrd-MO-5oC" secondAttribute="trailing" constant="8" id="PyA-cs-eQ6"/>
                     <constraint firstItem="NgE-Az-bvT" firstAttribute="top" secondItem="Nrd-MO-5oC" secondAttribute="top" id="QSV-ln-YwI"/>
                     <constraint firstItem="Nrd-MO-5oC" firstAttribute="leading" secondItem="1OT-6a-aHP" secondAttribute="leadingMargin" id="REt-T0-Om3"/>
                     <constraint firstItem="Nrd-MO-5oC" firstAttribute="top" secondItem="1OT-6a-aHP" secondAttribute="topMargin" id="e7G-u1-CuL"/>
                     <constraint firstItem="b4X-7z-17G" firstAttribute="leading" secondItem="NgE-Az-bvT" secondAttribute="leading" id="lYD-lr-5kI"/>
-                    <constraint firstItem="b4X-7z-17G" firstAttribute="top" secondItem="NgE-Az-bvT" secondAttribute="bottom" constant="8" id="vp2-1p-Juk"/>
+                    <constraint firstItem="b4X-7z-17G" firstAttribute="top" secondItem="NgE-Az-bvT" secondAttribute="bottom" constant="4" id="vp2-1p-Juk"/>
                     <constraint firstItem="3jh-lq-neG" firstAttribute="leading" secondItem="b4X-7z-17G" secondAttribute="leading" id="wJQ-sG-X2Q"/>
-                    <constraint firstItem="3jh-lq-neG" firstAttribute="top" secondItem="b4X-7z-17G" secondAttribute="bottom" constant="14" id="xOD-Uh-sWc"/>
+                    <constraint firstItem="3jh-lq-neG" firstAttribute="top" secondItem="b4X-7z-17G" secondAttribute="bottom" constant="4" id="xOD-Uh-sWc"/>
                     <constraint firstItem="3jh-lq-neG" firstAttribute="trailing" secondItem="b4X-7z-17G" secondAttribute="trailing" id="ze8-x8-03p"/>
                 </constraints>
             </tableViewCellContentView>

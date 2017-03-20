@@ -10,8 +10,8 @@ import UIKit
 
 struct DefaultStyle: StyleDefinition {
   // text color
-  let generalText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 15), color: UIColor.black)
-  let clickableText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 15), color: UIColor.red)
-  let usernameText: Typography = Typography.init(font: UIFont.boldSystemFont(ofSize: 15), color: UIColor.black)
-  let screennameText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: UIColor.cyan)
+  let generalText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 14), color: UIColor.black)
+  let clickableText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 14), color: UIColor.black)
+  let usernameText: Typography = Typography.init(font: UIFont.boldSystemFont(ofSize: 14), color: UIColor.black)
+  let screennameText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: UIColor.darkGray)
 }
