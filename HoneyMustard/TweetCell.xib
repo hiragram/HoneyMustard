@@ -22,7 +22,6 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nrd-MO-5oC" userLabel="userIcon">
                         <rect key="frame" x="8" y="8" width="60" height="60"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Nrd-MO-5oC" secondAttribute="height" multiplier="1:1" id="0FM-Uj-bxO"/>
                             <constraint firstAttribute="width" constant="60" id="dju-MK-iIg"/>
@@ -70,6 +69,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="bodyLabel" destination="b4X-7z-17G" id="rCh-cM-UPa"/>
+                <outlet property="iconImageView" destination="Nrd-MO-5oC" id="Jrg-99-rMl"/>
                 <outlet property="nameLabel" destination="NgE-Az-bvT" id="nq3-J0-mCz"/>
                 <outlet property="screennameLabel" destination="av0-oP-mAJ" id="3iP-u4-DLg"/>
             </connections>
