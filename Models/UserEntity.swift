@@ -13,7 +13,7 @@ public struct UserEntity: JSONMappable {
   public let name: String
   public let screenname: String
   public let iconImageURL: URL
-  public let bannerImageURL: URL
+  public let bannerImageURL: URL?
   public let createdAt: Date
   public let description: String
   public let following: Bool?
