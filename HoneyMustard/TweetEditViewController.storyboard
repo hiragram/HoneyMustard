@@ -136,6 +136,15 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="218"/>
                     <connections>
+                        <outlet property="attachmentContainerHeight" destination="jhm-0T-w78" id="ZBW-yR-SaY"/>
+                        <outlet property="photo1" destination="6hz-UC-8RV" id="9dT-Jn-QDO"/>
+                        <outlet property="photo1Width" destination="8TZ-jJ-ZEL" id="ozZ-b9-teN"/>
+                        <outlet property="photo2" destination="L6w-03-W8p" id="RWB-2o-HOI"/>
+                        <outlet property="photo2Width" destination="13R-Ah-aAl" id="GZO-yE-n2U"/>
+                        <outlet property="photo3" destination="wuK-TU-dmg" id="7X5-C7-e1C"/>
+                        <outlet property="photo3Width" destination="xdF-1c-SVA" id="9bb-h5-4gx"/>
+                        <outlet property="photo4" destination="zh2-RQ-zkp" id="HIh-fE-yme"/>
+                        <outlet property="photo4Width" destination="S4x-Fp-Jmx" id="U0B-fh-Fhu"/>
                         <outlet property="submitButton" destination="SnN-zU-Nrw" id="S9w-n8-Mll"/>
                         <outlet property="textField" destination="exn-4a-GJy" id="nig-r3-ATZ"/>
                     </connections>
