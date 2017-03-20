@@ -25,7 +25,7 @@ class TimelineViewModel {
 
   var items: Observable<[Section]> {
     return tweets.asObservable().map({ (tweets) -> [Section] in
-      let rows = tweets.map { Row.tweet($0) }
+      let rows = tweets.reversed().map { Row.tweet($0) }
       return [Section.tweets(rows)]
     })
   }
@@ -46,8 +46,12 @@ class TimelineViewModel {
             case .next(let event):
               switch event {
               case .newStatus(rawEvent: let raw):
-                let tweet = try! TweetEntity.init(json: raw)
-                self.tweets.value.append(tweet)
+                do {
+                  let tweet = try TweetEntity.init(json: raw)
+                  self.tweets.value.append(tweet)
+                } catch let e {
+                  print(e.localizedDescription)
+                }
               case .deleteStatus(rawEvent: let raw):
                 let delete: [String: Any] = try! raw.get(valueForKey: "delete")
                 let status: [String: Any] = try! delete.get(valueForKey: "status")

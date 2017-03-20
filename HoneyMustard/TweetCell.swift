@@ -12,7 +12,13 @@ import RxCocoa
 import Models
 
 final class TweetCell: UITableViewCell {
+  @IBOutlet private weak var nameLabel: UILabel!
+  @IBOutlet private weak var screennameLabel: UILabel!
+  @IBOutlet private weak var bodyLabel: UILabel!
+
   func setup(tweet: TweetEntity) {
-    
+    nameLabel.text = tweet.user.name
+    screennameLabel.text = tweet.user.screenname
+    bodyLabel.text = tweet.text
   }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol JSONMappable {
-  init(jsonDict: [String: Any]) throws
+  init(json: [String: Any]) throws
 }
 
 enum JSONMappingError: Error {

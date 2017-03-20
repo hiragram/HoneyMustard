@@ -48,6 +48,7 @@
 		6042EEBB1E7CE442004C0485 /* StoryboardInstantiatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EEBA1E7CE442004C0485 /* StoryboardInstantiatable.swift */; };
 		6042EEBD1E7CE635004C0485 /* TweetEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EEBC1E7CE635004C0485 /* TweetEditViewController.swift */; };
 		6042EEBF1E7CE676004C0485 /* TweetEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6042EEBE1E7CE676004C0485 /* TweetEditViewController.storyboard */; };
+		6044841A1E7F861900C8794E /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604484191E7F861900C8794E /* UserEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		6042EEBA1E7CE442004C0485 /* StoryboardInstantiatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiatable.swift; sourceTree = "<group>"; };
 		6042EEBC1E7CE635004C0485 /* TweetEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetEditViewController.swift; sourceTree = "<group>"; };
 		6042EEBE1E7CE676004C0485 /* TweetEditViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TweetEditViewController.storyboard; sourceTree = "<group>"; };
+		604484191E7F861900C8794E /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 				6042EE911E7CCC7F004C0485 /* Info.plist */,
 				6042EEAC1E7CCD1E004C0485 /* TweetRepository.swift */,
 				601FAE4F1E7D2A7E00E6F23C /* TweetEntity.swift */,
+				604484191E7F861900C8794E /* UserEntity.swift */,
 				601FAE531E7D2ACE00E6F23C /* Protocols/Extensions */,
 				6042EEB41E7CD33C004C0485 /* Keychain.swift */,
 			);
@@ -559,6 +562,7 @@
 				601FAE551E7D2F3400E6F23C /* Date.swift in Sources */,
 				601FAE521E7D2AC900E6F23C /* Dictionary.swift in Sources */,
 				601FAE501E7D2A7E00E6F23C /* TweetEntity.swift in Sources */,
+				6044841A1E7F861900C8794E /* UserEntity.swift in Sources */,
 				6042EEB51E7CD33C004C0485 /* Keychain.swift in Sources */,
 				601FAE571E7D311B00E6F23C /* JSONMappable.swift in Sources */,
 			);
