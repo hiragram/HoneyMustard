@@ -49,7 +49,9 @@ public extension Dictionary {
   }
 
   func get(valueForKey key: Key) throws -> URL? {
-    let urlStr: String = try get(valueForKey: key)
+    guard let urlStr: String = try? get(valueForKey: key) else {
+      return nil
+    }
     guard let url = URL.init(string: urlStr) else {
       return nil
     }
