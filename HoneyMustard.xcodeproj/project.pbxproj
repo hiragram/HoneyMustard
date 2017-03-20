@@ -55,6 +55,7 @@
 		604484231E7FB00D00C8794E /* DefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604484221E7FB00D00C8794E /* DefaultStyle.swift */; };
 		604484261E7FB06E00C8794E /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604484251E7FB06E00C8794E /* Typography.swift */; };
 		604484281E7FB45100C8794E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604484271E7FB45100C8794E /* Style.swift */; };
+		60DD30161E7FB4FC00FFBE08 /* DesignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD30151E7FB4FC00FFBE08 /* DesignedLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		604484221E7FB00D00C8794E /* DefaultStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultStyle.swift; sourceTree = "<group>"; };
 		604484251E7FB06E00C8794E /* Typography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		604484271E7FB45100C8794E /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		60DD30151E7FB4FC00FFBE08 /* DesignedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignedLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +345,7 @@
 				604484221E7FB00D00C8794E /* DefaultStyle.swift */,
 				604484271E7FB45100C8794E /* Style.swift */,
 				604484251E7FB06E00C8794E /* Typography.swift */,
+				60DD30151E7FB4FC00FFBE08 /* DesignedLabel.swift */,
 			);
 			name = Styles;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				601FAE591E7D395C00E6F23C /* TimelineViewModel.swift in Sources */,
 				6042EEB71E7CE3D8004C0485 /* TimelineViewController.swift in Sources */,
 				601FAE4C1E7D283900E6F23C /* UITableView.swift in Sources */,
+				60DD30161E7FB4FC00FFBE08 /* DesignedLabel.swift in Sources */,
 				604484261E7FB06E00C8794E /* Typography.swift in Sources */,
 				604484211E7FAFF300C8794E /* StyleDefinition.swift in Sources */,
 			);
