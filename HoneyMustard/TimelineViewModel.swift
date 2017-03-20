@@ -50,7 +50,7 @@ class TimelineViewModel {
                   let tweet = try TweetEntity.init(json: raw)
                   self.tweets.value.append(tweet)
                 } catch let e {
-                  print(e.localizedDescription)
+                  print(e)
                 }
               case .deleteStatus(rawEvent: let raw):
                 let delete: [String: Any] = try! raw.get(valueForKey: "delete")

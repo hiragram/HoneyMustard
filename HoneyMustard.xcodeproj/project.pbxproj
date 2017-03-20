@@ -49,6 +49,7 @@
 		6042EEBD1E7CE635004C0485 /* TweetEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EEBC1E7CE635004C0485 /* TweetEditViewController.swift */; };
 		6042EEBF1E7CE676004C0485 /* TweetEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6042EEBE1E7CE676004C0485 /* TweetEditViewController.storyboard */; };
 		6044841A1E7F861900C8794E /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604484191E7F861900C8794E /* UserEntity.swift */; };
+		6044841D1E7F942200C8794E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6044841B1E7F941C00C8794E /* SDWebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		6042EEBC1E7CE635004C0485 /* TweetEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetEditViewController.swift; sourceTree = "<group>"; };
 		6042EEBE1E7CE676004C0485 /* TweetEditViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TweetEditViewController.storyboard; sourceTree = "<group>"; };
 		604484191E7F861900C8794E /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		6044841B1E7F941C00C8794E /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				6011A3B01E7C61450061F3A6 /* RxSwift.framework in Frameworks */,
 				6011A3AF1E7C61450061F3A6 /* RxCocoa.framework in Frameworks */,
 				6011A3AC1E7C61450061F3A6 /* CommonCrypto.framework in Frameworks */,
+				6044841D1E7F942200C8794E /* SDWebImage.framework in Frameworks */,
 				601FAE5C1E7D3C8100E6F23C /* OAuthSwift.framework in Frameworks */,
 				6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */,
 				6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */,
@@ -242,6 +245,7 @@
 		6011A3B21E7C614B0061F3A6 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				6044841B1E7F941C00C8794E /* SDWebImage.framework */,
 				601FAE5A1E7D3C7B00E6F23C /* OAuthSwift.framework */,
 				601FAE4D1E7D2A5200E6F23C /* RxDataSources.framework */,
 				601FAE421E7CFEDA00E6F23C /* SplitViewController.framework */,
@@ -520,6 +524,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SplitViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/OAuthSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
 			);
 			name = Carthage;
 			outputPaths = (
