@@ -46,6 +46,21 @@ public struct TweetRepository {
 
     return variable
   }()
+
+  fileprivate static let oauthClient: Variable<OAuthSwiftClient?> = { _ -> Variable<OAuthSwiftClient?> in
+    let variable: Variable<OAuthSwiftClient?>
+    if let accessToken = Keychain.accessToken(), let accessTokenSecret = Keychain.accessTokenSecret() {
+      variable = Variable.init(OAuthSwiftClient.init(consumerKey: consumerKey, consumerSecret: consumerSecret, oauthToken: accessToken, oauthTokenSecret: accessTokenSecret, version: .oauth1))
+    } else {
+      variable = Variable.init(nil)
+    }
+
+    Keychain.credential.map({ (credential) -> OAuthSwiftClient in
+      return OAuthSwiftClient.init(consumerKey: consumerKey, consumerSecret: consumerSecret, oauthToken: credential.accessToken, oauthTokenSecret: credential.accessTokenSecret, version: .oauth1)
+    }).bindTo(variable).addDisposableTo(bag)
+
+    return variable
+  }()
 }
 
 // - MARK: API Observables
@@ -69,6 +84,29 @@ public extension TweetRepository {
     }, failure: { (error) in
       print(error.localizedDescription)
     })
+  }
+
+  public static func postUpdate(body: String) -> Observable<TweetEntity> {
+    return Observable<Data>.create { (observer) -> Disposable in
+      let params: [String: String] = [
+        "status": body
+      ]
+      let handle = oauthClient.value?.post("https://api.twitter.com/1.1/statuses/update.json", parameters: params, success: { (response) in
+        observer.onNext(response.data)
+        observer.onCompleted()
+      }, failure: { (error) in
+        observer.onError(error)
+        print(error)
+      })
+
+      return Disposables.create {
+        handle?.cancel()
+      }
+      }.map { (data) -> [String: Any] in
+        return try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+      }.map { (json) -> TweetEntity in
+        return try TweetEntity.init(json: json)
+    }
   }
 }
 

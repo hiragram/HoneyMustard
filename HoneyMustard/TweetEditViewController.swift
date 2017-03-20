@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Models
 
 final class TweetEditViewController: UIViewController, StoryboardInstantiatable {
   @IBOutlet fileprivate weak var textField: UITextView! {
@@ -18,7 +19,20 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
       textField.layer.borderWidth = 0.5
     }
   }
-  @IBOutlet fileprivate weak var submitButton: UIButton!
+  @IBOutlet fileprivate weak var submitButton: UIButton! {
+    didSet {
+      submitButton.rx.tap.asObservable()
+        .map { [unowned self] _ in self.textField.text ?? "" }
+        .filter { !$0.isEmpty }
+        .filter { $0.characters.count <= 140 }
+        .flatMap { (text) -> Observable<TweetEntity> in
+          TweetRepository.postUpdate(body: text)
+        }
+        .subscribe(onNext: { [unowned self] (_) in
+          self.textField.text = ""
+        }).addDisposableTo(bag)
+    }
+  }
   @IBOutlet private weak var photo1: UIImageView!
   @IBOutlet private weak var photo2: UIImageView!
   @IBOutlet private weak var photo3: UIImageView!
@@ -35,6 +49,10 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    submitButton.rx.tap.asObservable().subscribe(onNext: { (_) in
+      print("たっぷ")
+    }).addDisposableTo(bag)
 
     vm.images.asObservable().subscribe(onNext: { [weak self] (images) in
       let image1 = images.first
