@@ -10,15 +10,12 @@ import UIKit
 import SplitViewController
 import Models
 import RxSwift
-import OAuthSwift
 
 class GlobalController: UIViewController {
 
   private let bag = DisposeBag.init()
 
   private var rootViewController: UIViewController!
-
-  private var oauth: OAuth1Swift!
 
   override func loadView() {
     super.loadView()
@@ -45,12 +42,7 @@ class GlobalController: UIViewController {
 
     TweetRepository.isAuthorized.take(1).subscribe(onNext: { [unowned self] (isAuthorized) in
       if !isAuthorized {
-        self.oauth = OAuth1Swift.init(consumerKey: "C518wxiwwHsfUWORezGgnM1MH", consumerSecret: "fnuzGVK61pjPm3TgeWeTS4BpgiNkOlffFntYPxV7aJFJaipyY2", requestTokenUrl: "https://api.twitter.com/oauth/request_token", authorizeUrl: "https://api.twitter.com/oauth/authorize", accessTokenUrl: "https://api.twitter.com/oauth/access_token")
-        self.oauth.authorize(withCallbackURL: "honeymustard://oauth-callback/twitter", success: { (credential, response, parameters) in
-          Keychain.set(accessToken: credential.oauthToken, accessTokenSecret: credential.oauthTokenSecret)
-        }, failure: { (error) in
-          print(error.localizedDescription)
-        })
+        TweetRepository.oauth()
       }
     }).addDisposableTo(bag)
   }

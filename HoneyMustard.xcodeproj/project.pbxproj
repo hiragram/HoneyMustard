@@ -30,7 +30,6 @@
 		601FAE551E7D2F3400E6F23C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE541E7D2F3400E6F23C /* Date.swift */; };
 		601FAE571E7D311B00E6F23C /* JSONMappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE561E7D311B00E6F23C /* JSONMappable.swift */; };
 		601FAE591E7D395C00E6F23C /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE581E7D395C00E6F23C /* TimelineViewModel.swift */; };
-		601FAE5C1E7D3C8100E6F23C /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601FAE5A1E7D3C7B00E6F23C /* OAuthSwift.framework */; };
 		6042EE971E7CCC7F004C0485 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6042EE8E1E7CCC7F004C0485 /* Models.framework */; };
 		6042EE9E1E7CCC7F004C0485 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EE9D1E7CCC7F004C0485 /* ModelsTests.swift */; };
 		6042EEA01E7CCC7F004C0485 /* Models.h in Headers */ = {isa = PBXBuildFile; fileRef = 6042EE901E7CCC7F004C0485 /* Models.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -57,6 +56,7 @@
 		604484281E7FB45100C8794E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604484271E7FB45100C8794E /* Style.swift */; };
 		60DD30161E7FB4FC00FFBE08 /* DesignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD30151E7FB4FC00FFBE08 /* DesignedLabel.swift */; };
 		60DD30181E7FC31300FFBE08 /* TweetEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD30171E7FC31300FFBE08 /* TweetEditViewModel.swift */; };
+		60DD30191E7FCE0700FFBE08 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601FAE5A1E7D3C7B00E6F23C /* OAuthSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,7 +168,6 @@
 				6011A3AF1E7C61450061F3A6 /* RxCocoa.framework in Frameworks */,
 				6011A3AC1E7C61450061F3A6 /* CommonCrypto.framework in Frameworks */,
 				6044841D1E7F942200C8794E /* SDWebImage.framework in Frameworks */,
-				601FAE5C1E7D3C8100E6F23C /* OAuthSwift.framework in Frameworks */,
 				6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */,
 				6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */,
 				601FAE431E7CFEDA00E6F23C /* SplitViewController.framework in Frameworks */,
@@ -191,6 +190,7 @@
 			files = (
 				6042EEAF1E7CCD36004C0485 /* RxCocoa.framework in Frameworks */,
 				6042EEB11E7CCD36004C0485 /* Somen.framework in Frameworks */,
+				60DD30191E7FCE0700FFBE08 /* OAuthSwift.framework in Frameworks */,
 				6042EEAE1E7CCD36004C0485 /* RxBlocking.framework in Frameworks */,
 				6042EEB01E7CCD36004C0485 /* RxSwift.framework in Frameworks */,
 				6042EEB31E7CCF1E004C0485 /* KeychainAccess.framework in Frameworks */,

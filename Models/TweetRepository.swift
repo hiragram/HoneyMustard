@@ -9,10 +9,13 @@
 import Foundation
 import RxSwift
 import Somen
+import OAuthSwift
 
 public struct TweetRepository {
   static let consumerKey = "C518wxiwwHsfUWORezGgnM1MH"
   static let consumerSecret = "fnuzGVK61pjPm3TgeWeTS4BpgiNkOlffFntYPxV7aJFJaipyY2"
+
+  fileprivate static let oauthswift = OAuth1Swift.init(consumerKey: consumerKey, consumerSecret: consumerSecret, requestTokenUrl: "https://api.twitter.com/oauth/request_token", authorizeUrl: "https://api.twitter.com/oauth/authorize", accessTokenUrl: "https://api.twitter.com/oauth/access_token")
 
   static let bag = DisposeBag.init()
 
@@ -54,6 +57,18 @@ public extension TweetRepository {
     }
 
     return somen.userstream()
+  }
+}
+
+// - MARK: Other API
+
+public extension TweetRepository {
+  public static func oauth() {
+    oauthswift.authorize(withCallbackURL: "honeymustard://oauth-callback/twitter", success: { (credential, response, parameters) in
+      Keychain.set(accessToken: credential.oauthToken, accessTokenSecret: credential.oauthTokenSecret)
+    }, failure: { (error) in
+      print(error.localizedDescription)
+    })
   }
 }
 
