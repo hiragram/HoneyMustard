@@ -11,6 +11,9 @@ import RxSwift
 import RxCocoa
 
 final class TimelineViewController: UIViewController, StoryboardInstantiatable {
+
+  private let vm = TimelineViewModel.init()
+
   @IBOutlet fileprivate weak var tableView: UITableView! {
     didSet {
       tableView.registerNib(cellType: TweetCell.self)
