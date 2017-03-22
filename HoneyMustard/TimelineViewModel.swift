@@ -16,7 +16,7 @@ class TimelineViewModel {
 
   private let bag = DisposeBag.init()
 
-  let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
+  let dataSource = RxTableViewSectionedAnimatedDataSource<Section>.init()
 
   private let _streamingIsConnected = BehaviorSubject.init(value: false)
   var streamingIsConnected: ControlProperty<Bool>! = nil
@@ -87,10 +87,18 @@ class TimelineViewModel {
 // - MARK: RxDataSources
 
 extension TimelineViewModel {
-  enum Section: SectionModelType {
+  enum Section: AnimatableSectionModelType {
     case tweets([Row])
 
     typealias Item = Row
+    typealias Identity = Int
+
+    var identity: Int {
+      switch self {
+      case .tweets:
+        return 1
+      }
+    }
 
     var items: [Row] {
       switch self {
@@ -107,7 +115,20 @@ extension TimelineViewModel {
     }
   }
 
-  enum Row {
+  enum Row: IdentifiableType, Equatable {
     case tweet(TweetEntity)
+
+    typealias Identity = Int
+
+    var identity: Int {
+      switch self {
+      case .tweet(let tweet):
+        return tweet.id
+      }
+    }
+
+    static func ==(lhs: TimelineViewModel.Row, rhs: TimelineViewModel.Row) -> Bool {
+      return lhs.identity == rhs.identity
+    }
   }
 }

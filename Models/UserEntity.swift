@@ -15,7 +15,7 @@ public struct UserEntity: JSONMappable {
   public let iconImageURL: URL
   public let bannerImageURL: URL?
   public let createdAt: Date
-  public let description: String
+  public let description: String?
   public let following: Bool?
   public let followersCount: Int
   public let friendsCount: Int

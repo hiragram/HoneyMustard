@@ -14,7 +14,7 @@ import Models
 final class TweetEditViewController: UIViewController, StoryboardInstantiatable {
   @IBOutlet fileprivate weak var textField: UITextView! {
     didSet {
-      textField.layer.cornerRadius = 5
+      textField.layer.cornerRadius = 3
       textField.layer.borderColor = UIColor.lightGray.cgColor
       textField.layer.borderWidth = 0.5
     }
