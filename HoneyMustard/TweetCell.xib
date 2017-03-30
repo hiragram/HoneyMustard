@@ -13,11 +13,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="209" id="Swp-g2-cWY" customClass="TweetCell" customModule="HoneyMustard" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="209" id="Swp-g2-cWY" customClass="TweetCell" customModule="HoneyMustard" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="380" height="209"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Swp-g2-cWY" id="1OT-6a-aHP">
-                <rect key="frame" x="0.0" y="0.0" width="380" height="208.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="380" height="208"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nrd-MO-5oC" userLabel="userIcon">
@@ -49,12 +49,22 @@
                         <rect key="frame" x="56" y="58" width="316" height="142"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9jK-5b-363" userLabel="colorRibbonView">
+                        <rect key="frame" x="0.0" y="0.0" width="2" height="208"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="2" id="wMO-Nn-V29"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="9jK-5b-363" secondAttribute="bottom" id="1rU-1K-8p8"/>
                     <constraint firstItem="b4X-7z-17G" firstAttribute="trailing" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" id="4db-bz-C3a"/>
                     <constraint firstItem="3jh-lq-neG" firstAttribute="trailing" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" id="9AM-jV-FVG"/>
                     <constraint firstAttribute="bottomMargin" secondItem="3jh-lq-neG" secondAttribute="bottom" id="Dzo-c7-tX5"/>
                     <constraint firstItem="av0-oP-mAJ" firstAttribute="leading" secondItem="NgE-Az-bvT" secondAttribute="trailing" constant="4" id="E9Z-Kl-dWy"/>
+                    <constraint firstItem="9jK-5b-363" firstAttribute="leading" secondItem="1OT-6a-aHP" secondAttribute="leading" id="GvZ-6a-LSV"/>
+                    <constraint firstItem="9jK-5b-363" firstAttribute="top" secondItem="1OT-6a-aHP" secondAttribute="top" id="MyU-Hm-5gn"/>
                     <constraint firstItem="av0-oP-mAJ" firstAttribute="baseline" secondItem="NgE-Az-bvT" secondAttribute="baseline" id="Nh3-X3-YaS"/>
                     <constraint firstItem="NgE-Az-bvT" firstAttribute="leading" secondItem="Nrd-MO-5oC" secondAttribute="trailing" constant="8" id="PyA-cs-eQ6"/>
                     <constraint firstItem="NgE-Az-bvT" firstAttribute="top" secondItem="Nrd-MO-5oC" secondAttribute="top" id="QSV-ln-YwI"/>
@@ -67,8 +77,10 @@
                     <constraint firstItem="3jh-lq-neG" firstAttribute="trailing" secondItem="b4X-7z-17G" secondAttribute="trailing" id="ze8-x8-03p"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="56" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="bodyLabel" destination="b4X-7z-17G" id="rCh-cM-UPa"/>
+                <outlet property="colorRibbonView" destination="9jK-5b-363" id="kIj-bw-Jxq"/>
                 <outlet property="iconImageView" destination="Nrd-MO-5oC" id="Jrg-99-rMl"/>
                 <outlet property="nameLabel" destination="NgE-Az-bvT" id="nq3-J0-mCz"/>
                 <outlet property="screennameLabel" destination="av0-oP-mAJ" id="3iP-u4-DLg"/>

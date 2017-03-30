@@ -32,6 +32,8 @@ class TimelineViewModel {
 
   private var userstreamDisposable: Disposable?
 
+  private var friendIDs: [Int] = []
+
   init() {
     streamingIsConnected = ControlProperty<Bool>.init(values: _streamingIsConnected.asObservable(), valueSink: _streamingIsConnected.asObserver())
 
@@ -58,6 +60,9 @@ class TimelineViewModel {
                 let id: Int = try! status.get(valueForKey: "id")
                 let tweets = self.tweets.value
                 self.tweets.value = tweets.filter { $0.id != id }
+              case .friends(rawEvent: let raw):
+                self.friendIDs = try! raw.get(valueForKey: "friends") ?? []
+                print(self.friendIDs)
               default:
                 break
               }
@@ -73,11 +78,12 @@ class TimelineViewModel {
       }
     }).addDisposableTo(bag)
 
-    dataSource.configureCell = { (dataSource, tableView, indexPath, row) -> UITableViewCell in
+    dataSource.configureCell = { [unowned self] (dataSource, tableView, indexPath, row) -> UITableViewCell in
       switch row {
       case .tweet(let tweet):
         let cell: TweetCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.setup(tweet: tweet)
+        cell.colorRibbon = self.friendIDs.contains(tweet.user.id) ? nil : .notFriend
         return cell
       }
     }
