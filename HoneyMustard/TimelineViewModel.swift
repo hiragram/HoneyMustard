@@ -62,7 +62,6 @@ class TimelineViewModel {
                 self.tweets.value = tweets.filter { $0.id != id }
               case .friends(rawEvent: let raw):
                 self.friendIDs = try! raw.get(valueForKey: "friends") ?? []
-                print(self.friendIDs)
               default:
                 break
               }

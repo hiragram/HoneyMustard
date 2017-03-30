@@ -33,6 +33,16 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
         }).addDisposableTo(bag)
     }
   }
+  @IBOutlet private weak var imagePickerButton: UIButton! {
+    didSet {
+      imagePickerButton.rx.tap.asObservable().subscribe(onNext: { [unowned self] (_) in
+        let picker = UIImagePickerController.init()
+        picker.delegate = self.vm.imagePickerDelegate
+        self.present(picker, animated: true, completion: nil)
+      }).addDisposableTo(bag)
+    }
+  }
+
   @IBOutlet private weak var photo1: UIImageView!
   @IBOutlet private weak var photo2: UIImageView!
   @IBOutlet private weak var photo3: UIImageView!
@@ -49,10 +59,6 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    submitButton.rx.tap.asObservable().subscribe(onNext: { (_) in
-      print("たっぷ")
-    }).addDisposableTo(bag)
 
     vm.images.asObservable().subscribe(onNext: { [weak self] (images) in
       let image1 = images.first
