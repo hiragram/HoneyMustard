@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Timeline View Controller-->
+        <!--タ〜イムライン-->
         <scene sceneID="j5p-m4-nIY">
             <objects>
-                <viewController id="Jdc-Ng-Y7B" customClass="TimelineViewController" customModule="HoneyMustard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="タ〜イムライン" id="Jdc-Ng-Y7B" customClass="TimelineViewController" customModule="HoneyMustard" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EWL-Cn-VyA"/>
                         <viewControllerLayoutGuide type="bottom" id="JVn-P6-pDK"/>

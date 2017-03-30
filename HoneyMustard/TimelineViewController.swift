@@ -24,6 +24,27 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
     }
   }
 
+  private var statusView: TimelineStatusView! {
+    didSet {
+      vm.streamingIsConnected.map {
+        $0 ? Status.streamingIsEstablished : .notConnected
+      }.bindTo(statusView.status).addDisposableTo(bag)
+    }
+  }
+
+  override func loadView() {
+    super.loadView()
+
+    statusView = TimelineStatusView.instantiate(withOwner: self, options: nil)
+    statusView.translatesAutoresizingMaskIntoConstraints = false
+    tableView.addSubview(statusView)
+    let constraints = [NSLayoutAttribute.centerX, .width].map {
+      NSLayoutConstraint.init(item: tableView, attribute: $0, relatedBy: .equal, toItem: statusView, attribute: $0, multiplier: 1, constant: 0)
+    }
+    tableView.addConstraints(constraints)
+    tableView.addConstraint(NSLayoutConstraint.init(item: tableView, attribute: .top, relatedBy: .equal, toItem: statusView, attribute: .bottom, multiplier: 1, constant: 0))
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     Observable.just(true).bindTo(vm.streamingIsConnected).addDisposableTo(bag)
