@@ -28,15 +28,18 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="exn-4a-GJy">
                                         <rect key="frame" x="8" y="8" width="359" height="113"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="k5X-aa-VuI"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="exn-4a-GJy" secondAttribute="bottom" priority="250" constant="2" id="0yh-GH-bfh"/>
+                                    <constraint firstAttribute="bottom" secondItem="exn-4a-GJy" secondAttribute="bottom" constant="2" id="0yh-GH-bfh"/>
                                     <constraint firstItem="exn-4a-GJy" firstAttribute="leading" secondItem="q8a-7a-aAx" secondAttribute="leading" constant="8" id="1a9-Nk-Sh9"/>
-                                    <constraint firstItem="exn-4a-GJy" firstAttribute="top" secondItem="q8a-7a-aAx" secondAttribute="top" priority="250" constant="8" id="69l-nC-BsF"/>
+                                    <constraint firstItem="exn-4a-GJy" firstAttribute="top" secondItem="q8a-7a-aAx" secondAttribute="top" constant="8" id="69l-nC-BsF"/>
                                     <constraint firstAttribute="height" priority="250" constant="114" id="aXW-nB-SId"/>
                                     <constraint firstAttribute="trailing" secondItem="exn-4a-GJy" secondAttribute="trailing" constant="8" id="aeT-zG-F7Z"/>
                                 </constraints>
@@ -108,7 +111,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="251" constant="35" id="60U-da-3fR"/>
+                                    <constraint firstAttribute="height" constant="35" id="60U-da-3fR"/>
                                     <constraint firstItem="SnN-zU-Nrw" firstAttribute="centerY" secondItem="INg-QV-uN4" secondAttribute="centerY" id="DlL-Ns-Xd6"/>
                                     <constraint firstItem="cs0-z5-sdI" firstAttribute="leading" secondItem="INg-QV-uN4" secondAttribute="leading" constant="8" id="ObS-JX-hRr"/>
                                     <constraint firstItem="cs0-z5-sdI" firstAttribute="centerY" secondItem="INg-QV-uN4" secondAttribute="centerY" id="d8f-EU-hJ5"/>
