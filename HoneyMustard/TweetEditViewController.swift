@@ -25,11 +25,22 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
         .map { [unowned self] _ in self.textField.text ?? "" }
         .filter { !$0.isEmpty }
         .filter { $0.characters.count <= 140 }
-        .flatMap { (text) -> Observable<TweetEntity> in
-          TweetRepository.postUpdate(body: text)
+        .flatMap { [unowned self] (text) -> Observable<(text: String, mediaIDs: [Int])> in
+          let observables = (0..<4).map {
+            self.vm.images.value.dropLast($0).first
+            }.map {
+              $0 == nil ? Observable.just(nil) : TweetRepository.post(image: $0!).map { Optional<Int>.init($0) }
+          }
+          return Observable<(text: String, mediaIDs: [Int])>.combineLatest(observables, { (mediaIDs) -> (text: String, mediaIDs: [Int]) in
+            return (text: text, mediaIDs: mediaIDs.map { $0 == nil ? [] : [$0!] }.flatMap { $0 })
+          })
+        }
+        .flatMap { (data) -> Observable<TweetEntity> in
+          TweetRepository.postUpdate(body: data.text, mediaIDs: data.mediaIDs)
         }
         .subscribe(onNext: { [unowned self] (_) in
           self.textField.text = ""
+          self.vm.images.value = []
         }).addDisposableTo(bag)
     }
   }

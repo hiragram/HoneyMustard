@@ -42,7 +42,7 @@ public struct TweetRepository {
         accessToken: credential.accessToken,
         accessTokenSecret: credential.accessTokenSecret
       )
-    }.bindTo(variable).addDisposableTo(bag)
+      }.bindTo(variable).addDisposableTo(bag)
 
     return variable
   }()
@@ -73,23 +73,12 @@ public extension TweetRepository {
 
     return somen.userstream()
   }
-}
 
-// - MARK: Other API
-
-public extension TweetRepository {
-  public static func oauth() {
-    oauthswift.authorize(withCallbackURL: "honeymustard://oauth-callback/twitter", success: { (credential, response, parameters) in
-      Keychain.set(accessToken: credential.oauthToken, accessTokenSecret: credential.oauthTokenSecret)
-    }, failure: { (error) in
-      print(error.localizedDescription)
-    })
-  }
-
-  public static func postUpdate(body: String) -> Observable<TweetEntity> {
+  public static func postUpdate(body: String, mediaIDs: [Int] = []) -> Observable<TweetEntity> {
     return Observable<Data>.create { (observer) -> Disposable in
       let params: [String: String] = [
-        "status": body
+        "status": body,
+        "media_ids": mediaIDs.map { "\($0)" }.joined(separator: ",")
       ]
       let handle = oauthClient.value?.post("https://api.twitter.com/1.1/statuses/update.json", parameters: params, success: { (response) in
         observer.onNext(response.data)
@@ -107,6 +96,41 @@ public extension TweetRepository {
       }.map { (json) -> TweetEntity in
         return try TweetEntity.init(json: json)
     }
+  }
+
+  public static func post(image: UIImage) -> Observable<Int> {
+    return Observable<Data>.create { (observer) -> Disposable in
+      let params: [String: String] = [
+        "media_data": UIImageJPEGRepresentation(image, 1)?.base64EncodedString() ?? ""
+      ]
+      let handle = oauthClient.value?.post("https://upload.twitter.com/1.1/media/upload.json", parameters: params, success: { (response) in
+        observer.onNext(response.data)
+        observer.onCompleted()
+      }, failure: { (error) in
+        observer.onError(error)
+        print(error)
+      })
+
+      return Disposables.create {
+        handle?.cancel()
+      }
+      }.map({ (data) -> [String: Any] in
+        return try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+      }).map({ (json) -> Int in
+        return try json.get(valueForKey: "media_id")
+      })
+  }
+}
+
+// - MARK: Other API
+
+public extension TweetRepository {
+  public static func oauth() {
+    oauthswift.authorize(withCallbackURL: "honeymustard://oauth-callback/twitter", success: { (credential, response, parameters) in
+      Keychain.set(accessToken: credential.oauthToken, accessTokenSecret: credential.oauthTokenSecret)
+    }, failure: { (error) in
+      print(error.localizedDescription)
+    })
   }
 }
 
