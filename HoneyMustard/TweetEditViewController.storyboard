@@ -47,54 +47,56 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQU-VO-43q" userLabel="attachmentContainer">
                                 <rect key="frame" x="0.0" y="123" width="375" height="60"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6hz-UC-8RV" userLabel="photo1">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6hz-UC-8RV" userLabel="photo1">
                                         <rect key="frame" x="8" y="5" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="8TZ-jJ-ZEL"/>
-                                            <constraint firstAttribute="width" secondItem="6hz-UC-8RV" secondAttribute="height" multiplier="1:1" priority="249" id="aB0-QV-icZ"/>
+                                            <constraint firstAttribute="width" priority="998" constant="50" id="8TZ-jJ-ZEL"/>
+                                            <constraint firstAttribute="width" secondItem="6hz-UC-8RV" secondAttribute="height" multiplier="1:1" priority="997" id="aB0-QV-icZ"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L6w-03-W8p" userLabel="photo2">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L6w-03-W8p" userLabel="photo2">
                                         <rect key="frame" x="66" y="5" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="13R-Ah-aAl"/>
-                                            <constraint firstAttribute="width" secondItem="L6w-03-W8p" secondAttribute="height" multiplier="1:1" priority="249" id="l7s-hh-T8p"/>
+                                            <constraint firstAttribute="width" secondItem="L6w-03-W8p" secondAttribute="height" multiplier="1:1" priority="997" id="l7s-hh-T8p"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wuK-TU-dmg" userLabel="photo3">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wuK-TU-dmg" userLabel="photo3">
                                         <rect key="frame" x="124" y="5" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="wuK-TU-dmg" secondAttribute="height" multiplier="1:1" priority="249" id="dSZ-MA-9zM"/>
+                                            <constraint firstAttribute="width" secondItem="wuK-TU-dmg" secondAttribute="height" multiplier="1:1" priority="997" id="dSZ-MA-9zM"/>
                                             <constraint firstAttribute="width" constant="50" id="xdF-1c-SVA"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zh2-RQ-zkp" userLabel="photo4">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zh2-RQ-zkp" userLabel="photo4">
                                         <rect key="frame" x="182" y="5" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="zh2-RQ-zkp" secondAttribute="height" multiplier="1:1" priority="249" id="ARM-Kb-usU"/>
+                                            <constraint firstAttribute="width" secondItem="zh2-RQ-zkp" secondAttribute="height" multiplier="1:1" priority="997" id="ARM-Kb-usU"/>
                                             <constraint firstAttribute="width" constant="50" id="S4x-Fp-Jmx"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="L6w-03-W8p" secondAttribute="bottom" priority="250" constant="5" id="8IT-0y-3bb"/>
-                                    <constraint firstItem="wuK-TU-dmg" firstAttribute="top" secondItem="GQU-VO-43q" secondAttribute="top" priority="251" constant="5" id="A3C-Ow-lW6"/>
-                                    <constraint firstAttribute="bottom" secondItem="6hz-UC-8RV" secondAttribute="bottom" priority="250" constant="5" id="Cle-Ak-Nvn"/>
+                                    <constraint firstAttribute="bottom" secondItem="6hz-UC-8RV" secondAttribute="bottom" priority="999" constant="5" id="Cle-Ak-Nvn"/>
                                     <constraint firstItem="L6w-03-W8p" firstAttribute="leading" secondItem="6hz-UC-8RV" secondAttribute="trailing" constant="8" id="Fea-M4-h0J"/>
-                                    <constraint firstItem="zh2-RQ-zkp" firstAttribute="top" secondItem="GQU-VO-43q" secondAttribute="top" priority="251" constant="5" id="LCp-aG-Wjb"/>
-                                    <constraint firstItem="6hz-UC-8RV" firstAttribute="top" secondItem="GQU-VO-43q" secondAttribute="top" priority="251" constant="5" id="QM3-AV-5Gj"/>
-                                    <constraint firstAttribute="bottom" secondItem="zh2-RQ-zkp" secondAttribute="bottom" priority="250" constant="5" id="RSa-Pd-uLD"/>
+                                    <constraint firstItem="6hz-UC-8RV" firstAttribute="top" secondItem="GQU-VO-43q" secondAttribute="top" priority="999" constant="5" id="QM3-AV-5Gj"/>
                                     <constraint firstItem="wuK-TU-dmg" firstAttribute="leading" secondItem="L6w-03-W8p" secondAttribute="trailing" constant="8" id="SHo-Pw-WOC"/>
+                                    <constraint firstItem="wuK-TU-dmg" firstAttribute="bottom" secondItem="6hz-UC-8RV" secondAttribute="bottom" id="Sti-vJ-zE3"/>
+                                    <constraint firstItem="zh2-RQ-zkp" firstAttribute="top" secondItem="6hz-UC-8RV" secondAttribute="top" id="TIX-EB-my2"/>
                                     <constraint firstItem="zh2-RQ-zkp" firstAttribute="leading" secondItem="wuK-TU-dmg" secondAttribute="trailing" constant="8" id="aaU-Oc-nOe"/>
-                                    <constraint firstAttribute="bottom" secondItem="wuK-TU-dmg" secondAttribute="bottom" priority="250" constant="5" id="ckZ-Y0-EA8"/>
                                     <constraint firstAttribute="height" constant="60" id="jhm-0T-w78"/>
+                                    <constraint firstItem="zh2-RQ-zkp" firstAttribute="bottom" secondItem="6hz-UC-8RV" secondAttribute="bottom" id="msf-Ch-24w"/>
                                     <constraint firstItem="6hz-UC-8RV" firstAttribute="leading" secondItem="GQU-VO-43q" secondAttribute="leading" constant="8" id="npN-Qe-LXG"/>
-                                    <constraint firstItem="L6w-03-W8p" firstAttribute="top" secondItem="GQU-VO-43q" secondAttribute="top" priority="251" constant="5" id="rHg-f0-dzm"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6hz-UC-8RV" secondAttribute="bottom" id="tCG-Xw-Sti"/>
+                                    <constraint firstItem="L6w-03-W8p" firstAttribute="top" secondItem="6hz-UC-8RV" secondAttribute="top" id="tZZ-bj-n1k"/>
+                                    <constraint firstItem="6hz-UC-8RV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GQU-VO-43q" secondAttribute="top" id="twl-BD-B6D"/>
+                                    <constraint firstItem="wuK-TU-dmg" firstAttribute="top" secondItem="6hz-UC-8RV" secondAttribute="top" id="vDm-P6-1U6"/>
+                                    <constraint firstItem="L6w-03-W8p" firstAttribute="bottom" secondItem="6hz-UC-8RV" secondAttribute="bottom" id="xyl-lR-cwc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INg-QV-uN4" userLabel="controlContainer">
@@ -105,8 +107,8 @@
                                         <state key="normal" title="送信"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cs0-z5-sdI">
-                                        <rect key="frame" x="8" y="2.5" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                        <rect key="frame" x="8" y="2.5" width="31" height="30"/>
+                                        <state key="normal" title="写真"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -140,6 +142,7 @@
                     <size key="freeformSize" width="375" height="218"/>
                     <connections>
                         <outlet property="attachmentContainerHeight" destination="jhm-0T-w78" id="ZBW-yR-SaY"/>
+                        <outlet property="imagePickerButton" destination="cs0-z5-sdI" id="l1Y-yZ-y7W"/>
                         <outlet property="photo1" destination="6hz-UC-8RV" id="9dT-Jn-QDO"/>
                         <outlet property="photo1Width" destination="8TZ-jJ-ZEL" id="ozZ-b9-teN"/>
                         <outlet property="photo2" destination="L6w-03-W8p" id="RWB-2o-HOI"/>
