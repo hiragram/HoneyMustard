@@ -1,5 +1,5 @@
 github "ReactiveX/RxSwift" ~> 3.3.0
-github "hiragram/Somen" ~> 0.1.0
+github "hiragram/Somen" "master"
 github "RxSwiftCommunity/RxKeyboard" ~> 0.4.0
 github "kishikawakatsumi/KeychainAccess" ~> 3.0.0
 github "hiragram/SplitViewController" ~> 0.1.0
