@@ -16,7 +16,8 @@ class TimelineViewModel {
 
   private let bag = DisposeBag.init()
 
-  let dataSource = RxTableViewSectionedAnimatedDataSource<Section>.init()
+//  let dataSource = RxTableViewSectionedAnimatedDataSource<Section>.init()
+  let dataSource = TableViewDataSource<Section>.init()
 
   private let _streamingIsConnected = BehaviorSubject.init(value: false)
   var streamingIsConnected: ControlProperty<Bool>! = nil
