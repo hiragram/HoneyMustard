@@ -74,13 +74,9 @@ public extension TweetRepository {
     return somen.userstream()
   }
 
-  public static func postUpdate(body: String, mediaIDs: [Int] = []) -> Observable<TweetEntity> {
+  private static func signedRequestPost(url: URL, params: [String: String] = [:]) -> Observable<[String: Any]> {
     return Observable<Data>.create { (observer) -> Disposable in
-      let params: [String: String] = [
-        "status": body,
-        "media_ids": mediaIDs.map { "\($0)" }.joined(separator: ",")
-      ]
-      let handle = oauthClient.value?.post("https://api.twitter.com/1.1/statuses/update.json", parameters: params, success: { (response) in
+      let handle = oauthClient.value?.post(url.absoluteString, parameters: params, success: { (response) in
         observer.onNext(response.data)
         observer.onCompleted()
       }, failure: { (error) in
@@ -93,17 +89,12 @@ public extension TweetRepository {
       }
       }.map { (data) -> [String: Any] in
         return try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-      }.map { (json) -> TweetEntity in
-        return try TweetEntity.init(json: json)
     }
   }
 
-  public static func post(image: UIImage) -> Observable<Int> {
+  private static func signedRequestGet(url: URL, params: [String: String] = [:]) -> Observable<[String: Any]> {
     return Observable<Data>.create { (observer) -> Disposable in
-      let params: [String: String] = [
-        "media_data": UIImageJPEGRepresentation(image, 1)?.base64EncodedString() ?? ""
-      ]
-      let handle = oauthClient.value?.post("https://upload.twitter.com/1.1/media/upload.json", parameters: params, success: { (response) in
+      let handle = oauthClient.value?.get(url.absoluteString, parameters: params, success: { (response) in
         observer.onNext(response.data)
         observer.onCompleted()
       }, failure: { (error) in
@@ -114,11 +105,33 @@ public extension TweetRepository {
       return Disposables.create {
         handle?.cancel()
       }
-      }.map({ (data) -> [String: Any] in
+      }.map { (data) -> [String: Any] in
         return try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-      }).map({ (json) -> Int in
-        return try json.get(valueForKey: "media_id")
-      })
+    }
+  }
+
+  public static func postUpdate(body: String, mediaIDs: [Int] = []) -> Observable<TweetEntity> {
+    return
+      signedRequestPost(
+        url: URL.init(string: "https://api.twitter.com/1.1/statuses/update.json")!,
+        params: [
+          "status": body,
+          "media_ids": mediaIDs.map { "\($0)" }.joined(separator: ",")
+        ])
+        .map { (json) -> TweetEntity in
+          return try TweetEntity.init(json: json)
+    }
+  }
+
+  public static func post(image: UIImage) -> Observable<Int> {
+    return
+      signedRequestPost(
+        url: URL.init(string: "https://upload.twitter.com/1.1/media/upload.json")!,
+        params: [
+          "media_data": UIImageJPEGRepresentation(image, 1)?.base64EncodedString() ?? ""
+        ]).map({ (json) -> Int in
+          return try json.get(valueForKey: "media_id")
+        })
   }
 }
 

@@ -16,7 +16,8 @@ class TimelineViewModel {
 
   private let bag = DisposeBag.init()
 
-  let dataSource = RxTableViewSectionedAnimatedDataSource<Section>.init()
+//  let dataSource = RxTableViewSectionedAnimatedDataSource<Section>.init()
+  let dataSource = TableViewDataSource<Section>.init()
 
   private let _streamingIsConnected = BehaviorSubject.init(value: false)
   var streamingIsConnected: ControlProperty<Bool>! = nil
@@ -81,11 +82,22 @@ class TimelineViewModel {
       switch row {
       case .tweet(let tweet):
         let cell: TweetCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.setup(tweet: tweet)
+        cell.body = tweet.text
+        cell.screenname = "@\(tweet.user.screenname)"
+        cell.name = tweet.user.name
+        cell.set(imageURL: tweet.user.iconImageURL)
         cell.colorRibbon = self.friendIDs.contains(tweet.user.id) ? nil : .notFriend
         return cell
       }
     }
+  }
+}
+
+// - MARK: Fetch from REST API
+
+extension TimelineViewModel {
+  var refresh: Observable<Void> {
+    fatalError()
   }
 }
 

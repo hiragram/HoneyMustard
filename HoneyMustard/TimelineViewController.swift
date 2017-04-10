@@ -21,6 +21,10 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
       tableView.registerNib(cellType: TweetCell.self)
       vm.items.bindTo(tableView.rx.items(dataSource: vm.dataSource)).addDisposableTo(bag)
       tableView.estimatedRowHeight = 100 // FIXME
+      tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+      tableView.rx.scrolledToBottom.subscribe(onNext: { (_) in
+        print("一番下")
+      }).addDisposableTo(bag)
     }
   }
 
