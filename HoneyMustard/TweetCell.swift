@@ -9,27 +9,26 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Models
 
 final class TweetCell: UITableViewCell {
   private var bag = DisposeBag.init()
 
-  @IBOutlet private weak var nameLabel: DesignedLabel! {
+  @IBOutlet fileprivate weak var nameLabel: DesignedLabel! {
     didSet {
       nameLabel.typography = Style.current.usernameText
     }
   }
-  @IBOutlet private weak var screennameLabel: DesignedLabel! {
+  @IBOutlet fileprivate weak var screennameLabel: DesignedLabel! {
     didSet {
       screennameLabel.typography = Style.current.screennameText
     }
   }
-  @IBOutlet private weak var bodyLabel: DesignedLabel! {
+  @IBOutlet fileprivate weak var bodyLabel: DesignedLabel! {
     didSet {
       bodyLabel.typography = Style.current.generalText
     }
   }
-  @IBOutlet private weak var iconImageView: UIImageView! {
+  @IBOutlet fileprivate weak var iconImageView: UIImageView! {
     didSet {
       iconImageView.layer.cornerRadius = 5
       iconImageView.layer.masksToBounds = true
@@ -37,7 +36,7 @@ final class TweetCell: UITableViewCell {
       iconImageView.layer.borderWidth = 0.5
     }
   }
-  @IBOutlet private weak var colorRibbonView: UIView! {
+  @IBOutlet fileprivate weak var colorRibbonView: UIView! {
     didSet {
       _colorRibbon.asObservable().subscribe(onNext: { [weak self] (ribbon) in
         self?.colorRibbonView.backgroundColor = ribbon?.color ?? UIColor.clear
@@ -45,13 +44,6 @@ final class TweetCell: UITableViewCell {
     }
   }
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
-
-  func setup(tweet: TweetEntity) {
-    nameLabel.text = tweet.user.name
-    screennameLabel.text = tweet.user.screenname
-    bodyLabel.text = tweet.text
-    iconImageView.setImage(url: tweet.user.iconImageURL)
-  }
 
   // MARK: - Appearance properties
 
@@ -70,6 +62,41 @@ final class TweetCell: UITableViewCell {
   override func prepareForReuse() {
     bag = DisposeBag.init()
     super.prepareForReuse()
+  }
+}
+
+// MARK - api
+
+extension TweetCell {
+  var name: String? {
+    get {
+      return nameLabel.text
+    }
+    set {
+      nameLabel.text = newValue
+    }
+  }
+
+  var screenname: String? {
+    get {
+      return screennameLabel.text
+    }
+    set {
+      screennameLabel.text = newValue
+    }
+  }
+
+  var body: String? {
+    get {
+      return bodyLabel.text
+    }
+    set {
+      bodyLabel.text = newValue
+    }
+  }
+
+  func set(imageURL: URL) {
+    iconImageView.setImage(url: imageURL)
   }
 }
 

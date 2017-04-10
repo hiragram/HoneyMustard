@@ -82,7 +82,10 @@ class TimelineViewModel {
       switch row {
       case .tweet(let tweet):
         let cell: TweetCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.setup(tweet: tweet)
+        cell.body = tweet.text
+        cell.screenname = "@\(tweet.user.screenname)"
+        cell.name = tweet.user.name
+        cell.set(imageURL: tweet.user.iconImageURL)
         cell.colorRibbon = self.friendIDs.contains(tweet.user.id) ? nil : .notFriend
         return cell
       }
