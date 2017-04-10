@@ -30,6 +30,7 @@
 		601FAE551E7D2F3400E6F23C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE541E7D2F3400E6F23C /* Date.swift */; };
 		601FAE571E7D311B00E6F23C /* JSONMappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE561E7D311B00E6F23C /* JSONMappable.swift */; };
 		601FAE591E7D395C00E6F23C /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FAE581E7D395C00E6F23C /* TimelineViewModel.swift */; };
+		6025CE8F1E9BE9DC00244733 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025CE8E1E9BE9DC00244733 /* UIScrollView.swift */; };
 		6042EE971E7CCC7F004C0485 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6042EE8E1E7CCC7F004C0485 /* Models.framework */; };
 		6042EE9E1E7CCC7F004C0485 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EE9D1E7CCC7F004C0485 /* ModelsTests.swift */; };
 		6042EEA01E7CCC7F004C0485 /* Models.h in Headers */ = {isa = PBXBuildFile; fileRef = 6042EE901E7CCC7F004C0485 /* Models.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -137,6 +138,7 @@
 		601FAE561E7D311B00E6F23C /* JSONMappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONMappable.swift; sourceTree = "<group>"; };
 		601FAE581E7D395C00E6F23C /* TimelineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
 		601FAE5A1E7D3C7B00E6F23C /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = Carthage/Build/iOS/OAuthSwift.framework; sourceTree = "<group>"; };
+		6025CE8E1E9BE9DC00244733 /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		6042EE8E1E7CCC7F004C0485 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6042EE901E7CCC7F004C0485 /* Models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Models.h; sourceTree = "<group>"; };
 		6042EE911E7CCC7F004C0485 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				6068580F1E8D68FC00E37AF7 /* NibInstantiatable.swift */,
 				601FAE4B1E7D283900E6F23C /* UITableView.swift */,
 				6044841E1E7F946800C8794E /* UIImageView.swift */,
+				6025CE8E1E9BE9DC00244733 /* UIScrollView.swift */,
 			);
 			name = Protocols/Extensions;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				604484231E7FB00D00C8794E /* DefaultStyle.swift in Sources */,
 				6042EEBB1E7CE442004C0485 /* StoryboardInstantiatable.swift in Sources */,
 				6011A3871E7C5DD10061F3A6 /* AppDelegate.swift in Sources */,
+				6025CE8F1E9BE9DC00244733 /* UIScrollView.swift in Sources */,
 				604484281E7FB45100C8794E /* Style.swift in Sources */,
 				60DD30181E7FC31300FFBE08 /* TweetEditViewModel.swift in Sources */,
 				601FAE471E7D272300E6F23C /* TweetCell.swift in Sources */,

@@ -93,6 +93,14 @@ class TimelineViewModel {
   }
 }
 
+// - MARK: Fetch from REST API
+
+extension TimelineViewModel {
+  var refresh: Observable<Void> {
+    fatalError()
+  }
+}
+
 // - MARK: RxDataSources
 
 extension TimelineViewModel {
