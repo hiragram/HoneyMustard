@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Models
 
 final class TimelineViewController: UIViewController, StoryboardInstantiatable {
 
@@ -51,6 +52,7 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    Observable.just(true).bindTo(vm.streamingIsConnected).addDisposableTo(bag)
+//    Observable.just(true).bindTo(vm.streamingIsConnected).addDisposableTo(bag)
+    MastodonRepository.oauth(parentVC: self)
   }
 }
