@@ -9,6 +9,7 @@
 import Foundation
 import OAuthSwift
 import UIKit
+import RxSwift
 
 public struct MastodonRepository {
   private static let host = "https://pawoo.net"
@@ -43,6 +44,10 @@ public struct MastodonRepository {
     }) { (error) in
       print(error)
     }
+  }
+
+  public static func timeline() {
+
   }
 
   /*
