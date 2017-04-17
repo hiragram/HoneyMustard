@@ -19,6 +19,10 @@ public struct MastodonRepository {
     return host + path
   }
 
+  private static func apiURL(forPath path: String) -> String {
+    return url(forPath: "/api/v1/") + path
+  }
+
   private static let oauthSwift = OAuth2Swift.init(consumerKey: clientID, consumerSecret: clientSecret, authorizeUrl: url(forPath: "/oauth/authorize"), accessTokenUrl: url(forPath: "/oauth/token"), responseType: "code")
 
 
@@ -28,6 +32,14 @@ public struct MastodonRepository {
       print(credential)
       print(response)
       print(parameters)
+    }) { (error) in
+      print(error)
+    }
+  }
+
+  public static func post(text: String) {
+    oauthSwift.client.post(apiURL(forPath: "statuses"), parameters: ["status": text], success: { (response) in
+      print(response)
     }) { (error) in
       print(error)
     }
