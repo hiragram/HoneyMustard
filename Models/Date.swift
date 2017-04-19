@@ -20,4 +20,16 @@ extension Date {
       return nil
     }
   }
+
+  init?(mastodonDateString dateString: String) {
+    let formatter = DateFormatter.init()
+    //                      2017-04-16T06:37:45.215Z
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+    formatter.locale = Locale.init(identifier: "en-US")
+    if let timestamp = formatter.date(from: dateString)?.timeIntervalSince1970 {
+      self.init(timeIntervalSince1970: timestamp)
+    } else {
+      return nil
+    }
+  }
 }

@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct MastodonTagEntity {
-  var name: String
-  var url: URL
+public struct MastodonTagEntity: JSONMappable {
+  public var name: String
+  public var url: URL
+
+  public init(json: [String : Any]) throws {
+    name = try json.get(valueForKey: "name")
+    url = try json.get(valueForKey: "url")
+  }
 }

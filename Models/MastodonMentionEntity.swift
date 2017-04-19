@@ -8,9 +8,16 @@
 
 import Foundation
 
-struct MastodonMentionEntity {
-  var url: URL
-  var username: String
-  var acct: String
-  var id: Int
+public struct MastodonMentionEntity: JSONMappable {
+  public var url: URL
+  public var username: String
+  public var acct: String
+  public var id: Int
+
+  public init(json: [String : Any]) throws {
+    url = try json.get(valueForKey: "url")
+    username = try json.get(valueForKey: "username")
+    acct = try json.get(valueForKey: "acct")
+    id = try json.get(valueForKey: "id")
+  }
 }

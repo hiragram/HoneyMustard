@@ -48,7 +48,7 @@ public extension Dictionary {
 
   func get(valueForKey key: Key) throws -> [String: Any] {
     guard let dict = self[key] as? [String: Any] else {
-      throw JSONMappingError.mappingFailed(message: "Failed to extract dictionary.")
+      throw JSONMappingError.mappingFailed(message: "Failed to extract dictionary. key: \(key) value: \(self[key])")
     }
     return dict
   }
@@ -56,6 +56,14 @@ public extension Dictionary {
   func getTwitterDate(valueForKey key: Key) throws -> Date {
     let dateStr: String = try get(valueForKey: key)
     guard let date = Date.init(twitterDateString: dateStr) else {
+      throw JSONMappingError.mappingFailed(message: "Failed to parse date string. actual value: (\(dateStr))")
+    }
+    return date
+  }
+
+  func getMastodonDate(valueForKey key: Key) throws -> Date {
+    let dateStr: String = try get(valueForKey: key)
+    guard let date = Date.init(mastodonDateString: dateStr) else {
       throw JSONMappingError.mappingFailed(message: "Failed to parse date string. actual value: (\(dateStr))")
     }
     return date

@@ -24,15 +24,21 @@ public struct MastodonRepository {
     return url(forPath: "/api/v1/") + path
   }
 
-  private static let oauthSwift = OAuth2Swift.init(consumerKey: clientID, consumerSecret: clientSecret, authorizeUrl: url(forPath: "/oauth/authorize"), accessTokenUrl: url(forPath: "/oauth/token"), responseType: "code")
+  private static let oauthSwift = { _ -> OAuth2Swift in
+    let oauthSwift = OAuth2Swift.init(consumerKey: clientID, consumerSecret: clientSecret, authorizeUrl: url(forPath: "/oauth/authorize"), accessTokenUrl: url(forPath: "/oauth/token"), responseType: "code")
+    if let accessToken = Keychain.accessToken(), let accessTokenSecret = Keychain.accessTokenSecret() {
+      oauthSwift.client.credential.oauthToken = accessToken
+      oauthSwift.client.credential.oauthTokenSecret = accessTokenSecret
+    }
+
+    return oauthSwift
+  }()
 
 
   public static func oauth(parentVC: UIViewController) {
     oauthSwift.authorizeURLHandler = SafariURLHandler.init(viewController: parentVC, oauthSwift: oauthSwift)
     oauthSwift.authorize(withCallbackURL: "honeymustard://oauth-callback/mastodon", scope: "read write follow", state: "a", success: { (credential, response, parameters) in
-      print(credential)
-      print(response)
-      print(parameters)
+      Keychain.set(accessToken: credential.oauthToken, accessTokenSecret: credential.oauthTokenSecret)
     }) { (error) in
       print(error)
     }
@@ -46,8 +52,32 @@ public struct MastodonRepository {
     }
   }
 
-  public static func timeline() {
+  public static func timeline() -> Observable<[MastodonStatusEntity]> {
+    return Observable.create({ (observer) -> Disposable in
+      oauthSwift.client.get(apiURL(forPath: "/timelines/home"), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [[String: Any]] else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          let statuses = try json.map { try MastodonStatusEntity.init(json: $0) }
+          observer.onNext(statuses)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
 
+  public static var isAuthorized: Observable<Bool> {
+    guard let _ = Keychain.accessToken(), let _ = Keychain.accessTokenSecret() else {
+      return Observable.just(false)
+    }
+    return Observable.just(true)
   }
 
   /*

@@ -21,7 +21,7 @@ class GlobalController: UIViewController {
   override func loadView() {
     super.loadView()
 
-    TweetRepository.isAuthorized
+    MastodonRepository.isAuthorized
       .filter { $0 == true }
       .subscribe(onNext: { [unowned self] (_) in
         let editVC = TweetEditViewController.instantiateFromStoryboard()
@@ -54,9 +54,9 @@ class GlobalController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
-    TweetRepository.isAuthorized.take(1).subscribe(onNext: { [unowned self] (isAuthorized) in
+    MastodonRepository.isAuthorized.take(1).subscribe(onNext: { [unowned self] (isAuthorized) in
       if !isAuthorized {
-        TweetRepository.oauth()
+        MastodonRepository.oauth(parentVC: self)
       }
     }).addDisposableTo(bag)
   }

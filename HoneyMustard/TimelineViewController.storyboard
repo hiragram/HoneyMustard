@@ -24,17 +24,22 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9R7-es-01f">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="Dex-9s-54u" customClass="UIRefreshControl">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="9R7-es-01f" secondAttribute="trailing" id="9p0-tM-P53"/>
-                            <constraint firstItem="JVn-P6-pDK" firstAttribute="top" secondItem="9R7-es-01f" secondAttribute="bottom" id="I84-AZ-j5G"/>
                             <constraint firstItem="9R7-es-01f" firstAttribute="leading" secondItem="gKw-9W-hzz" secondAttribute="leading" id="TRE-PW-odf"/>
+                            <constraint firstAttribute="bottom" secondItem="9R7-es-01f" secondAttribute="bottom" id="UAK-kK-Ipt"/>
                             <constraint firstItem="9R7-es-01f" firstAttribute="top" secondItem="gKw-9W-hzz" secondAttribute="top" id="wdF-69-cH6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="refreshControl" destination="Dex-9s-54u" id="mkP-yC-FVo"/>
                         <outlet property="tableView" destination="9R7-es-01f" id="sVa-WN-KDc"/>
                     </connections>
                 </viewController>

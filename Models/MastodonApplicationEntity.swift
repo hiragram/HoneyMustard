@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct MastodonApplicationEntity {
-  var name: String
-  var website: URL
+public struct MastodonApplicationEntity: JSONMappable {
+  public var name: String
+  public var website: URL?
+
+  public init(json: [String : Any]) throws {
+    name = try json.get(valueForKey: "name")
+    website = try json.get(valueForKey: "website")
+  }
 }

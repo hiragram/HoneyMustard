@@ -16,18 +16,15 @@ class TimelineViewModel {
 
   private let bag = DisposeBag.init()
 
-//  let dataSource = RxTableViewSectionedAnimatedDataSource<Section>.init()
   let dataSource = TableViewDataSource<Section>.init()
+//  let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
 
-  private let _streamingIsConnected = BehaviorSubject.init(value: false)
-  var streamingIsConnected: ControlProperty<Bool>! = nil
-
-  private let tweets = Variable<[TweetEntity]>.init([])
+  fileprivate let statuses = Variable<[MastodonStatusEntity]>.init([])
 
   var items: Observable<[Section]> {
-    return tweets.asObservable().map({ (tweets) -> [Section] in
-      let rows = tweets.reversed().map { Row.tweet($0) }
-      return [Section.tweets(rows)]
+    return statuses.asObservable().map({ (statuses) -> [Section] in
+      let rows = statuses.map { Row.status($0) }
+      return [Section.statuses(rows)]
     })
   }
 
@@ -36,57 +33,14 @@ class TimelineViewModel {
   private var friendIDs: [Int] = []
 
   init() {
-    streamingIsConnected = ControlProperty<Bool>.init(values: _streamingIsConnected.asObservable(), valueSink: _streamingIsConnected.asObserver())
-
-    _streamingIsConnected.subscribe(onNext: { [unowned self] (value) in
-      if value == true {
-        guard self.userstreamDisposable == nil else {
-          return
-        }
-        self.userstreamDisposable = try! TweetRepository.userstream()
-          .subscribe({ [unowned self] (event) in
-            switch event {
-            case .next(let event):
-              switch event {
-              case .newStatus(rawEvent: let raw):
-                do {
-                  let tweet = try TweetEntity.init(json: raw)
-                  self.tweets.value.append(tweet)
-                } catch let e {
-                  print(e)
-                }
-              case .deleteStatus(rawEvent: let raw):
-                let delete: [String: Any] = try! raw.get(valueForKey: "delete")
-                let status: [String: Any] = try! delete.get(valueForKey: "status")
-                let id: Int = try! status.get(valueForKey: "id")
-                let tweets = self.tweets.value
-                self.tweets.value = tweets.filter { $0.id != id }
-              case .friends(rawEvent: let raw):
-                self.friendIDs = try! raw.get(valueForKey: "friends") ?? []
-              default:
-                break
-              }
-            case .error(let error):
-              print(error.localizedDescription)
-            case .completed:
-              print("completed")
-            }
-          })
-      } else {
-        self.userstreamDisposable?.dispose()
-        self.userstreamDisposable = nil
-      }
-    }).addDisposableTo(bag)
-
-    dataSource.configureCell = { [unowned self] (dataSource, tableView, indexPath, row) -> UITableViewCell in
+    dataSource.configureCell = { (dataSource, tableView, indexPath, row) -> UITableViewCell in
       switch row {
-      case .tweet(let tweet):
+      case .status(let status):
         let cell: TweetCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.body = tweet.text
-        cell.screenname = "@\(tweet.user.screenname)"
-        cell.name = tweet.user.name
-        cell.set(imageURL: tweet.user.iconImageURL)
-        cell.colorRibbon = self.friendIDs.contains(tweet.user.id) ? nil : .notFriend
+        cell.body = status.content
+        cell.screenname = status.account.acct
+        cell.name = status.account.displayName
+        cell.set(imageURL: status.account.avatar)
         return cell
       }
     }
@@ -96,8 +50,11 @@ class TimelineViewModel {
 // - MARK: Fetch from REST API
 
 extension TimelineViewModel {
-  var refresh: Observable<Void> {
-    fatalError()
+  var refresh: Observable<[MastodonStatusEntity]> {
+    return MastodonRepository.timeline()
+    .do(onNext: { [weak self] (statuses) in
+      self?.statuses.value = statuses
+    })
   }
 }
 
@@ -105,41 +62,41 @@ extension TimelineViewModel {
 
 extension TimelineViewModel {
   enum Section: AnimatableSectionModelType {
-    case tweets([Row])
+    case statuses([Row])
 
     typealias Item = Row
     typealias Identity = Int
 
     var identity: Int {
       switch self {
-      case .tweets:
+      case .statuses:
         return 1
       }
     }
 
     var items: [Row] {
       switch self {
-      case .tweets(let rows):
+      case .statuses(let rows):
         return rows
       }
     }
 
     init(original: Section, items: [Item]) {
       switch original {
-      case .tweets:
-        self = .tweets(items)
+      case .statuses:
+        self = .statuses(items)
       }
     }
   }
 
   enum Row: IdentifiableType, Equatable {
-    case tweet(TweetEntity)
+    case status(MastodonStatusEntity)
 
     typealias Identity = Int
 
     var identity: Int {
       switch self {
-      case .tweet(let tweet):
+      case .status(let tweet):
         return tweet.id
       }
     }
