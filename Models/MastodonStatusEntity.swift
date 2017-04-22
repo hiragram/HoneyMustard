@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MastodonStatusEntity: JSONMappable {
+public struct MastodonStatusEntity: JSONMappable, Identified {
   public var id: Int
   public var uri: String
   public var url: String

@@ -71,7 +71,7 @@ public extension Dictionary {
 
   func get(valueForKey key: Key) throws -> URL {
     guard let url = try get(valueForKey: key) as URL? else {
-      throw JSONMappingError.mappingFailed(message: "Failed to parse url.")
+      throw JSONMappingError.mappingFailed(message: "Failed to parse url. actual: \(self[key]) self: \(self) key: \(key)")
     }
 
     return url

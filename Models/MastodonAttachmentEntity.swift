@@ -12,7 +12,7 @@ public struct MastodonAttachmentEntity: JSONMappable {
   public var id: Int
   public var type: Attachment?
   public var url: URL
-  public var remoteURL: URL
+  public var remoteURL: URL?
   public var previewURL: URL
   public var textURL: URL
 

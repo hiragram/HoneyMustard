@@ -16,8 +16,8 @@ class TimelineViewModel {
 
   private let bag = DisposeBag.init()
 
-  let dataSource = TableViewDataSource<Section>.init()
-//  let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
+//  let dataSource = TableViewDataSource<Section>.init()
+  let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
 
   fileprivate let statuses = Variable<[MastodonStatusEntity]>.init([])
 
