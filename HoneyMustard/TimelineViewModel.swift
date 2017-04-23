@@ -15,6 +15,15 @@ import RxDataSources
 class TimelineViewModel {
 
   private let bag = DisposeBag.init()
+  private let _openURL = PublishSubject<URLOpenStyle>.init()
+  var openURL: Observable<URLOpenStyle> {
+    return _openURL.asObservable()
+  }
+
+  enum URLOpenStyle {
+    case modally(URL)
+    case push(URL)
+  }
 
 //  let dataSource = TableViewDataSource<Section>.init()
   let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
@@ -47,8 +56,8 @@ class TimelineViewModel {
         cell.screenname = status.account.acct
         cell.name = status.account.displayName
         cell.set(imageURL: status.account.avatar)
-        cell.tapLink.subscribe(onNext: { (url) in
-          print(url)
+        cell.tapLink.subscribe(onNext: { [weak self] (url) in
+          self?._openURL.onNext(.modally(url))
         }).addDisposableTo(cell.bag)
         return cell
       }

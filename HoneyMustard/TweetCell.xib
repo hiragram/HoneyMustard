@@ -69,6 +69,7 @@
                     <constraint firstItem="NgE-Az-bvT" firstAttribute="leading" secondItem="Nrd-MO-5oC" secondAttribute="trailing" constant="8" id="PyA-cs-eQ6"/>
                     <constraint firstItem="NgE-Az-bvT" firstAttribute="top" secondItem="Nrd-MO-5oC" secondAttribute="top" id="QSV-ln-YwI"/>
                     <constraint firstItem="Nrd-MO-5oC" firstAttribute="leading" secondItem="1OT-6a-aHP" secondAttribute="leadingMargin" id="REt-T0-Om3"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Nrd-MO-5oC" secondAttribute="bottom" id="dil-Vq-HAA"/>
                     <constraint firstItem="Nrd-MO-5oC" firstAttribute="top" secondItem="1OT-6a-aHP" secondAttribute="topMargin" id="e7G-u1-CuL"/>
                     <constraint firstItem="b4X-7z-17G" firstAttribute="leading" secondItem="NgE-Az-bvT" secondAttribute="leading" id="lYD-lr-5kI"/>
                     <constraint firstItem="b4X-7z-17G" firstAttribute="top" secondItem="NgE-Az-bvT" secondAttribute="bottom" constant="4" id="vp2-1p-Juk"/>

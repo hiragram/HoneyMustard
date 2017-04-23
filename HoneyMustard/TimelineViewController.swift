@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Models
+import SafariServices
 
 final class TimelineViewController: UIViewController, StoryboardInstantiatable {
 
@@ -46,11 +47,15 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
   override func viewDidLoad() {
     super.viewDidLoad()
     vm.refresh.subscribe().addDisposableTo(bag)
-
-    let testHTML = "<p>だいぶしんどいぞこれ<a href=\"https://pawoo.net/media/oqL1KDbdJggzvXDwyGA\" rel=\"nofollow noopener\" target=\"_blank\"><span class=\"invisible\">https://</span><span class=\"ellipsis\">pawoo.net/media/oqL1KDbdJggzvX</span><span class=\"invisible\">DwyGA</span></a></p>"
-    MastodonStatusParser.parse(xml: testHTML.data(using: .utf8)!)
-      .subscribe(onNext: { (representations) in
-        print(representations.map { $0.attributedString })
-      }).addDisposableTo(bag)
+    vm.openURL.subscribe(onNext: { [weak self] (transition) in
+      switch transition {
+      case .modally(let url):
+        let safari = SFSafariViewController.init(url: url)
+        self?.present(safari, animated: true, completion: nil)
+      case .push(let url):
+        let safari = SFSafariViewController.init(url: url)
+        self?.show(safari, sender: nil)
+      }
+    }).addDisposableTo(bag)
   }
 }

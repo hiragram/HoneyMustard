@@ -71,3 +71,7 @@ public enum Visibility: String {
   case `private`
   case direct
 }
+
+private struct StatusBox {
+  var entity: MastodonStatusEntity
+}
