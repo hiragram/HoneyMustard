@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Attributed
 
 public struct MastodonStatusParser {
 
@@ -83,7 +84,6 @@ private class Parser: NSObject {
         print("unsupported tag")
         return []
       }
-
     }
   }
 
@@ -207,6 +207,20 @@ public enum TextRepresentation {
 
   fileprivate static func generateRepresentations(fromElement element: Parser.Element) {
 
+  }
+
+  public var attributedString: NSAttributedString {
+    switch self {
+    case .text(let text):
+      return NSAttributedString.init(string: text)
+    case .link(text: let children, url: let url):
+      let text = children.map { $0.attributedString.string }.joined(separator: "")
+      return text.at.attributed {
+        $0.underlineStyle(.styleSingle)
+      }
+    case .attachment(url: let url):
+      return NSAttributedString.init(string: url.absoluteString) // TODO
+    }
   }
 }
 

@@ -54,7 +54,7 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
     self.parser = parser
     parser.parse()
       .subscribe(onNext: { (representations) in
-        print(representations)
+        print(representations.map { $0.attributedString })
       }).addDisposableTo(bag)
 
   }
