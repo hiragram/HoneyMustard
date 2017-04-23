@@ -26,6 +26,7 @@ final class TweetCell: UITableViewCell {
   @IBOutlet fileprivate weak var bodyLabel: DesignedLabel! {
     didSet {
       bodyLabel.typography = Style.current.generalText
+      bodyLabel.isUserInteractionEnabled = true
     }
   }
   @IBOutlet fileprivate weak var iconImageView: UIImageView! {
@@ -62,6 +63,45 @@ final class TweetCell: UITableViewCell {
   override func prepareForReuse() {
     bag = DisposeBag.init()
     super.prepareForReuse()
+    setLinkTapRecognizer()
+  }
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setLinkTapRecognizer()
+  }
+
+  private func setLinkTapRecognizer() {
+    let bodyTapGesture = UITapGestureRecognizer.init()
+    let layoutManager = NSLayoutManager.init()
+    let textContainer = NSTextContainer.init(size: .zero)
+    layoutManager.addTextContainer(textContainer)
+    bodyLabel.addGestureRecognizer(bodyTapGesture)
+    bodyTapGesture.rx.event.map { [weak self] (gesture) -> URL? in
+      guard let bodyLabel = gesture.view as? DesignedLabel else {
+        return nil
+      }
+      guard let attributedText = bodyLabel.attributedText else {
+        return nil
+      }
+      let textStorage = NSTextStorage.init(attributedString: attributedText)
+      textStorage.addLayoutManager(layoutManager)
+      textContainer.lineFragmentPadding = 0.0
+      textContainer.lineBreakMode = bodyLabel.lineBreakMode
+      textContainer.maximumNumberOfLines = bodyLabel.numberOfLines
+      textContainer.size = bodyLabel.bounds.size
+
+      let position = gesture.location(in: bodyLabel)
+      let labelSize = bodyLabel.bounds.size
+      let textBoundingBox = layoutManager.usedRect(for: textContainer)
+      let textContainerOffset = CGPoint.init(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+      let locationOfTouchInTextContainer = CGPoint.init(x: position.x - textContainerOffset.x, y: position.y - textContainerOffset.y)
+      let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+      print("\(indexOfCharacter)文字目がタップされた！")
+      let attributesOfTappedCharacter = attributedText.attributes(at: indexOfCharacter, effectiveRange: nil)
+      print(attributesOfTappedCharacter)
+      return nil
+      }.subscribe().addDisposableTo(bag)
   }
 }
 
