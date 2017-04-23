@@ -70,6 +70,7 @@
 		60B60E6B1EA50F3800D491EC /* MastodonMentionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B60E6A1EA50F3800D491EC /* MastodonMentionEntity.swift */; };
 		60B60E6D1EA50F4E00D491EC /* MastodonTagEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B60E6C1EA50F4E00D491EC /* MastodonTagEntity.swift */; };
 		60B60E6F1EA50F7000D491EC /* MastodonApplicationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B60E6E1EA50F7000D491EC /* MastodonApplicationEntity.swift */; };
+		60D6E6C81EACD2290075492A /* Attributed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D6E6C71EACD2290075492A /* Attributed.framework */; };
 		60DD30161E7FB4FC00FFBE08 /* DesignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD30151E7FB4FC00FFBE08 /* DesignedLabel.swift */; };
 		60DD30181E7FC31300FFBE08 /* TweetEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD30171E7FC31300FFBE08 /* TweetEditViewModel.swift */; };
 		60DD30191E7FCE0700FFBE08 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601FAE5A1E7D3C7B00E6F23C /* OAuthSwift.framework */; };
@@ -186,6 +187,7 @@
 		60B60E6A1EA50F3800D491EC /* MastodonMentionEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonMentionEntity.swift; sourceTree = "<group>"; };
 		60B60E6C1EA50F4E00D491EC /* MastodonTagEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonTagEntity.swift; sourceTree = "<group>"; };
 		60B60E6E1EA50F7000D491EC /* MastodonApplicationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonApplicationEntity.swift; sourceTree = "<group>"; };
+		60D6E6C71EACD2290075492A /* Attributed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Attributed.framework; path = Carthage/Build/iOS/Attributed.framework; sourceTree = "<group>"; };
 		60DD30151E7FB4FC00FFBE08 /* DesignedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignedLabel.swift; sourceTree = "<group>"; };
 		60DD30171E7FC31300FFBE08 /* TweetEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetEditViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60D6E6C81EACD2290075492A /* Attributed.framework in Frameworks */,
 				6042EEA31E7CCC7F004C0485 /* Models.framework in Frameworks */,
 				6011A3B01E7C61450061F3A6 /* RxSwift.framework in Frameworks */,
 				6011A3AF1E7C61450061F3A6 /* RxCocoa.framework in Frameworks */,
@@ -294,6 +297,7 @@
 		6011A3B21E7C614B0061F3A6 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				60D6E6C71EACD2290075492A /* Attributed.framework */,
 				602CCC1D1EA925AC005A07C3 /* Nimble.framework */,
 				6044841B1E7F941C00C8794E /* SDWebImage.framework */,
 				601FAE5A1E7D3C7B00E6F23C /* OAuthSwift.framework */,
@@ -621,6 +625,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/OAuthSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Attributed.framework",
 			);
 			name = Carthage;
 			outputPaths = (
