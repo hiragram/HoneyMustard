@@ -11,14 +11,16 @@ import RxSwift
 
 public struct MastodonStatusParser {
 
-  private static var processingParser: Parser? = nil
-  public static func parse(xml: Data) {
-    guard processingParser == nil else {
-      return
+  private var parser: Parser
+
+  public init(xml: Data) {
+    parser = Parser.init(xml: xml)
+  }
+
+  public func parse() -> Observable<[TextRepresentation]> {
+    return parser.parse().map { (element) -> [TextRepresentation] in
+      return element.textRepresentation()
     }
-    let parser = Parser.init(xml: xml)
-    parser.parse()
-    processingParser = parser
   }
 }
 
@@ -27,9 +29,14 @@ private class Parser: NSObject {
 
   fileprivate var elementStack: [Element] = []
 
-  fileprivate class Element: CustomStringConvertible {
+  fileprivate let _parsedElements = ReplaySubject<Element>.create(bufferSize: 1)
+  private var parsedElements: Observable<Element> {
+    return _parsedElements.asObservable()
+  }
+
+  class Element: CustomStringConvertible, ParserElement {
     var name: String
-    var children: [CustomStringConvertible] = []
+    var children: [ParserElement] = []
     var attributes: [String: [String]] = [:]
 
     init(name: String) {
@@ -43,6 +50,41 @@ private class Parser: NSObject {
       }.joined(separator: " ")
       return "<\(name)\(attributesStr.isEmpty ? "" : " \(attributesStr)")>\(childrenStr)</\(name)>"
     }
+
+    func `is`(`class` className: String) -> Bool {
+      guard let classes = attributes["class"] else {
+        return false
+      }
+      return classes.contains(className)
+    }
+
+    func textRepresentation() -> [TextRepresentation] {
+      guard !self.is(class: "invisible") else {
+        return []
+      }
+
+      let childrenRepresentation = children.map({ (child) -> [TextRepresentation] in
+        return child.textRepresentation()
+      }).reduce([], +)
+
+
+      switch name {
+      case "p":
+        return childrenRepresentation
+      case "a":
+        if let urlStr = (attributes["href"] ?? []).first, let url = URL.init(string: urlStr) {
+          return [.link(text: childrenRepresentation, url: url)]
+        } else {
+          return childrenRepresentation
+        }
+      case "span":
+        return childrenRepresentation
+      default:
+        print("unsupported tag")
+        return []
+      }
+
+    }
   }
 
   fileprivate init(xml: Data) {
@@ -51,8 +93,9 @@ private class Parser: NSObject {
     parser.delegate = self
   }
 
-  fileprivate func parse() {
+  fileprivate func parse() -> Observable<Element> {
     parser.parse()
+    return parsedElements
   }
 }
 
@@ -65,6 +108,8 @@ extension Parser: XMLParserDelegate {
   func parserDidEndDocument(_ parser: XMLParser) {
     print("Finished parsing")
     print(elementStack)
+    assert(elementStack.count == 1)
+    _parsedElements.onNext(elementStack.first!)
   }
 
   func parser(_ parser: XMLParser, foundNotationDeclarationWithName name: String, publicID: String?, systemID: String?) {
@@ -152,5 +197,25 @@ extension Parser: XMLParserDelegate {
 
   func parser(_ parser: XMLParser, validationErrorOccurred validationError: Error) {
     print("validationErrorOccurred", validationError)
+  }
+}
+
+public enum TextRepresentation {
+  case text(String)
+  case link(text: [TextRepresentation], url: URL)
+  case attachment(url: URL)
+
+  fileprivate static func generateRepresentations(fromElement element: Parser.Element) {
+
+  }
+}
+
+protocol ParserElement: CustomStringConvertible {
+  func textRepresentation() -> [TextRepresentation]
+}
+
+extension String: ParserElement {
+  func textRepresentation() -> [TextRepresentation] {
+    return [.text(self)]
   }
 }

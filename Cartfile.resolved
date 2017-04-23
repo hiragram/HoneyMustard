@@ -1,3 +1,4 @@
+github "Nirma/Attributed" "1.0.0"
 github "OAuthSwift/OAuthSwift" "1.1.1"
 github "Quick/Nimble" "v6.1.0"
 github "ReactiveX/RxSwift" "3.3.1"

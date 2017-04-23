@@ -6,3 +6,4 @@ github "hiragram/SplitViewController" ~> 0.1.0
 github "RxSwiftCommunity/RxDataSources" ~> 1.0.0
 github "OAuthSwift/OAuthSwift" ~> 1.1.0
 github "rs/SDWebImage" ~> 4.0.0
+github "Nirma/Attributed" ~> 1.0.0
