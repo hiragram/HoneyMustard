@@ -47,6 +47,9 @@ class TimelineViewModel {
         cell.screenname = status.account.acct
         cell.name = status.account.displayName
         cell.set(imageURL: status.account.avatar)
+        cell.tapLink.subscribe(onNext: { (url) in
+          print(url)
+        }).addDisposableTo(cell.bag)
         return cell
       }
     }

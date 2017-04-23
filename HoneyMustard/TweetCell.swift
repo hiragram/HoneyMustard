@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 final class TweetCell: UITableViewCell {
-  private var bag = DisposeBag.init()
+  var bag = DisposeBag.init()
 
   @IBOutlet fileprivate weak var nameLabel: DesignedLabel! {
     didSet {
@@ -45,6 +45,7 @@ final class TweetCell: UITableViewCell {
     }
   }
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
+  fileprivate let _linkTapped = PublishSubject<URL>.init()
 
   // MARK: - Appearance properties
 
@@ -77,7 +78,7 @@ final class TweetCell: UITableViewCell {
     let textContainer = NSTextContainer.init(size: .zero)
     layoutManager.addTextContainer(textContainer)
     bodyLabel.addGestureRecognizer(bodyTapGesture)
-    bodyTapGesture.rx.event.map { [weak self] (gesture) -> URL? in
+    bodyTapGesture.rx.event.map { (gesture) -> URL? in
       guard let bodyLabel = gesture.view as? DesignedLabel else {
         return nil
       }
@@ -97,11 +98,18 @@ final class TweetCell: UITableViewCell {
       let textContainerOffset = CGPoint.init(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
       let locationOfTouchInTextContainer = CGPoint.init(x: position.x - textContainerOffset.x, y: position.y - textContainerOffset.y)
       let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-      print("\(indexOfCharacter)文字目がタップされた！")
       let attributesOfTappedCharacter = attributedText.attributes(at: indexOfCharacter, effectiveRange: nil)
-      print(attributesOfTappedCharacter)
+      if let urlStr = attributesOfTappedCharacter[NSLinkAttributeName] as? String, let url = URL.init(string: urlStr) {
+        return url
+      }
       return nil
-      }.subscribe().addDisposableTo(bag)
+      }.flatMap { optionalURL -> Observable<URL> in
+        if let url = optionalURL {
+          return Observable.just(url)
+        } else {
+          return Observable<URL>.empty()
+        }
+    }.bindTo(_linkTapped).addDisposableTo(bag)
   }
 }
 
@@ -147,6 +155,10 @@ extension TweetCell {
 
   func set(imageURL: URL) {
     iconImageView.setImage(url: imageURL)
+  }
+
+  var tapLink: Observable<URL> {
+    return _linkTapped.asObservable()
   }
 }
 

@@ -40,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4X-7z-17G" userLabel="bodyLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                        <rect key="frame" x="56" y="33" width="316" height="21"/>
+                        <rect key="frame" x="56" y="33" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="9jK-5b-363" secondAttribute="bottom" id="1rU-1K-8p8"/>
-                    <constraint firstItem="b4X-7z-17G" firstAttribute="trailing" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" id="4db-bz-C3a"/>
+                    <constraint firstItem="b4X-7z-17G" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" id="4db-bz-C3a"/>
                     <constraint firstItem="3jh-lq-neG" firstAttribute="trailing" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" id="9AM-jV-FVG"/>
                     <constraint firstAttribute="bottomMargin" secondItem="3jh-lq-neG" secondAttribute="bottom" id="Dzo-c7-tX5"/>
                     <constraint firstItem="av0-oP-mAJ" firstAttribute="leading" secondItem="NgE-Az-bvT" secondAttribute="trailing" constant="4" id="E9Z-Kl-dWy"/>
@@ -74,7 +74,6 @@
                     <constraint firstItem="b4X-7z-17G" firstAttribute="top" secondItem="NgE-Az-bvT" secondAttribute="bottom" constant="4" id="vp2-1p-Juk"/>
                     <constraint firstItem="3jh-lq-neG" firstAttribute="leading" secondItem="b4X-7z-17G" secondAttribute="leading" id="wJQ-sG-X2Q"/>
                     <constraint firstItem="3jh-lq-neG" firstAttribute="top" secondItem="b4X-7z-17G" secondAttribute="bottom" constant="4" id="xOD-Uh-sWc"/>
-                    <constraint firstItem="3jh-lq-neG" firstAttribute="trailing" secondItem="b4X-7z-17G" secondAttribute="trailing" id="ze8-x8-03p"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="56" minY="0.0" maxX="0.0" maxY="0.0"/>

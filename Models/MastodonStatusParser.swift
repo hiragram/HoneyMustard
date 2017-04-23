@@ -238,7 +238,9 @@ public enum TextRepresentation {
     case .link(text: let children, url: let url):
       let text = children.map { $0.attributedString.string }.joined(separator: "")
       return text.at.attributed {
-        $0.underlineStyle(.styleSingle)
+        $0
+          .underlineStyle(.styleSingle)
+          .link(url.absoluteString)
       }
     case .attachment(url: let url):
       return NSAttributedString.init(string: url.absoluteString) // TODO
