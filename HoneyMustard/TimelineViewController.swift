@@ -43,19 +43,14 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
     }
   }
 
-  var parser: MastodonStatusParser! = nil
-
   override func viewDidLoad() {
     super.viewDidLoad()
     vm.refresh.subscribe().addDisposableTo(bag)
 
     let testHTML = "<p>だいぶしんどいぞこれ<a href=\"https://pawoo.net/media/oqL1KDbdJggzvXDwyGA\" rel=\"nofollow noopener\" target=\"_blank\"><span class=\"invisible\">https://</span><span class=\"ellipsis\">pawoo.net/media/oqL1KDbdJggzvX</span><span class=\"invisible\">DwyGA</span></a></p>"
-    let parser = MastodonStatusParser.init(xml: testHTML.data(using: .utf8)!)
-    self.parser = parser
-    parser.parse()
+    MastodonStatusParser.parse(xml: testHTML.data(using: .utf8)!)
       .subscribe(onNext: { (representations) in
         print(representations.map { $0.attributedString })
       }).addDisposableTo(bag)
-
   }
 }

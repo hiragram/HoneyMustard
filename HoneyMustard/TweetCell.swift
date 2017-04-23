@@ -86,6 +86,16 @@ extension TweetCell {
     }
   }
 
+  var attributedBody: NSAttributedString? {
+    get {
+      return bodyLabel.attributedText
+    }
+
+    set {
+      bodyLabel.attributedText = newValue
+    }
+  }
+
   var body: String? {
     get {
       return bodyLabel.text

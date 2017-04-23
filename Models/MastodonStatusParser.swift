@@ -10,15 +10,37 @@ import Foundation
 import RxSwift
 import Attributed
 
-public struct MastodonStatusParser {
+public class MastodonStatusParser {
 
   private var parser: Parser
 
-  public init(xml: Data) {
+  private static var processingParserRefs: [MastodonStatusParser] = []
+
+  public static func parse(xml: Data) -> Observable<[TextRepresentation]> {
+    let parser = MastodonStatusParser.init(xml: xml)
+    processingParserRefs.append(parser)
+
+    return parser.parse().do(onError: { (error) in
+      print(error)
+      if let index = processingParserRefs.index(where: { $0 === parser }) {
+        processingParserRefs.remove(at: index)
+      } else {
+        print("なんか消えてるぞ")
+      }
+    }, onCompleted: { 
+      if let index = processingParserRefs.index(where: { $0 === parser }) {
+        processingParserRefs.remove(at: index)
+      } else {
+        print("なんか消えてるぞ")
+      } // TODO コピペ直す
+    })
+  }
+
+  private init(xml: Data) {
     parser = Parser.init(xml: xml)
   }
 
-  public func parse() -> Observable<[TextRepresentation]> {
+  private func parse() -> Observable<[TextRepresentation]> {
     return parser.parse().map { (element) -> [TextRepresentation] in
       return element.textRepresentation()
     }
