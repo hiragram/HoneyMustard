@@ -46,7 +46,11 @@ final class TweetCell: UITableViewCell {
 //  }
   @IBOutlet private weak var controlContainer: UIView!
   @IBOutlet private weak var controlContainerHeight: NSLayoutConstraint!
-
+  @IBOutlet private weak var mediaContainerHeight: NSLayoutConstraint! {
+    didSet {
+      mediaContainerHeight.constant = 0
+    }
+  }
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
   fileprivate let _linkTapped = PublishSubject<URL>.init()
 
@@ -83,6 +87,7 @@ final class TweetCell: UITableViewCell {
     }) { [weak self] (_) in
 //      self?.controlContainer.isHidden = !selected
     }
+    super.setSelected(selected, animated: animated)
   }
 
   private func setLinkTapRecognizer() {

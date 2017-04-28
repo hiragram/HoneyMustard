@@ -24,7 +24,7 @@
                         <rect key="frame" x="8" y="8" width="364" height="233"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptq-Ez-gbc" userLabel="statusContainer">
-                                <rect key="frame" x="0.0" y="0.0" width="364" height="233"/>
+                                <rect key="frame" x="0.0" y="0.0" width="364" height="183"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aPv-aB-wpi" userLabel="userIcon">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -52,15 +52,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iF-oj-vp5" userLabel="mediaContainer">
-                                        <rect key="frame" x="48" y="49" width="316" height="184"/>
+                                        <rect key="frame" x="48" y="49" width="316" height="134"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="134" id="WqE-Ey-ser"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="leading" secondItem="Ptq-Ez-gbc" secondAttribute="leading" id="0mg-4v-HfD"/>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="width" secondItem="aPv-aB-wpi" secondAttribute="height" multiplier="1:1" id="0nu-lX-ZhO"/>
-                                    <constraint firstItem="5iF-oj-vp5" firstAttribute="top" secondItem="3Zt-4r-DDQ" secondAttribute="bottom" constant="4" id="41L-zJ-pbs"/>
+                                    <constraint firstItem="5iF-oj-vp5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3Zt-4r-DDQ" secondAttribute="bottom" constant="4" id="41L-zJ-pbs"/>
                                     <constraint firstAttribute="bottom" secondItem="5iF-oj-vp5" secondAttribute="bottom" id="LcR-9p-FP2"/>
                                     <constraint firstAttribute="trailing" secondItem="pNw-Yg-Pfj" secondAttribute="trailing" id="OgG-wm-MF6"/>
                                     <constraint firstItem="V85-qd-b9G" firstAttribute="leading" secondItem="aPv-aB-wpi" secondAttribute="trailing" constant="8" id="Qyo-qz-HUS"/>
@@ -73,16 +76,20 @@
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="top" secondItem="Ptq-Ez-gbc" secondAttribute="top" id="mUG-Ts-dEJ"/>
                                     <constraint firstItem="5iF-oj-vp5" firstAttribute="leading" secondItem="3Zt-4r-DDQ" secondAttribute="leading" id="vex-b2-32c"/>
                                     <constraint firstItem="5iF-oj-vp5" firstAttribute="trailing" secondItem="pNw-Yg-Pfj" secondAttribute="trailing" id="wfB-tb-5CX"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aPv-aB-wpi" secondAttribute="bottom" id="xDJ-qu-1hg"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Op0-dC-9bE" userLabel="controlContainer">
-                                <rect key="frame" x="0.0" y="233" width="364" height="0.0"/>
+                                <rect key="frame" x="0.0" y="183" width="364" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" id="Nc6-E0-naz"/>
+                                    <constraint firstAttribute="height" constant="50" id="Nc6-E0-naz"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="Op0-dC-9bE" firstAttribute="top" secondItem="Ptq-Ez-gbc" secondAttribute="bottom" id="YXx-i1-Xf3"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -98,6 +105,7 @@
                 <outlet property="controlContainer" destination="Op0-dC-9bE" id="Y6z-cR-wEM"/>
                 <outlet property="controlContainerHeight" destination="Nc6-E0-naz" id="f1n-zu-2lb"/>
                 <outlet property="iconImageView" destination="aPv-aB-wpi" id="80T-ku-CDY"/>
+                <outlet property="mediaContainerHeight" destination="WqE-Ey-ser" id="lpo-1O-hZT"/>
                 <outlet property="nameLabel" destination="V85-qd-b9G" id="04j-E2-jgG"/>
                 <outlet property="screennameLabel" destination="pNw-Yg-Pfj" id="Vaw-Hn-AOL"/>
             </connections>
