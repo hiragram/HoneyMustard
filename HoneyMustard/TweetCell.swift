@@ -44,6 +44,8 @@ final class TweetCell: UITableViewCell {
       }).addDisposableTo(bag)
     }
   }
+  @IBOutlet private weak var controlContainerHeight: NSLayoutConstraint!
+
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
   fileprivate let _linkTapped = PublishSubject<URL>.init()
 
@@ -70,6 +72,16 @@ final class TweetCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     setLinkTapRecognizer()
+  }
+
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    let constant: CGFloat = selected ? 50 : 0
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { [weak self] in
+      self?.controlContainerHeight.constant = constant
+      self?.layoutIfNeeded()
+    }) { (_) in
+
+    }
   }
 
   private func setLinkTapRecognizer() {
