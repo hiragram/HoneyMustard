@@ -23,9 +23,9 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
       tableView.registerNib(cellType: TweetCell.self)
       vm.items.bindTo(tableView.rx.items(dataSource: vm.dataSource)).addDisposableTo(bag)
       tableView.estimatedRowHeight = 100 // FIXME
-//      tableView.rx.scrolledToBottom.subscribe(onNext: { (_) in
-//        print("一番下")
-//      }).addDisposableTo(bag)
+      tableView.rx.scrolledToBottom.flatMap { [weak self] (_) -> Observable<Void> in
+        return self?.vm.fetchOlder ?? Observable.empty()
+      }.subscribe().addDisposableTo(bag)
     }
   }
   @IBOutlet weak var refreshControl: UIRefreshControl! {

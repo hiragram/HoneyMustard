@@ -52,9 +52,12 @@ public struct MastodonRepository {
     }
   }
 
-  public static func timeline() -> Observable<[MastodonStatusEntity]> {
+  public static func timeline(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonStatusEntity]> {
     return Observable.create({ (observer) -> Disposable in
-      oauthSwift.client.get(apiURL(forPath: "/timelines/home"), success: { (response) in
+      var params: [String: String] = [:]
+      params["min_id"] = minID == nil ? nil : "\(minID!)"
+      params["max_id"] = maxID == nil ? nil : "\(maxID!)"
+      oauthSwift.client.get(apiURL(forPath: "/timelines/home", params: params), success: { (response) in
         do {
           guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [[String: Any]] else {
             observer.onError(NSError.init()) // todo

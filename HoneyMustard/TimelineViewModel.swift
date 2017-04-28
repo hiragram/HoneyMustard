@@ -68,11 +68,30 @@ class TimelineViewModel {
 // - MARK: Fetch from REST API
 
 extension TimelineViewModel {
-  var refresh: Observable<[MastodonStatusEntity]> {
+  var refresh: Observable<Void> {
     return MastodonRepository.timeline()
-    .do(onNext: { [weak self] (statuses) in
-      self?.statuses.value = statuses
-    })
+      .do(onNext: { [weak self] (statuses) in
+        self?.statuses.value = statuses
+      })
+      .map { _ in () }
+  }
+
+  var fetchNewer: Observable<Void> {
+    return MastodonRepository.timeline(minID: statuses.value.first?.id)
+      .map { _ in () }
+  }
+
+  var fetchOlder: Observable<Void> {
+    return MastodonRepository.timeline(maxID: statuses.value.last?.id)
+      .do(onNext: { [weak self] (statuses) in
+        var currentStatuses = self?.statuses.value ?? []
+        let lastID = currentStatuses.last?.id
+        let appendingStatuses = statuses.split(whereSeparator: { (status) -> Bool in
+          status.id == lastID
+        }).last.map { Array($0) } ?? []
+        self?.statuses.value = currentStatuses + appendingStatuses
+      })
+      .map { _ in () }
   }
 }
 
