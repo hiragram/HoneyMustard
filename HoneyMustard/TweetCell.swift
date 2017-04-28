@@ -37,13 +37,14 @@ final class TweetCell: UITableViewCell {
       iconImageView.layer.borderWidth = 0.5
     }
   }
-  @IBOutlet fileprivate weak var colorRibbonView: UIView! {
-    didSet {
-      _colorRibbon.asObservable().subscribe(onNext: { [weak self] (ribbon) in
-        self?.colorRibbonView.backgroundColor = ribbon?.color ?? UIColor.clear
-      }).addDisposableTo(bag)
-    }
-  }
+//  @IBOutlet fileprivate weak var colorRibbonView: UIView! {
+//    didSet {
+//      _colorRibbon.asObservable().subscribe(onNext: { [weak self] (ribbon) in
+//        self?.colorRibbonView.backgroundColor = ribbon?.color ?? UIColor.clear
+//      }).addDisposableTo(bag)
+//    }
+//  }
+  @IBOutlet private weak var controlContainer: UIView!
   @IBOutlet private weak var controlContainerHeight: NSLayoutConstraint!
 
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
@@ -51,15 +52,15 @@ final class TweetCell: UITableViewCell {
 
   // MARK: - Appearance properties
 
-  var colorRibbon: Ribbon? {
-    set {
-      _colorRibbon.value = newValue
-    }
-
-    get {
-      return _colorRibbon.value
-    }
-  }
+//  var colorRibbon: Ribbon? {
+//    set {
+//      _colorRibbon.value = newValue
+//    }
+//
+//    get {
+//      return _colorRibbon.value
+//    }
+//  }
 
   // MARK: - Lifecycle
 
@@ -76,11 +77,11 @@ final class TweetCell: UITableViewCell {
 
   override func setSelected(_ selected: Bool, animated: Bool) {
     let constant: CGFloat = selected ? 50 : 0
-    UIView.animate(withDuration: 0.5, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { [weak self] in
+    UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { [weak self] in
       self?.controlContainerHeight.constant = constant
       self?.layoutIfNeeded()
-    }) { (_) in
-
+    }) { [weak self] (_) in
+//      self?.controlContainer.isHidden = !selected
     }
   }
 

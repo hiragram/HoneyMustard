@@ -26,6 +26,17 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
       tableView.rx.scrolledToBottom.flatMap { [weak self] (_) -> Observable<Void> in
         return self?.vm.fetchOlder ?? Observable.empty()
       }.subscribe().addDisposableTo(bag)
+
+      tableView.rx.itemSelected.asObservable().subscribe(onNext: { [weak self] (_) in
+        self?.tableView.beginUpdates()
+        self?.tableView.endUpdates()
+      }).addDisposableTo(bag)
+
+      tableView.rx.itemDeselected.asObservable().subscribe(onNext: { [weak self] (_) in
+        self?.tableView.beginUpdates()
+        self?.tableView.endUpdates()
+      }).addDisposableTo(bag)
+
     }
   }
   @IBOutlet weak var refreshControl: UIRefreshControl! {
