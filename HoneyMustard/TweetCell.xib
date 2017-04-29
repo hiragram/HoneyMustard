@@ -124,8 +124,11 @@
                 <outlet property="bodyLabel" destination="3Zt-4r-DDQ" id="C7L-my-HCT"/>
                 <outlet property="controlContainer" destination="Op0-dC-9bE" id="Y6z-cR-wEM"/>
                 <outlet property="controlContainerHeight" destination="Nc6-E0-naz" id="f1n-zu-2lb"/>
+                <outlet property="favoriteButton" destination="gJv-kf-Nmm" id="fnq-Kf-8As"/>
                 <outlet property="iconImageView" destination="aPv-aB-wpi" id="80T-ku-CDY"/>
                 <outlet property="nameLabel" destination="V85-qd-b9G" id="04j-E2-jgG"/>
+                <outlet property="reblogButton" destination="QLx-Mk-foD" id="oan-eS-Tfp"/>
+                <outlet property="replyButton" destination="mGY-Mo-JrR" id="4Vp-cj-9TU"/>
                 <outlet property="screennameLabel" destination="pNw-Yg-Pfj" id="Vaw-Hn-AOL"/>
             </connections>
             <point key="canvasLocation" x="-229" y="40.5"/>

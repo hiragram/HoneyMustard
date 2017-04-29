@@ -37,6 +37,9 @@ final class TweetCell: UITableViewCell {
       iconImageView.layer.borderWidth = 0.5
     }
   }
+  @IBOutlet fileprivate weak var replyButton: UIButton!
+  @IBOutlet fileprivate weak var reblogButton: UIButton!
+  @IBOutlet fileprivate weak var favoriteButton: UIButton!
 //  @IBOutlet fileprivate weak var colorRibbonView: UIView! {
 //    didSet {
 //      _colorRibbon.asObservable().subscribe(onNext: { [weak self] (ribbon) in
@@ -173,6 +176,22 @@ extension TweetCell {
 
   var tapLink: Observable<URL> {
     return _linkTapped.asObservable()
+  }
+}
+
+// MARK: - Reactive
+
+extension Reactive where Base: TweetCell {
+  var tapReply: ControlEvent<Void> {
+    return base.replyButton.rx.tap
+  }
+
+  var tapReblog: ControlEvent<Void> {
+    return base.reblogButton.rx.tap
+  }
+
+  var tapFavorite: ControlEvent<Void> {
+    return base.favoriteButton.rx.tap
   }
 }
 

@@ -59,6 +59,19 @@ class TimelineViewModel {
         cell.tapLink.subscribe(onNext: { [weak self] (url) in
           self?._openURL.onNext(.modally(url))
         }).addDisposableTo(cell.bag)
+        cell.rx.tapReblog.flatMap({ (_) -> Observable<MastodonStatusEntity> in
+          MastodonRepository.reblog(statusID: status.id)
+        }).subscribe(onNext: { [weak self] (status) in
+          guard let _self = self else {
+            return
+          }
+          var currentStatuses = _self.statuses.value
+          guard let index = currentStatuses.index(where: { $0.id == status.id }) else {
+            return
+          }
+          currentStatuses[index] = status
+          _self.statuses.value = currentStatuses
+        }).addDisposableTo(self.bag)
         return cell
       }
     }

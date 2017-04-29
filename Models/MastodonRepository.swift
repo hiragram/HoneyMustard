@@ -76,44 +76,24 @@ public struct MastodonRepository {
     })
   }
 
-  public static func home() -> ObservableCursor<[MastodonStatusEntity]> {
-
-    var firstID: Int? = nil
-    var lastID: Int? = nil
-
-    let observableGenerator = { (params: [String: String]) -> Observable<[MastodonStatusEntity]> in
-      return Observable.create({ (observer) -> Disposable in
-        _ = oauthSwift.client.get(apiURL(forPath: "/timelines/home", params: params), success: { (response) in
-          do {
-            guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [[String: Any]] else {
-              observer.onError(NSError.init()) // todo
-              return
-            }
-            let statuses = try json.map { try MastodonStatusEntity.init(json: $0) }
-            firstID = statuses.first?.id
-            lastID = statuses.last?.id
-            observer.onNext(statuses)
-            observer.onCompleted()
-          } catch let error {
-            observer.onError(error)
+  public static func reblog(statusID: Int) -> Observable<MastodonStatusEntity> {
+    return Observable.create({ (observer) -> Disposable in
+      oauthSwift.client.post(apiURL(forPath: "/statuses/\(statusID)/reblog"), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+            observer.onError(NSError.init()) // TODO
+            return
           }
-        }, failure: { (error) in
+          let status = try MastodonStatusEntity.init(json: json)
+          observer.onNext(status)
+          observer.onCompleted()
+        } catch let error {
           observer.onError(error)
-        })
-        return Disposables.create()
+        }
+      }, failure: { (error) in
+        observer.onError(error)
       })
-    }
-
-    return ObservableCursor<[MastodonStatusEntity]>.init(nextPage: { (_) -> Observable<[MastodonStatusEntity]> in
-      guard let lastID = lastID else {
-        return observableGenerator([:])
-      }
-      return observableGenerator(["since_id": "\(lastID)"])
-    }, previousPage: { (_) -> Observable<[MastodonStatusEntity]> in
-      guard let firstID = firstID else {
-        return observableGenerator([:])
-      }
-      return observableGenerator(["max_id": "\(firstID)"])
+      return Disposables.create()
     })
   }
 
