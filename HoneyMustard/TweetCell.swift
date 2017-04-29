@@ -46,11 +46,7 @@ final class TweetCell: UITableViewCell {
 //  }
   @IBOutlet private weak var controlContainer: UIView!
   @IBOutlet private weak var controlContainerHeight: NSLayoutConstraint!
-  @IBOutlet private weak var mediaContainerHeight: NSLayoutConstraint! {
-    didSet {
-      mediaContainerHeight.constant = 0
-    }
-  }
+  @IBOutlet private weak var mediaContainerHeight: NSLayoutConstraint!
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
   fileprivate let _linkTapped = PublishSubject<URL>.init()
 
@@ -80,7 +76,7 @@ final class TweetCell: UITableViewCell {
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
-    let constant: CGFloat = selected ? 50 : 0
+    let constant: CGFloat = selected ? 30 : 0
     UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { [weak self] in
       self?.controlContainerHeight.constant = constant
       self?.layoutIfNeeded()
