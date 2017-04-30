@@ -26,6 +26,7 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
         if let text = self.textField.text {
           MastodonRepository.post(text: text)
         }
+        self.textField.text = ""
       }).addDisposableTo(bag)
 //      submitButton.rx.tap.asObservable()
 //        .map { [unowned self] _ in self.textField.text ?? "" }
