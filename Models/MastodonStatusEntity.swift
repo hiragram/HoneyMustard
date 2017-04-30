@@ -15,7 +15,7 @@ public struct MastodonStatusEntity: JSONMappable, Identified {
   public var account: MastodonAccountEntity
   public var inReplyToID: Int?
   public var inReplyToAccountID: Int?
-// public var reblog: MastodonStatusEntity?
+  private var reblogDict: [String: Any]?
   public var content: String
   public var createdAt: Date
   public var reblogsCount: Int
@@ -29,6 +29,18 @@ public struct MastodonStatusEntity: JSONMappable, Identified {
   public var mentions: [MastodonMentionEntity]
   public var tags: [MastodonTagEntity]
   public var application: MastodonApplicationEntity?
+
+  public var reblog: MastodonStatusEntity? {
+    guard let dict = reblogDict else {
+      return nil
+    }
+    do {
+      return try MastodonStatusEntity.init(json: dict)
+    } catch let e {
+      print(e)
+      return nil
+    }
+  }
 
   public init(json: [String : Any]) throws {
     id = try json.get(valueForKey: "id")
@@ -62,6 +74,8 @@ public struct MastodonStatusEntity: JSONMappable, Identified {
         return nil
       }
     }()
+
+    reblogDict = try json["reblog"] as? [String: Any]
   }
 }
 

@@ -45,7 +45,8 @@ class TimelineViewModel {
   init() {
     dataSource.configureCell = { [unowned self] (dataSource, tableView, indexPath, row) -> UITableViewCell in
       switch row {
-      case .status(let status):
+      case .status(let _status):
+        let status = _status.reblog ?? _status
         let cell: TweetCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         MastodonStatusParser.parse(xml: status.content.data(using: .utf8)!).subscribe(onNext: { (texts) in
           let attributedString = texts.map { $0.attributedString }.reduce(NSMutableAttributedString.init(string: ""), { (attributedString, current) -> NSMutableAttributedString in

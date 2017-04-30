@@ -180,7 +180,6 @@ extension TweetCell {
 
   func set(reblogged: Bool) {
     reblogButton.backgroundColor = reblogged ? .red : .clear
-    contentView.backgroundColor = reblogged ? .cyan : .clear
   }
 
   func set(favorited: Bool) {
