@@ -20,23 +20,7 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
 
   @IBOutlet fileprivate weak var tableView: UITableView! {
     didSet {
-      tableView.registerNib(cellType: TweetCell.self)
-      vm.items.bindTo(tableView.rx.items(dataSource: vm.dataSource)).addDisposableTo(bag)
-      tableView.estimatedRowHeight = 100 // FIXME
-      tableView.rx.scrolledToBottom.flatMap { [weak self] (_) -> Observable<Void> in
-        return self?.vm.fetchOlder ?? Observable.empty()
-      }.subscribe().addDisposableTo(bag)
-
-      tableView.rx.itemSelected.asObservable().subscribe(onNext: { [weak self] (_) in
-        self?.tableView.beginUpdates()
-        self?.tableView.endUpdates()
-      }).addDisposableTo(bag)
-
-      tableView.rx.itemDeselected.asObservable().subscribe(onNext: { [weak self] (_) in
-        self?.tableView.beginUpdates()
-        self?.tableView.endUpdates()
-      }).addDisposableTo(bag)
-
+      vm.setup(tableView: tableView)
     }
   }
   @IBOutlet weak var refreshControl: UIRefreshControl! {

@@ -116,7 +116,48 @@ public struct MastodonRepository {
       })
       return Disposables.create()
     })
+  }
 
+  public static func favorite(statusID: Int) -> Observable<MastodonStatusEntity> {
+    return Observable.create({ (observer) -> Disposable in
+      oauthSwift.client.post(apiURL(forPath: "/statuses/\(statusID)/favourite"), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+            observer.onError(NSError.init()) // TODO
+            return
+          }
+          let status = try MastodonStatusEntity.init(json: json)
+          observer.onNext(status)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
+  public static func unfavorite(statusID: Int) -> Observable<MastodonStatusEntity> {
+    return Observable.create({ (observer) -> Disposable in
+      oauthSwift.client.post(apiURL(forPath: "/statuses/\(statusID)/unfavourite"), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+            observer.onError(NSError.init()) // TODO
+            return
+          }
+          let status = try MastodonStatusEntity.init(json: json)
+          observer.onNext(status)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
   }
 
   public static var isAuthorized: Observable<Bool> {

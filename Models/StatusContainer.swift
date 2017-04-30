@@ -38,6 +38,10 @@ struct StatusContainer<T: Identified> {
   }
 }
 
-protocol Identified {
+public protocol Identified: Equatable {
   var id: Int { get }
+}
+
+public func ==<T: Identified>(lhs: T, rhs: T) -> Bool {
+  return lhs.id == rhs.id
 }

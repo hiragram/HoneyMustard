@@ -25,17 +25,18 @@ class TimelineViewModel {
     case push(URL)
   }
 
-//  let dataSource = TableViewDataSource<Section>.init()
   let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
 
-  fileprivate let statuses = Variable<[MastodonStatusEntity]>.init([])
+  fileprivate let statuses = EntityStorage<MastodonStatusEntity>.init()
 
   var items: Observable<[Section]> {
-    return statuses.asObservable().map({ (statuses) -> [Section] in
+    return statuses.items.map({ (statuses) -> [Section] in
       let rows = statuses.map { Row.status($0) }
       return [Section.statuses(rows)]
     })
   }
+
+  private var selectedIndexPath: IndexPath?
 
   private var userstreamDisposable: Disposable?
 
@@ -58,29 +59,64 @@ class TimelineViewModel {
         cell.set(imageURL: status.account.avatar)
         cell.set(favorited: status.favourited)
         cell.set(reblogged: status.reblogged)
+
         cell.tapLink.subscribe(onNext: { [weak self] (url) in
           self?._openURL.onNext(.modally(url))
         }).addDisposableTo(cell.bag)
+
         cell.rx.tapReblog.flatMap({ (_) -> Observable<MastodonStatusEntity> in
           if status.reblogged {
             return MastodonRepository.unreblog(statusID: status.id)
+              .do(onNext: { [weak self] (status) in
+                self?.statuses.update(status)
+              })
+
           } else {
             return MastodonRepository.reblog(statusID: status.id)
+              .do(onNext: { [weak self] (status) in
+                self?.statuses.prepend(status)
+              })
+          }
+        }).subscribe().addDisposableTo(cell.bag)
+
+        cell.rx.tapFavorite.flatMap({ (_) -> Observable<MastodonStatusEntity> in
+          if status.favourited {
+            return MastodonRepository.unfavorite(statusID: status.id)
+          } else {
+            return MastodonRepository.favorite(statusID: status.id)
           }
         }).subscribe(onNext: { [weak self] (status) in
-          guard let _self = self else {
-            return
-          }
-          var currentStatuses = _self.statuses.value
-          guard let index = currentStatuses.index(where: { $0.id == status.id }) else {
-            return
-          }
-          currentStatuses[index] = status
-          _self.statuses.value = currentStatuses
+          self?.statuses.update(status)
         }).addDisposableTo(cell.bag)
+
         return cell
       }
     }
+  }
+
+  func setup(tableView: UITableView) {
+    tableView.registerNib(cellType: TweetCell.self)
+//    tableView.rx.methodInvoked(#selector(tableView.reloadData)).subscribe(onNext: { [weak self] (_) in
+//      tableView.beginUpdates()
+//      tableView.endUpdates()
+//      tableView.selectRow(at: self?.selectedIndexPath, animated: true, scrollPosition: .none)
+//    }).addDisposableTo(bag)
+    items.bindTo(tableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
+    tableView.estimatedRowHeight = 100 // FIXME
+    tableView.rx.scrolledToBottom.flatMap { [weak self] (_) -> Observable<Void> in
+      return self?.fetchOlder ?? Observable.empty()
+      }.subscribe().addDisposableTo(bag)
+
+    tableView.rx.itemSelected.asObservable().subscribe(onNext: { [weak self] (indexPath) in
+      tableView.beginUpdates()
+      tableView.endUpdates()
+      self?.selectedIndexPath = indexPath
+    }).addDisposableTo(bag)
+
+    tableView.rx.itemDeselected.asObservable().subscribe(onNext: { (_) in
+      tableView.beginUpdates()
+      tableView.endUpdates()
+    }).addDisposableTo(bag)
   }
 }
 
@@ -90,25 +126,26 @@ extension TimelineViewModel {
   var refresh: Observable<Void> {
     return MastodonRepository.timeline()
       .do(onNext: { [weak self] (statuses) in
-        self?.statuses.value = statuses
+        self?.statuses.refresh(statuses)
       })
       .map { _ in () }
   }
 
   var fetchNewer: Observable<Void> {
-    return MastodonRepository.timeline(minID: statuses.value.first?.id)
+    return MastodonRepository.timeline(minID: statuses.first?.id)
       .map { _ in () }
   }
 
   var fetchOlder: Observable<Void> {
-    return MastodonRepository.timeline(maxID: statuses.value.last?.id)
+    return MastodonRepository.timeline(maxID: statuses.last?.id)
       .do(onNext: { [weak self] (statuses) in
-        var currentStatuses = self?.statuses.value ?? []
-        let lastID = currentStatuses.last?.id
+        let lastID = self?.statuses.last?.id
         let appendingStatuses = statuses.split(whereSeparator: { (status) -> Bool in
           status.id == lastID
         }).last.map { Array($0) } ?? []
-        self?.statuses.value = currentStatuses + appendingStatuses
+        appendingStatuses.forEach {
+          self?.statuses.append($0)
+        }
       })
       .map { _ in () }
   }
