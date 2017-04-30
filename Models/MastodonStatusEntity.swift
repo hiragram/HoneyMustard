@@ -20,8 +20,8 @@ public struct MastodonStatusEntity: JSONMappable, Identified {
   public var createdAt: Date
   public var reblogsCount: Int
   public var favouritesCount: Int
-  public var reblogged: Bool?
-  public var favourited: Bool?
+  public var reblogged: Bool
+  public var favourited: Bool
   public var sensitive: Bool?
   public var spoilerText: String?
   public var visibility: Visibility?
@@ -41,8 +41,8 @@ public struct MastodonStatusEntity: JSONMappable, Identified {
     createdAt = try json.getMastodonDate(valueForKey: "created_at")
     reblogsCount = try json.get(valueForKey: "reblogs_count")
     favouritesCount = try json.get(valueForKey: "favourites_count")
-    reblogged = try json.get(valueForKey: "reblogged")
-    favourited = try json.get(valueForKey: "favourited")
+    reblogged = try json.get(valueForKey: "reblogged") ?? false
+    favourited = try json.get(valueForKey: "favourited") ?? false
     sensitive = try json.get(valueForKey: "sensitive")
     spoilerText = try json.get(valueForKey: "spoiler_text")
     visibility = Visibility.init(rawValue: try json.get(valueForKey: "visibility"))

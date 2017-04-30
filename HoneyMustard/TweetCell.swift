@@ -177,6 +177,15 @@ extension TweetCell {
   var tapLink: Observable<URL> {
     return _linkTapped.asObservable()
   }
+
+  func set(reblogged: Bool) {
+    reblogButton.backgroundColor = reblogged ? .red : .clear
+    contentView.backgroundColor = reblogged ? .cyan : .clear
+  }
+
+  func set(favorited: Bool) {
+    favoriteButton.backgroundColor = favorited ? .red : .clear
+  }
 }
 
 // MARK: - Reactive

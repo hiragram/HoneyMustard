@@ -56,11 +56,17 @@ class TimelineViewModel {
         cell.screenname = status.account.acct
         cell.name = status.account.displayName
         cell.set(imageURL: status.account.avatar)
+        cell.set(favorited: status.favourited)
+        cell.set(reblogged: status.reblogged)
         cell.tapLink.subscribe(onNext: { [weak self] (url) in
           self?._openURL.onNext(.modally(url))
         }).addDisposableTo(cell.bag)
         cell.rx.tapReblog.flatMap({ (_) -> Observable<MastodonStatusEntity> in
-          MastodonRepository.reblog(statusID: status.id)
+          if status.reblogged {
+            return MastodonRepository.unreblog(statusID: status.id)
+          } else {
+            return MastodonRepository.reblog(statusID: status.id)
+          }
         }).subscribe(onNext: { [weak self] (status) in
           guard let _self = self else {
             return
@@ -71,7 +77,7 @@ class TimelineViewModel {
           }
           currentStatuses[index] = status
           _self.statuses.value = currentStatuses
-        }).addDisposableTo(self.bag)
+        }).addDisposableTo(cell.bag)
         return cell
       }
     }
