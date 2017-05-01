@@ -45,6 +45,11 @@ final class TweetCell: UITableViewCell {
   @IBOutlet fileprivate weak var replyButton: UIButton!
   @IBOutlet fileprivate weak var reblogButton: UIButton!
   @IBOutlet fileprivate weak var favoriteButton: UIButton!
+
+  @IBOutlet fileprivate weak var previewImage1: UIImageView!
+  @IBOutlet fileprivate weak var previewImage2: UIImageView!
+  @IBOutlet fileprivate weak var previewImage3: UIImageView!
+  @IBOutlet fileprivate weak var previewImage4: UIImageView!
 //  @IBOutlet fileprivate weak var colorRibbonView: UIView! {
 //    didSet {
 //      _colorRibbon.asObservable().subscribe(onNext: { [weak self] (ribbon) in
@@ -54,10 +59,13 @@ final class TweetCell: UITableViewCell {
 //  }
   @IBOutlet private weak var controlContainer: UIView!
   @IBOutlet private weak var controlContainerHeight: NSLayoutConstraint!
-  @IBOutlet private weak var mediaContainerHeight: NSLayoutConstraint!
+  @IBOutlet fileprivate weak var mediaContainerHeight: NSLayoutConstraint!
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
   fileprivate let _linkTapped = PublishSubject<URL>.init()
 
+  @IBOutlet fileprivate weak var mediaContainer: UIView!
+  @IBOutlet fileprivate weak var preview1Height: NSLayoutConstraint!
+  @IBOutlet fileprivate weak var preview1Width: NSLayoutConstraint!
   // MARK: - Appearance properties
 
 //  var colorRibbon: Ribbon? {
@@ -190,6 +198,51 @@ extension TweetCell {
   func set(favorited: Bool) {
     favoriteButton.backgroundColor = favorited ? .red : .clear
   }
+
+  func set(attachments: AttachedImage) {
+    let mediaContainerSize = mediaContainer.bounds.size
+    switch attachments {
+    case .none:
+      mediaContainerHeight.constant = 0
+      previewImage1.image = nil
+      previewImage2.image = nil
+      previewImage3.image = nil
+      previewImage4.image = nil
+    case .one(let url):
+      mediaContainerHeight.constant = 200
+      preview1Height.constant = mediaContainerSize.height
+      preview1Width.constant = mediaContainerSize.width
+      previewImage1.setImage(url: url)
+      previewImage2.image = nil
+      previewImage3.image = nil
+      previewImage4.image = nil
+    case .two(let url1, let url2):
+      mediaContainerHeight.constant = 200
+      preview1Height.constant = mediaContainerSize.height
+      preview1Width.constant = mediaContainerSize.width / 2
+      previewImage1.setImage(url: url1)
+      previewImage2.setImage(url: url2)
+      previewImage3.image = nil
+      previewImage4.image = nil
+    case .three(let url1, let url2, let url3):
+      mediaContainerHeight.constant = 300
+      preview1Height.constant = mediaContainerSize.height / 2
+      preview1Width.constant = mediaContainerSize.width / 2
+      previewImage1.setImage(url: url1)
+      previewImage2.setImage(url: url2)
+      previewImage3.setImage(url: url3)
+      previewImage4.image = nil
+    case .four(let url1, let url2, let url3, let url4):
+      mediaContainerHeight.constant = 300
+      preview1Height.constant = mediaContainerSize.height / 2
+      preview1Width.constant = mediaContainerSize.width / 2
+      previewImage1.setImage(url: url1)
+      previewImage2.setImage(url: url2)
+      previewImage3.setImage(url: url3)
+      previewImage4.setImage(url: url4)
+    }
+    setNeedsLayout()
+  }
 }
 
 // MARK: - Reactive
@@ -248,4 +301,12 @@ enum DateTimeExpression: CustomStringConvertible {
       return "\(Date.init(timeIntervalSince1970: timestamp))"
     }
   }
+}
+
+enum AttachedImage {
+  case one(URL)
+  case two(URL, URL)
+  case three(URL, URL, URL)
+  case four(URL, URL, URL, URL)
+  case none
 }

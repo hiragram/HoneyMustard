@@ -96,6 +96,22 @@ class TimelineViewModel {
           self?.statuses.update(status)
         }).addDisposableTo(cell.bag)
 
+        let urls = status.mediaAttachments.map { $0.previewURL }
+        let attachments: AttachedImage
+        switch urls.count {
+        case 1:
+          attachments = .one(urls.first!)
+        case 2:
+          attachments = .two(urls.first!, urls.dropFirst().first!)
+        case 3:
+          attachments = .three(urls.first!, urls.dropFirst(1).first!, urls.dropFirst(2).first!)
+        case 4:
+          attachments = .four(urls.first!, urls.dropFirst(1).first!, urls.dropFirst(3).first!, urls.dropFirst(4).first!)
+        default:
+          attachments = .none
+        }
+        cell.set(attachments: attachments)
+
         self.clock.map({ (timestamp) -> DateTimeExpression in
           let createdTimestamp = status.createdAt.timeIntervalSince1970
           let diff = timestamp - createdTimestamp
