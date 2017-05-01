@@ -32,20 +32,20 @@
                                             <constraint firstAttribute="width" constant="40" id="Jrw-Vd-yhQ"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V85-qd-b9G" userLabel="usernameLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                                        <rect key="frame" x="48" y="0.0" width="42" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V85-qd-b9G" userLabel="usernameLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                                        <rect key="frame" x="48" y="0.0" width="94.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNw-Yg-Pfj" userLabel="screennameLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                                        <rect key="frame" x="94" y="0.0" width="42" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNw-Yg-Pfj" userLabel="screennameLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                                        <rect key="frame" x="146.5" y="0.0" width="76" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zt-4r-DDQ" userLabel="bodyLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                                        <rect key="frame" x="48" y="24.5" width="42" height="20.5"/>
+                                        <rect key="frame" x="48" y="24" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -57,16 +57,24 @@
                                             <constraint firstAttribute="height" id="4as-6w-DWN"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23s-yh-erO" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                                        <rect key="frame" x="322" y="0.5" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="leading" secondItem="Ptq-Ez-gbc" secondAttribute="leading" id="0mg-4v-HfD"/>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="width" secondItem="aPv-aB-wpi" secondAttribute="height" multiplier="1:1" id="0nu-lX-ZhO"/>
+                                    <constraint firstAttribute="trailing" secondItem="23s-yh-erO" secondAttribute="trailing" id="3jS-KJ-Bup"/>
                                     <constraint firstItem="5iF-oj-vp5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3Zt-4r-DDQ" secondAttribute="bottom" priority="999" constant="4" id="41L-zJ-pbs"/>
                                     <constraint firstAttribute="bottom" secondItem="5iF-oj-vp5" secondAttribute="bottom" id="LcR-9p-FP2"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pNw-Yg-Pfj" secondAttribute="trailing" id="OgG-wm-MF6"/>
                                     <constraint firstItem="V85-qd-b9G" firstAttribute="leading" secondItem="aPv-aB-wpi" secondAttribute="trailing" constant="8" id="Qyo-qz-HUS"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Zt-4r-DDQ" secondAttribute="trailing" id="UBn-pF-4Kd"/>
+                                    <constraint firstItem="23s-yh-erO" firstAttribute="baseline" secondItem="pNw-Yg-Pfj" secondAttribute="baseline" id="XSv-li-7Od"/>
                                     <constraint firstItem="V85-qd-b9G" firstAttribute="top" secondItem="aPv-aB-wpi" secondAttribute="top" id="YL2-ok-FNx"/>
                                     <constraint firstItem="pNw-Yg-Pfj" firstAttribute="baseline" secondItem="V85-qd-b9G" secondAttribute="baseline" id="ZAY-6n-mdx"/>
                                     <constraint firstItem="3Zt-4r-DDQ" firstAttribute="top" secondItem="V85-qd-b9G" secondAttribute="bottom" constant="4" id="aR2-vF-Q1K"/>
@@ -74,6 +82,7 @@
                                     <constraint firstItem="pNw-Yg-Pfj" firstAttribute="leading" secondItem="V85-qd-b9G" secondAttribute="trailing" constant="4" id="fTp-At-ZEZ"/>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="top" secondItem="Ptq-Ez-gbc" secondAttribute="top" id="mUG-Ts-dEJ"/>
                                     <constraint firstAttribute="trailing" secondItem="5iF-oj-vp5" secondAttribute="trailing" id="qB0-Gx-gXY"/>
+                                    <constraint firstItem="23s-yh-erO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pNw-Yg-Pfj" secondAttribute="trailing" constant="8" id="sVf-eu-gUY"/>
                                     <constraint firstItem="5iF-oj-vp5" firstAttribute="leading" secondItem="3Zt-4r-DDQ" secondAttribute="leading" id="vex-b2-32c"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aPv-aB-wpi" secondAttribute="bottom" id="xDJ-qu-1hg"/>
                                 </constraints>
@@ -124,6 +133,7 @@
                 <outlet property="bodyLabel" destination="3Zt-4r-DDQ" id="C7L-my-HCT"/>
                 <outlet property="controlContainer" destination="Op0-dC-9bE" id="Y6z-cR-wEM"/>
                 <outlet property="controlContainerHeight" destination="Nc6-E0-naz" id="f1n-zu-2lb"/>
+                <outlet property="dateLabel" destination="23s-yh-erO" id="Shn-LE-nQr"/>
                 <outlet property="favoriteButton" destination="gJv-kf-Nmm" id="fnq-Kf-8As"/>
                 <outlet property="iconImageView" destination="aPv-aB-wpi" id="80T-ku-CDY"/>
                 <outlet property="nameLabel" destination="V85-qd-b9G" id="04j-E2-jgG"/>
@@ -131,7 +141,7 @@
                 <outlet property="replyButton" destination="mGY-Mo-JrR" id="4Vp-cj-9TU"/>
                 <outlet property="screennameLabel" destination="pNw-Yg-Pfj" id="Vaw-Hn-AOL"/>
             </connections>
-            <point key="canvasLocation" x="-229" y="40.5"/>
+            <point key="canvasLocation" x="-229" y="40"/>
         </tableViewCell>
     </objects>
 </document>

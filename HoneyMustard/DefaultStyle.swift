@@ -14,4 +14,5 @@ struct DefaultStyle: StyleDefinition {
   let clickableText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 14), color: UIColor.black)
   let usernameText: Typography = Typography.init(font: UIFont.boldSystemFont(ofSize: 14), color: UIColor.black)
   let screennameText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: UIColor.darkGray)
+  let dateTimeText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 12), color: UIColor.darkGray)
 }

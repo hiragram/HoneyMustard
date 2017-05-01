@@ -29,6 +29,11 @@ final class TweetCell: UITableViewCell {
       bodyLabel.isUserInteractionEnabled = true
     }
   }
+  @IBOutlet fileprivate weak var dateLabel: DesignedLabel! {
+    didSet {
+      dateLabel.typography = Style.current.dateTimeText
+    }
+  }
   @IBOutlet fileprivate weak var iconImageView: UIImageView! {
     didSet {
       iconImageView.layer.cornerRadius = 5
@@ -201,6 +206,17 @@ extension Reactive where Base: TweetCell {
   var tapFavorite: ControlEvent<Void> {
     return base.favoriteButton.rx.tap
   }
+
+  var date: AnyObserver<DateTimeExpression> {
+    return AnyObserver.init(eventHandler: { (event) in
+      switch event {
+      case .next(let datetime):
+        self.base.dateLabel.text = datetime.description
+      default:
+        break
+      }
+    })
+  }
 }
 
 enum Ribbon {
@@ -210,6 +226,26 @@ enum Ribbon {
     switch self {
     case .notFriend:
       return #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+    }
+  }
+}
+
+enum DateTimeExpression: CustomStringConvertible {
+  case seconds(Int)
+  case minutes(Int)
+  case hours(Int)
+  case absolute(timestamp: TimeInterval)
+
+  var description: String {
+    switch self {
+    case .seconds(let seconds):
+      return "\(seconds)秒前" // TODO ローカライズ
+    case .minutes(let minutes):
+      return "\(minutes)分前" // TODO ローカライズ
+    case .hours(let hours):
+      return "\(hours)時間前" // TODO ローカライズ
+    case .absolute(timestamp: let timestamp):
+      return "\(Date.init(timeIntervalSince1970: timestamp))"
     }
   }
 }

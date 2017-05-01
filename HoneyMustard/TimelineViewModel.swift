@@ -26,8 +26,14 @@ class TimelineViewModel {
   }
 
   let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
+//  let dataSource = TableViewDataSource<Section>.init()
 
   fileprivate let statuses = EntityStorage<MastodonStatusEntity>.init()
+
+  private var clock: Observable<TimeInterval> = Observable<Observable<Int>>.of(Observable<Int>.interval(1.0, scheduler: MainScheduler.instance), Observable<Int>.just(1)).merge()
+    .map { (_) -> TimeInterval in
+      Date.init().timeIntervalSince1970
+    }.shareReplay(1)
 
   var items: Observable<[Section]> {
     return statuses.items.map({ (statuses) -> [Section] in
@@ -90,6 +96,21 @@ class TimelineViewModel {
           self?.statuses.update(status)
         }).addDisposableTo(cell.bag)
 
+        self.clock.map({ (timestamp) -> DateTimeExpression in
+          let createdTimestamp = status.createdAt.timeIntervalSince1970
+          let diff = timestamp - createdTimestamp
+          switch diff {
+          case 0..<60:
+            return .seconds(Int.init(diff))
+          case 60..<3_600:
+            return .minutes(Int.init(diff / 60))
+          case 3_600..<86_400:
+            return .hours(Int.init(diff / 60 / 24))
+          default:
+            return .absolute(timestamp: createdTimestamp)
+          }
+        }).bindTo(cell.rx.date).addDisposableTo(cell.bag)
+
         return cell
       }
     }
@@ -97,11 +118,6 @@ class TimelineViewModel {
 
   func setup(tableView: UITableView) {
     tableView.registerNib(cellType: TweetCell.self)
-//    tableView.rx.methodInvoked(#selector(tableView.reloadData)).subscribe(onNext: { [weak self] (_) in
-//      tableView.beginUpdates()
-//      tableView.endUpdates()
-//      tableView.selectRow(at: self?.selectedIndexPath, animated: true, scrollPosition: .none)
-//    }).addDisposableTo(bag)
     items.bindTo(tableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
     tableView.estimatedRowHeight = 100 // FIXME
     tableView.rx.scrolledToBottom.flatMap { [weak self] (_) -> Observable<Void> in
