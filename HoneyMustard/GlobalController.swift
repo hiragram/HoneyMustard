@@ -24,24 +24,24 @@ class GlobalController: UIViewController {
     MastodonRepository.isAuthorized
       .filter { $0 == true }
       .subscribe(onNext: { [unowned self] (_) in
-        let editVC = TweetEditViewController.instantiateFromStoryboard()
+//        let editVC = TweetEditViewController.instantiateFromStoryboard()
         let timelineVC = TimelineViewController.instantiateFromStoryboard()
-        let splitVC = SplitViewController.init(upperViewController: timelineVC, lowerViewController: editVC)
+//        let splitVC = SplitViewController.init(upperViewController: timelineVC, lowerViewController: editVC)
 
         let tabVC = UITabBarController.init()
-        
+        tabVC.viewControllers = [timelineVC]
 
-        self.addChildViewController(splitVC)
-        self.view.addSubview(splitVC.view)
-        splitVC.view.translatesAutoresizingMaskIntoConstraints = false
-        splitVC.didMove(toParentViewController: self)
+        self.addChildViewController(tabVC)
+        self.view.addSubview(tabVC.view)
+        tabVC.view.translatesAutoresizingMaskIntoConstraints = false
+        tabVC.didMove(toParentViewController: self)
 
         let constraints = [NSLayoutAttribute.top, .right, .left].map { (attribute) -> NSLayoutConstraint in
-          return NSLayoutConstraint.init(item: self.view, attribute: attribute, relatedBy: .equal, toItem: splitVC.view, attribute: attribute, multiplier: 1, constant: 0)
+          return NSLayoutConstraint.init(item: self.view, attribute: attribute, relatedBy: .equal, toItem: tabVC.view, attribute: attribute, multiplier: 1, constant: 0)
         }
         self.view.addConstraints(constraints)
 
-        let bottomMarginConstraints = NSLayoutConstraint.init(item: self.view, attribute: .bottom, relatedBy: .equal, toItem: splitVC.view, attribute: .bottom, multiplier: 1, constant: 0)
+        let bottomMarginConstraints = NSLayoutConstraint.init(item: self.view, attribute: .bottom, relatedBy: .equal, toItem: tabVC.view, attribute: .bottom, multiplier: 1, constant: 0)
         self.view.addConstraint(bottomMarginConstraints)
         RxKeyboard.instance.visibleHeight.drive(onNext: { [weak self] (height) in
           bottomMarginConstraints.constant = height
@@ -49,7 +49,7 @@ class GlobalController: UIViewController {
           self?.view.layoutIfNeeded()
         }).addDisposableTo(self.bag)
 
-        self.rootViewController = splitVC
+        self.rootViewController = tabVC
         self.updateViewConstraints()
       }).addDisposableTo(bag)
   }
