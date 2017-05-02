@@ -252,5 +252,9 @@ extension TimelineViewModel {
     static let `public` = Source.init(refresh: MastodonRepository.publicTimeline()) { (maxID) -> TimelineViewModel.Source.Stream in
       MastodonRepository.publicTimeline(maxID: maxID)
     }
+
+    static let local = Source.init(refresh: MastodonRepository.localTimeline()) { (maxID) -> TimelineViewModel.Source.Stream in
+      MastodonRepository.localTimeline(maxID: maxID)
+    }
   }
 }

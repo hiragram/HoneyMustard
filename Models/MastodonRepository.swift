@@ -55,7 +55,7 @@ public struct MastodonRepository {
   public static func home(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonStatusEntity]> {
     return Observable.create({ (observer) -> Disposable in
       var params: [String: String] = [:]
-      params["min_id"] = minID == nil ? nil : "\(minID!)"
+      params["since_id"] = minID == nil ? nil : "\(minID!)"
       params["max_id"] = maxID == nil ? nil : "\(maxID!)"
       oauthSwift.client.get(apiURL(forPath: "/timelines/home", params: params), success: { (response) in
         do {
@@ -76,10 +76,10 @@ public struct MastodonRepository {
     })
   }
 
-  public static func publicTimeline(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonStatusEntity]> {
+  public static func publicTimeline(maxID: Int? = nil, minID: Int? = nil, params _params: [String: String] = [:]) -> Observable<[MastodonStatusEntity]> {
     return Observable.create({ (observer) -> Disposable in
-      var params: [String: String] = [:]
-      params["min_id"] = minID == nil ? nil : "\(minID!)"
+      var params = _params
+      params["since_id"] = minID == nil ? nil : "\(minID!)"
       params["max_id"] = maxID == nil ? nil : "\(maxID!)"
       oauthSwift.client.get(apiURL(forPath: "/timelines/public", params: params), success: { (response) in
         do {
@@ -98,6 +98,10 @@ public struct MastodonRepository {
       })
       return Disposables.create()
     })
+  }
+
+  public static func localTimeline(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonStatusEntity]> {
+    return publicTimeline(params: ["local": "true"])
   }
 
   public static func reblog(statusID: Int) -> Observable<MastodonStatusEntity> {
