@@ -24,12 +24,13 @@ class GlobalController: UIViewController {
     MastodonRepository.isAuthorized
       .filter { $0 == true }
       .subscribe(onNext: { [unowned self] (_) in
-//        let editVC = TweetEditViewController.instantiateFromStoryboard()
-        let timelineVC = TimelineViewController.instantiateFromStoryboard()
-//        let splitVC = SplitViewController.init(upperViewController: timelineVC, lowerViewController: editVC)
+        let homeVC = TimelineViewController.instantiateFromStoryboard()
+        homeVC.vm = TimelineViewModel.init(source: .home)
+        let publicVC = TimelineViewController.instantiateFromStoryboard()
+        publicVC.vm = TimelineViewModel.init(source: .public)
 
         let tabVC = UITabBarController.init()
-        tabVC.viewControllers = [timelineVC]
+        tabVC.viewControllers = [homeVC, publicVC]
 
         self.addChildViewController(tabVC)
         self.view.addSubview(tabVC.view)

@@ -25,6 +25,8 @@ class TimelineViewModel {
     case push(URL)
   }
 
+  fileprivate let source: Source
+
   let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
 //  let dataSource = TableViewDataSource<Section>.init()
 
@@ -48,7 +50,8 @@ class TimelineViewModel {
 
   private var friendIDs: [Int] = []
 
-  init() {
+  init(source: Source) {
+    self.source = source
     dataSource.configureCell = { [unowned self] (dataSource, tableView, indexPath, row) -> UITableViewCell in
       switch row {
       case .status(let _status):
@@ -157,20 +160,21 @@ class TimelineViewModel {
 
 extension TimelineViewModel {
   var refresh: Observable<Void> {
-    return MastodonRepository.timeline()
+    return source.refresh
       .do(onNext: { [weak self] (statuses) in
         self?.statuses.refresh(statuses)
       })
       .map { _ in () }
   }
 
+  @available(*, unavailable)
   var fetchNewer: Observable<Void> {
-    return MastodonRepository.timeline(minID: statuses.first?.id)
+    return MastodonRepository.home(minID: statuses.first?.id)
       .map { _ in () }
   }
 
   var fetchOlder: Observable<Void> {
-    return MastodonRepository.timeline(maxID: statuses.last?.id)
+    return source.fetchOlder(statuses.last?.id)
       .do(onNext: { [weak self] (statuses) in
         let lastID = self?.statuses.last?.id
         let appendingStatuses = statuses.split(whereSeparator: { (status) -> Bool in
@@ -229,6 +233,24 @@ extension TimelineViewModel {
 
     static func ==(lhs: TimelineViewModel.Row, rhs: TimelineViewModel.Row) -> Bool {
       return lhs.identity == rhs.identity
+    }
+  }
+}
+
+// MARK: - ViewModel configuration
+
+extension TimelineViewModel {
+  struct Source {
+    typealias Stream = Observable<[MastodonStatusEntity]>
+    let refresh: Stream
+    let fetchOlder: (_ minID: Int?) -> Stream
+
+    static let home = Source.init(refresh: MastodonRepository.home()) { (maxID) -> TimelineViewModel.Source.Stream in
+      MastodonRepository.home(maxID: maxID)
+    }
+
+    static let `public` = Source.init(refresh: MastodonRepository.publicTimeline()) { (maxID) -> TimelineViewModel.Source.Stream in
+      MastodonRepository.publicTimeline(maxID: maxID)
     }
   }
 }

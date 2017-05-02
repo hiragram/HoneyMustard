@@ -16,7 +16,7 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
 
   private let bag = DisposeBag.init()
 
-  private let vm = TimelineViewModel.init()
+  var vm: TimelineViewModel!
 
   @IBOutlet fileprivate weak var tableView: UITableView! {
     didSet {

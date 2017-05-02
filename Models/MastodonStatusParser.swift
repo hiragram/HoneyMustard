@@ -57,6 +57,8 @@ private class Parser: NSObject {
     return _parsedElements.asObservable()
   }
 
+  fileprivate var rawData: Data
+
   class Element: CustomStringConvertible, ParserElement {
     var name: String
     var children: [ParserElement] = []
@@ -112,7 +114,9 @@ private class Parser: NSObject {
   }
 
   fileprivate init(xml: Data) {
-    parser = XMLParser.init(data: xml)
+    let pXML = "<p>".data(using: .utf8)! + xml + "</p>".data(using: .utf8)! // FIXME workaround
+    parser = XMLParser.init(data: pXML)
+    rawData = pXML
     super.init()
     parser.delegate = self
   }
@@ -129,7 +133,7 @@ extension Parser: XMLParserDelegate {
   }
 
   func parserDidEndDocument(_ parser: XMLParser) {
-    assert(elementStack.count == 1)
+    assert(elementStack.count == 1, "\(elementStack), \(String.init(data: rawData, encoding: .utf8))")
     _parsedElements.onNext(elementStack.first!)
   }
 

@@ -65,7 +65,7 @@ final class TweetCell: UITableViewCell {
 
   @IBOutlet fileprivate weak var mediaContainer: UIView! {
     didSet {
-      mediaContainer.layer.cornerRadius = 10
+      mediaContainer.layer.cornerRadius = 5
       mediaContainer.layer.masksToBounds = true
       mediaContainer.layer.borderWidth = 0.5
       mediaContainer.layer.borderColor = UIColor.lightGray.cgColor
