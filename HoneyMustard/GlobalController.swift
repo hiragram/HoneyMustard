@@ -28,6 +28,9 @@ class GlobalController: UIViewController {
         let timelineVC = TimelineViewController.instantiateFromStoryboard()
         let splitVC = SplitViewController.init(upperViewController: timelineVC, lowerViewController: editVC)
 
+        let tabVC = UITabBarController.init()
+        
+
         self.addChildViewController(splitVC)
         self.view.addSubview(splitVC.view)
         splitVC.view.translatesAutoresizingMaskIntoConstraints = false

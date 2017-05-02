@@ -83,7 +83,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lff-d3-UB1" userLabel="preview1">
                                         <rect key="frame" x="0.0" y="0.0" width="176" height="150"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pre-zC-uKZ">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pre-zC-uKZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="176" height="150"/>
                                             </imageView>
                                         </subviews>
@@ -94,13 +94,13 @@
                                             <constraint firstAttribute="height" priority="750" constant="150" identifier="Preview1Height" id="OZA-Pf-XYL"/>
                                             <constraint firstItem="pre-zC-uKZ" firstAttribute="top" secondItem="lff-d3-UB1" secondAttribute="top" identifier="PreviewImage1Top" id="Uhi-4I-0In"/>
                                             <constraint firstAttribute="trailing" secondItem="pre-zC-uKZ" secondAttribute="trailing" identifier="PreviewImage1Trailing" id="W9R-QF-0MA"/>
-                                            <constraint firstAttribute="width" constant="176" id="qHT-IX-qjc"/>
+                                            <constraint firstAttribute="width" priority="999" constant="176" identifier="Preview1Width" id="qHT-IX-qjc"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9g-cU-9gi" userLabel="preview2">
                                         <rect key="frame" x="176" y="0.0" width="188" height="150"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PgQ-tG-Tv4">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PgQ-tG-Tv4">
                                                 <rect key="frame" x="0.0" y="0.0" width="188" height="150"/>
                                             </imageView>
                                         </subviews>
@@ -115,7 +115,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oAP-UA-bQu" userLabel="preview3">
                                         <rect key="frame" x="0.0" y="150" width="176" height="150"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Eh-0J-aNe">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Eh-0J-aNe">
                                                 <rect key="frame" x="0.0" y="0.0" width="176" height="150"/>
                                             </imageView>
                                         </subviews>
@@ -130,7 +130,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfU-4c-fXw" userLabel="preview4">
                                         <rect key="frame" x="176" y="150" width="188" height="150"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LY7-w3-nWa">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LY7-w3-nWa">
                                                 <rect key="frame" x="0.0" y="0.0" width="188" height="150"/>
                                             </imageView>
                                         </subviews>
@@ -150,11 +150,11 @@
                                     <constraint firstItem="lff-d3-UB1" firstAttribute="leading" secondItem="5iF-oj-vp5" secondAttribute="leading" identifier="Preview1Leading" id="8w0-DO-htE"/>
                                     <constraint firstItem="hfU-4c-fXw" firstAttribute="top" secondItem="oAP-UA-bQu" secondAttribute="top" id="G1o-y0-uAe"/>
                                     <constraint firstItem="lff-d3-UB1" firstAttribute="bottom" secondItem="oAP-UA-bQu" secondAttribute="top" identifier="Preview1Bottom-Preview3Bottom" id="JOb-Ig-lv4"/>
-                                    <constraint firstAttribute="trailing" secondItem="hfU-4c-fXw" secondAttribute="trailing" id="MZP-WX-FJL"/>
+                                    <constraint firstAttribute="trailing" secondItem="hfU-4c-fXw" secondAttribute="trailing" identifier="Preview4Trailing" id="MZP-WX-FJL"/>
                                     <constraint firstItem="oAP-UA-bQu" firstAttribute="leading" secondItem="5iF-oj-vp5" secondAttribute="leading" id="Ncf-WD-Ujw"/>
                                     <constraint firstItem="lff-d3-UB1" firstAttribute="trailing" secondItem="oAP-UA-bQu" secondAttribute="trailing" identifier="Preview3Trailing" id="TCL-Vs-98N"/>
                                     <constraint firstAttribute="trailing" secondItem="v9g-cU-9gi" secondAttribute="trailing" id="WBD-2A-5AF"/>
-                                    <constraint firstItem="hfU-4c-fXw" firstAttribute="leading" secondItem="v9g-cU-9gi" secondAttribute="leading" id="Z1l-vS-AOW"/>
+                                    <constraint firstItem="hfU-4c-fXw" firstAttribute="leading" secondItem="v9g-cU-9gi" secondAttribute="leading" identifier="Preview4Leading-Preview2Leading" id="Z1l-vS-AOW"/>
                                     <constraint firstAttribute="bottom" secondItem="hfU-4c-fXw" secondAttribute="bottom" id="ZYW-X9-aCF"/>
                                     <constraint firstItem="v9g-cU-9gi" firstAttribute="top" secondItem="5iF-oj-vp5" secondAttribute="top" identifier="Preview3Top" id="ZxO-s4-Tug"/>
                                     <constraint firstItem="lff-d3-UB1" firstAttribute="bottom" secondItem="v9g-cU-9gi" secondAttribute="bottom" id="ep3-xp-wLh"/>
@@ -191,13 +191,16 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="Op0-dC-9bE" firstAttribute="top" secondItem="5iF-oj-vp5" secondAttribute="bottom" id="jI0-lN-HMB"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="NRD-sf-8sB" firstAttribute="top" secondItem="1OT-6a-aHP" secondAttribute="topMargin" id="2GN-Dn-L4o"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="NRD-sf-8sB" secondAttribute="bottom" constant="0.5" id="GjD-Ww-M5X"/>
-                    <constraint firstItem="NRD-sf-8sB" firstAttribute="leading" secondItem="1OT-6a-aHP" secondAttribute="leadingMargin" id="TwX-cV-m7I"/>
-                    <constraint firstItem="NRD-sf-8sB" firstAttribute="trailing" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" id="XN6-Jc-nTd"/>
+                    <constraint firstItem="NRD-sf-8sB" firstAttribute="top" secondItem="1OT-6a-aHP" secondAttribute="topMargin" identifier="StackViewTop" id="2GN-Dn-L4o"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="NRD-sf-8sB" secondAttribute="bottom" constant="0.5" identifier="StackViewBottom" id="GjD-Ww-M5X"/>
+                    <constraint firstItem="NRD-sf-8sB" firstAttribute="leading" secondItem="1OT-6a-aHP" secondAttribute="leadingMargin" identifier="StackViewLeading" id="TwX-cV-m7I"/>
+                    <constraint firstItem="NRD-sf-8sB" firstAttribute="trailing" secondItem="1OT-6a-aHP" secondAttribute="trailingMargin" identifier="StackViewTrailing" id="XN6-Jc-nTd"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="56" minY="0.0" maxX="0.0" maxY="0.0"/>

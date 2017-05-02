@@ -63,7 +63,7 @@ final class TweetCell: UITableViewCell {
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
   fileprivate let _linkTapped = PublishSubject<URL>.init()
 
-  @IBOutlet fileprivate weak var mediaCotainer: UIView! {
+  @IBOutlet fileprivate weak var mediaContainer: UIView! {
     didSet {
       mediaContainer.layer.cornerRadius = 10
       mediaContainer.layer.masksToBounds = true
@@ -233,7 +233,7 @@ extension TweetCell {
       previewImage4.image = nil
     case .three(let url1, let url2, let url3):
       mediaContainerHeight.constant = 300
-      preview1Height.constant = 300 / 2
+      preview1Height.constant = 150
       preview1Width.constant = mediaContainerSize.width / 2
       previewImage1.setImage(url: url1)
       previewImage2.setImage(url: url2)
@@ -241,7 +241,7 @@ extension TweetCell {
       previewImage4.image = nil
     case .four(let url1, let url2, let url3, let url4):
       mediaContainerHeight.constant = 300
-      preview1Height.constant = 300 / 2
+      preview1Height.constant = 150
       preview1Width.constant = mediaContainerSize.width / 2
       previewImage1.setImage(url: url1)
       previewImage2.setImage(url: url2)

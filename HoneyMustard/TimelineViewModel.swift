@@ -106,7 +106,7 @@ class TimelineViewModel {
         case 3:
           attachments = .three(urls.first!, urls.dropFirst(1).first!, urls.dropFirst(2).first!)
         case 4:
-          attachments = .four(urls.first!, urls.dropFirst(1).first!, urls.dropFirst(3).first!, urls.dropFirst(4).first!)
+          attachments = .four(urls.first!, urls.dropFirst(1).first!, urls.dropFirst(2).first!, urls.dropFirst(3).first!)
         default:
           attachments = .none
         }

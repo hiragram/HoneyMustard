@@ -102,8 +102,10 @@ private class Parser: NSObject {
         }
       case "span":
         return childrenRepresentation
+      case "br":
+        return [.text("\n")]
       default:
-        print("unsupported tag")
+        print("unsupported tag: \(name)")
         return []
       }
     }
