@@ -14,7 +14,7 @@ public struct MastodonAttachmentEntity: JSONMappable {
   public var url: URL
   public var remoteURL: URL?
   public var previewURL: URL
-  public var textURL: URL
+  public var textURL: URL?
 
   public init(json: [String : Any]) throws {
     id = try json.get(valueForKey: "id")
