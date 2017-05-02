@@ -57,24 +57,24 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="leading" secondItem="Ptq-Ez-gbc" secondAttribute="leading" id="0mg-4v-HfD"/>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="width" secondItem="aPv-aB-wpi" secondAttribute="height" multiplier="1:1" id="0nu-lX-ZhO"/>
                                     <constraint firstAttribute="trailing" secondItem="23s-yh-erO" secondAttribute="trailing" id="3jS-KJ-Bup"/>
+                                    <constraint firstItem="V85-qd-b9G" firstAttribute="top" secondItem="aPv-aB-wpi" secondAttribute="top" id="8SA-LO-9Xi"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pNw-Yg-Pfj" secondAttribute="trailing" id="OgG-wm-MF6"/>
                                     <constraint firstItem="V85-qd-b9G" firstAttribute="leading" secondItem="aPv-aB-wpi" secondAttribute="trailing" constant="8" id="Qyo-qz-HUS"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Zt-4r-DDQ" secondAttribute="trailing" id="UBn-pF-4Kd"/>
                                     <constraint firstItem="23s-yh-erO" firstAttribute="baseline" secondItem="pNw-Yg-Pfj" secondAttribute="baseline" id="XSv-li-7Od"/>
-                                    <constraint firstItem="V85-qd-b9G" firstAttribute="top" secondItem="aPv-aB-wpi" secondAttribute="top" id="YL2-ok-FNx"/>
                                     <constraint firstItem="pNw-Yg-Pfj" firstAttribute="baseline" secondItem="V85-qd-b9G" secondAttribute="baseline" id="ZAY-6n-mdx"/>
                                     <constraint firstItem="3Zt-4r-DDQ" firstAttribute="top" secondItem="V85-qd-b9G" secondAttribute="bottom" constant="4" id="aR2-vF-Q1K"/>
+                                    <constraint firstItem="pNw-Yg-Pfj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ptq-Ez-gbc" secondAttribute="top" id="d6k-Vf-Fue"/>
                                     <constraint firstItem="3Zt-4r-DDQ" firstAttribute="leading" secondItem="V85-qd-b9G" secondAttribute="leading" id="enN-eM-sP2"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3Zt-4r-DDQ" secondAttribute="bottom" constant="4.5" id="eyW-KQ-R1G"/>
                                     <constraint firstItem="pNw-Yg-Pfj" firstAttribute="leading" secondItem="V85-qd-b9G" secondAttribute="trailing" constant="4" id="fTp-At-ZEZ"/>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="top" secondItem="Ptq-Ez-gbc" secondAttribute="top" id="mUG-Ts-dEJ"/>
                                     <constraint firstItem="23s-yh-erO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pNw-Yg-Pfj" secondAttribute="trailing" constant="8" id="sVf-eu-gUY"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aPv-aB-wpi" secondAttribute="bottom" constant="8" id="xDJ-qu-1hg"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aPv-aB-wpi" secondAttribute="bottom" constant="4" id="xDJ-qu-1hg"/>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iF-oj-vp5" userLabel="mediaContainer">

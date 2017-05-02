@@ -26,8 +26,10 @@ class GlobalController: UIViewController {
       .subscribe(onNext: { [unowned self] (_) in
         let homeVC = TimelineViewController.instantiateFromStoryboard()
         homeVC.vm = TimelineViewModel.init(source: .home)
+        homeVC.vm.refresh.subscribe().addDisposableTo(self.bag)
         let publicVC = TimelineViewController.instantiateFromStoryboard()
         publicVC.vm = TimelineViewModel.init(source: .public)
+        publicVC.vm.refresh.subscribe().addDisposableTo(self.bag)
 
         let tabVC = UITabBarController.init()
         tabVC.viewControllers = [homeVC, publicVC]
