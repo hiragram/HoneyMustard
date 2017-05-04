@@ -65,6 +65,8 @@ class TimelineViewModel {
               cell.attributedBody = attributedString
             case .error(let error):
               print(error)
+              print("Parse error: \(status.content)")
+              cell.body = status.content
             case .completed:
               break
             }

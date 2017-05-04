@@ -27,18 +27,28 @@ class GlobalController: UIViewController {
         let homeVC = TimelineViewController.instantiateFromStoryboard()
         homeVC.vm = TimelineViewModel.init(source: .home)
         homeVC.vm.refresh.subscribe().addDisposableTo(self.bag)
+        homeVC.title = "ホーム"
+        let homeNav = UINavigationController.init(rootViewController: homeVC)
+
         let publicVC = TimelineViewController.instantiateFromStoryboard()
         publicVC.vm = TimelineViewModel.init(source: .public)
         publicVC.vm.refresh.subscribe().addDisposableTo(self.bag)
+        publicVC.title = "連合"
+        let publicNav = UINavigationController.init(rootViewController: publicVC)
+
         let localVC = TimelineViewController.instantiateFromStoryboard()
         localVC.vm = TimelineViewModel.init(source: .local)
         localVC.vm.refresh.subscribe().addDisposableTo(self.bag)
+        localVC.title = "ローカル"
+        let localNav = UINavigationController.init(rootViewController: localVC)
+
         let notificationVC = NotificationViewController.instantiateFromStoryboard()
         notificationVC.vm = NotificationViewModel.init()
         notificationVC.vm.refresh.subscribe().addDisposableTo(self.bag)
+        let notificationNav = UINavigationController.init(rootViewController: notificationVC)
 
         let tabVC = UITabBarController.init()
-        tabVC.viewControllers = [homeVC, publicVC, localVC, notificationVC]
+        tabVC.viewControllers = [homeNav, localNav, publicNav, notificationNav]
 
         self.addChildViewController(tabVC)
         self.view.addSubview(tabVC.view)

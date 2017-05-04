@@ -16,10 +16,16 @@ public class MastodonStatusParser {
 
   private static var processingParserRefs: [MastodonStatusParser] = []
 
-  public static func parse(xml: String) -> Observable<[TextRepresentation]> {
-    let xmlData = xml
-      .replacingOccurrences(of: "<br>", with: "<br />")
-      .data(using: .utf8)!
+  public static func parse(xml _xml: String) -> Observable<[TextRepresentation]> {
+    var xml = _xml
+
+    while let strayAmpersandRange = xml.range(of: "&(?!apos;|amp;|lt;|gt;|quot;)", options: [.regularExpression], range: nil, locale: nil) {
+      xml = xml.replacingCharacters(in: strayAmpersandRange, with: "&amp;")
+    }
+
+    xml = xml.replacingOccurrences(of: "<br>", with: "<br />")
+
+    let xmlData = xml.data(using: .utf8)!
 
     let parser = MastodonStatusParser.init(xml: xmlData)
     processingParserRefs.append(parser)
