@@ -12,7 +12,7 @@ import UIKit
 import RxSwift
 
 public struct MastodonRepository {
-  private static let host = "https://pawoo.net"
+  fileprivate static let host = "https://pawoo.net"
   private static let clientID = "ec05ea3e8fc85efe30e60441443c65081cb30cf1970d1e8b2732ce03835cb2d3"
   private static let clientSecret = "53eb3320a80da0dd31a8a500b72802f755405cf7a679519e62a0fb6b5021e77b"
 
@@ -188,6 +188,30 @@ public struct MastodonRepository {
     })
   }
 
+  public static func notifications(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonNotificationEntity]> {
+    return Observable.create({ (observer) -> Disposable in
+      var params: [String: String] = [:]
+      params["since_id"] = minID == nil ? nil : "\(minID!)"
+      params["max_id"] = maxID == nil ? nil : "\(maxID!)"
+      oauthSwift.client.get(apiURL(forPath: "/notifications", params: params), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [[String: Any]] else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          let notifications = try json.map { try MastodonNotificationEntity.init(json: $0) }
+          observer.onNext(notifications)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
   public static var isAuthorized: Observable<Bool> {
     guard let _ = Keychain.accessToken(), let _ = Keychain.accessTokenSecret() else {
       return Observable.just(false)
@@ -205,4 +229,12 @@ public struct MastodonRepository {
 
    {"id":10880,"redirect_uri":"honeymustard://oauth-callback/mastodon","client_id":"ec05ea3e8fc85efe30e60441443c65081cb30cf1970d1e8b2732ce03835cb2d3","client_secret":"53eb3320a80da0dd31a8a500b72802f755405cf7a679519e62a0fb6b5021e77b"}
  */
+}
+
+// MARK: - Internal API
+
+internal extension MastodonRepository {
+  static func getURLFrom(_ path: URL) -> URL {
+    return URL.init(string: host)!.appendingPathComponent(path.absoluteString)
+  }
 }

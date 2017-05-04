@@ -15,4 +15,5 @@ struct DefaultStyle: StyleDefinition {
   let usernameText: Typography = Typography.init(font: UIFont.boldSystemFont(ofSize: 14), color: UIColor.black)
   let screennameText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: UIColor.darkGray)
   let dateTimeText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 12), color: UIColor.darkGray)
+  let accessoryText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: UIColor.darkGray)
 }

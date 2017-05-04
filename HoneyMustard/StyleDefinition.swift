@@ -15,4 +15,5 @@ protocol StyleDefinition {
   var usernameText: Typography { get }
   var screennameText: Typography { get }
   var dateTimeText: Typography { get }
+  var accessoryText: Typography { get }
 }

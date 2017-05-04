@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 public struct MastodonAccountEntity: JSONMappable {
   public var id: Int
@@ -37,9 +38,57 @@ public struct MastodonAccountEntity: JSONMappable {
     statusesCount = try json.get(valueForKey: "statuses_count")
     note = try json.get(valueForKey: "note")
     url = try json.get(valueForKey: "url")
-    avatar = try json.get(valueForKey: "avatar")
-    avatarStatic = try json.get(valueForKey: "avatar_static")
-    header = try json.get(valueForKey: "header")
-    headerStatic = try json.get(valueForKey: "header_static")
+    let avatar: URL = try json.get(valueForKey: "avatar")
+    if avatar.scheme != "http" && avatar.scheme != "https" {
+      let url = MastodonRepository.getURLFrom(avatar)
+      self.avatar = url
+    } else {
+      self.avatar = avatar
+    }
+
+    let avatarStatic: URL = try json.get(valueForKey: "avatar_static")
+    if avatarStatic.scheme != "http" && avatarStatic.scheme != "https" {
+      let url = MastodonRepository.getURLFrom(avatarStatic)
+      self.avatarStatic = url
+    } else {
+      self.avatarStatic = avatarStatic
+    }
+    let header: URL = try json.get(valueForKey: "header")
+    if header.scheme != "http" && header.scheme != "https" {
+      let url = MastodonRepository.getURLFrom(header)
+      self.header = url
+    } else {
+      self.header = header
+    }
+    let headerStatic: URL = try json.get(valueForKey: "header_static")
+    if headerStatic.scheme != "http" && headerStatic.scheme != "https" {
+      let url = MastodonRepository.getURLFrom(headerStatic)
+      self.headerStatic = url
+    } else {
+      self.headerStatic = headerStatic
+    }
   }
+
+  fileprivate var _attributedNote = Variable<NSAttributedString?>.init(nil)
+}
+
+// MARK: - Extended APIs
+
+public extension MastodonAccountEntity {
+  public var attributedNote: Observable<NSAttributedString> {
+    if let attributedNote = _attributedNote.value {
+      return Observable.just(attributedNote)
+    }
+    return MastodonStatusParser.parse(xml: note.data(using: .utf8)!)
+      .map({ (texts) -> NSAttributedString in
+        return texts.map { $0.attributedString }.reduce(NSMutableAttributedString.init(string: ""), { (attributedString, current) -> NSMutableAttributedString in
+          attributedString.append(current)
+          return attributedString
+        })
+      })
+      .do(onNext: { (attributedNote) in
+        self._attributedNote.value = attributedNote
+      })
+  }
+
 }

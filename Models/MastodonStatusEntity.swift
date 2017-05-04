@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 public struct MastodonStatusEntity: JSONMappable, Identified {
   public var id: Int
@@ -75,7 +76,29 @@ public struct MastodonStatusEntity: JSONMappable, Identified {
       }
     }()
 
-    reblogDict = try json["reblog"] as? [String: Any]
+    reblogDict = json["reblog"] as? [String: Any]
+  }
+
+  fileprivate var _attributedBody = Variable<NSAttributedString?>.init(nil)
+}
+
+// MARK: - Extended APIs
+
+public extension MastodonStatusEntity {
+  public var attributedBody: Observable<NSAttributedString> {
+    if let attributedBody = _attributedBody.value {
+      return Observable.just(attributedBody)
+    }
+    return MastodonStatusParser.parse(xml: content.data(using: .utf8)!)
+      .map({ (texts) -> NSAttributedString in
+        return texts.map { $0.attributedString }.reduce(NSMutableAttributedString.init(string: ""), { (attributedString, current) -> NSMutableAttributedString in
+          attributedString.append(current)
+          return attributedString
+        })
+      })
+      .do(onNext: { (attributedBody) in
+        self._attributedBody.value = attributedBody
+      })
   }
 }
 

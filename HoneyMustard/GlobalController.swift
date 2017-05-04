@@ -33,9 +33,12 @@ class GlobalController: UIViewController {
         let localVC = TimelineViewController.instantiateFromStoryboard()
         localVC.vm = TimelineViewModel.init(source: .local)
         localVC.vm.refresh.subscribe().addDisposableTo(self.bag)
+        let notificationVC = NotificationViewController.instantiateFromStoryboard()
+        notificationVC.vm = NotificationViewModel.init()
+        notificationVC.vm.refresh.subscribe().addDisposableTo(self.bag)
 
         let tabVC = UITabBarController.init()
-        tabVC.viewControllers = [homeVC, publicVC, localVC]
+        tabVC.viewControllers = [homeVC, publicVC, localVC, notificationVC]
 
         self.addChildViewController(tabVC)
         self.view.addSubview(tabVC.view)

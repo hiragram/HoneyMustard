@@ -41,7 +41,7 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    vm.refresh.subscribe().addDisposableTo(bag)
+//    vm.refresh.subscribe().addDisposableTo(bag)
     vm.openURL.subscribe(onNext: { [weak self] (transition) in
       switch transition {
       case .modally(let url):

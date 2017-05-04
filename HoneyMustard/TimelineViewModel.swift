@@ -57,13 +57,18 @@ class TimelineViewModel {
       case .status(let _status):
         let status = _status.reblog ?? _status
         let cell: TweetCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        MastodonStatusParser.parse(xml: status.content.data(using: .utf8)!).subscribe(onNext: { (texts) in
-          let attributedString = texts.map { $0.attributedString }.reduce(NSMutableAttributedString.init(string: ""), { (attributedString, current) -> NSMutableAttributedString in
-            attributedString.append(current)
-            return attributedString
-          })
-          cell.attributedBody = attributedString
-        }).addDisposableTo(self.bag)
+
+        status.attributedBody
+          .subscribe({ (event) in
+            switch event {
+            case .next(let attributedString):
+              cell.attributedBody = attributedString
+            case .error(let error):
+              print(error)
+            case .completed:
+              break
+            }
+          }).addDisposableTo(cell.bag)
         cell.screenname = status.account.acct
         cell.name = status.account.displayName
         cell.set(imageURL: status.account.avatar)
@@ -146,7 +151,6 @@ class TimelineViewModel {
     tableView.rx.itemSelected.asObservable().subscribe(onNext: { [weak self] (indexPath) in
       tableView.beginUpdates()
       tableView.endUpdates()
-      self?.selectedIndexPath = indexPath
     }).addDisposableTo(bag)
 
     tableView.rx.itemDeselected.asObservable().subscribe(onNext: { (_) in
@@ -156,7 +160,7 @@ class TimelineViewModel {
   }
 }
 
-// - MARK: Fetch from REST API
+// MARK: - Fetch from REST API
 
 extension TimelineViewModel {
   var refresh: Observable<Void> {
