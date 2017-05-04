@@ -26,5 +26,6 @@ extension Reactive where Base: UIScrollView {
         return result
       }
       .map { _ in () }
+      .retry()
   }
 }
