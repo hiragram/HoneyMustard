@@ -16,8 +16,12 @@ public class MastodonStatusParser {
 
   private static var processingParserRefs: [MastodonStatusParser] = []
 
-  public static func parse(xml: Data) -> Observable<[TextRepresentation]> {
-    let parser = MastodonStatusParser.init(xml: xml)
+  public static func parse(xml: String) -> Observable<[TextRepresentation]> {
+    let xmlData = xml
+      .replacingOccurrences(of: "<br>", with: "<br />")
+      .data(using: .utf8)!
+
+    let parser = MastodonStatusParser.init(xml: xmlData)
     processingParserRefs.append(parser)
 
     return parser.parse().do(onError: { (error) in
@@ -44,6 +48,17 @@ public class MastodonStatusParser {
     return parser.parse().map { (element) -> [TextRepresentation] in
       return element.textRepresentation()
     }
+  }
+}
+
+extension Observable where Element == [TextRepresentation] {
+  func asAttributedString() -> Observable<NSAttributedString> {
+    return map({ (texts) -> NSAttributedString in
+      return texts.map { $0.attributedString }.reduce(NSMutableAttributedString.init(string: ""), { (attributedString, current) -> NSMutableAttributedString in
+        attributedString.append(current)
+        return attributedString
+      })
+    })
   }
 }
 
@@ -135,6 +150,7 @@ extension Parser: XMLParserDelegate {
   func parserDidEndDocument(_ parser: XMLParser) {
     assert(elementStack.count == 1, "\(elementStack), \(String.init(data: rawData, encoding: .utf8))")
     _parsedElements.onNext(elementStack.first!)
+    _parsedElements.onCompleted()
   }
 
   func parser(_ parser: XMLParser, foundNotationDeclarationWithName name: String, publicID: String?, systemID: String?) {
@@ -201,9 +217,13 @@ extension Parser: XMLParserDelegate {
   }
 
   func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
+    _parsedElements.onError(parseError)
+    print(parseError)
   }
 
   func parser(_ parser: XMLParser, validationErrorOccurred validationError: Error) {
+    _parsedElements.onError(validationError)
+    print(validationError)
   }
 }
 

@@ -89,13 +89,8 @@ public extension MastodonStatusEntity {
     if let attributedBody = _attributedBody.value {
       return Observable.just(attributedBody)
     }
-    return MastodonStatusParser.parse(xml: content.data(using: .utf8)!)
-      .map({ (texts) -> NSAttributedString in
-        return texts.map { $0.attributedString }.reduce(NSMutableAttributedString.init(string: ""), { (attributedString, current) -> NSMutableAttributedString in
-          attributedString.append(current)
-          return attributedString
-        })
-      })
+    return MastodonStatusParser.parse(xml: content)
+      .asAttributedString()
       .do(onNext: { (attributedBody) in
         self._attributedBody.value = attributedBody
       })

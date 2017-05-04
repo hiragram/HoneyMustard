@@ -15,7 +15,6 @@
 		6011A39C1E7C5DD10061F3A6 /* HoneyMustardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6011A39B1E7C5DD10061F3A6 /* HoneyMustardTests.swift */; };
 		6011A3AC1E7C61450061F3A6 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A61E7C61450061F3A6 /* CommonCrypto.framework */; };
 		6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A71E7C61450061F3A6 /* Crypto.framework */; };
-		6011A3AE1E7C61450061F3A6 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A81E7C61450061F3A6 /* RxBlocking.framework */; };
 		6011A3AF1E7C61450061F3A6 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A91E7C61450061F3A6 /* RxCocoa.framework */; };
 		6011A3B01E7C61450061F3A6 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AA1E7C61450061F3A6 /* RxSwift.framework */; };
 		6011A3B11E7C61450061F3A6 /* Somen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AB1E7C61450061F3A6 /* Somen.framework */; };
@@ -35,13 +34,13 @@
 		602CCC181EA91E59005A07C3 /* MastodonStatusParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602CCC171EA91E59005A07C3 /* MastodonStatusParser.swift */; };
 		602CCC1C1EA92564005A07C3 /* XMLParserTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602CCC1B1EA92564005A07C3 /* XMLParserTestCase.swift */; };
 		602CCC1E1EA925AC005A07C3 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 602CCC1D1EA925AC005A07C3 /* Nimble.framework */; };
+		603529431EBAAB05003E6E2A /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A81E7C61450061F3A6 /* RxBlocking.framework */; };
 		6042EE971E7CCC7F004C0485 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6042EE8E1E7CCC7F004C0485 /* Models.framework */; };
 		6042EE9E1E7CCC7F004C0485 /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EE9D1E7CCC7F004C0485 /* ModelsTests.swift */; };
 		6042EEA01E7CCC7F004C0485 /* Models.h in Headers */ = {isa = PBXBuildFile; fileRef = 6042EE901E7CCC7F004C0485 /* Models.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6042EEA31E7CCC7F004C0485 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6042EE8E1E7CCC7F004C0485 /* Models.framework */; };
 		6042EEA51E7CCC7F004C0485 /* Models.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6042EE8E1E7CCC7F004C0485 /* Models.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6042EEAD1E7CCD1E004C0485 /* TweetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6042EEAC1E7CCD1E004C0485 /* TweetRepository.swift */; };
-		6042EEAE1E7CCD36004C0485 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A81E7C61450061F3A6 /* RxBlocking.framework */; };
 		6042EEAF1E7CCD36004C0485 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3A91E7C61450061F3A6 /* RxCocoa.framework */; };
 		6042EEB01E7CCD36004C0485 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AA1E7C61450061F3A6 /* RxSwift.framework */; };
 		6042EEB11E7CCD36004C0485 /* Somen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6011A3AB1E7C61450061F3A6 /* Somen.framework */; };
@@ -224,7 +223,6 @@
 				6011A3AD1E7C61450061F3A6 /* Crypto.framework in Frameworks */,
 				601FAE431E7CFEDA00E6F23C /* SplitViewController.framework in Frameworks */,
 				601FAE4E1E7D2A5200E6F23C /* RxDataSources.framework in Frameworks */,
-				6011A3AE1E7C61450061F3A6 /* RxBlocking.framework in Frameworks */,
 				6011A3B51E7CCAE60061F3A6 /* RxKeyboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,7 +241,6 @@
 				6042EEAF1E7CCD36004C0485 /* RxCocoa.framework in Frameworks */,
 				6042EEB11E7CCD36004C0485 /* Somen.framework in Frameworks */,
 				60DD30191E7FCE0700FFBE08 /* OAuthSwift.framework in Frameworks */,
-				6042EEAE1E7CCD36004C0485 /* RxBlocking.framework in Frameworks */,
 				60D6E6C91EACD35C0075492A /* Attributed.framework in Frameworks */,
 				6042EEB01E7CCD36004C0485 /* RxSwift.framework in Frameworks */,
 				6042EEB31E7CCF1E004C0485 /* KeychainAccess.framework in Frameworks */,
@@ -256,6 +253,7 @@
 			files = (
 				6042EE971E7CCC7F004C0485 /* Models.framework in Frameworks */,
 				602CCC1E1EA925AC005A07C3 /* Nimble.framework in Frameworks */,
+				603529431EBAAB05003E6E2A /* RxBlocking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

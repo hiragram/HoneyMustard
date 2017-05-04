@@ -79,13 +79,8 @@ public extension MastodonAccountEntity {
     if let attributedNote = _attributedNote.value {
       return Observable.just(attributedNote)
     }
-    return MastodonStatusParser.parse(xml: note.data(using: .utf8)!)
-      .map({ (texts) -> NSAttributedString in
-        return texts.map { $0.attributedString }.reduce(NSMutableAttributedString.init(string: ""), { (attributedString, current) -> NSMutableAttributedString in
-          attributedString.append(current)
-          return attributedString
-        })
-      })
+    return MastodonStatusParser.parse(xml: note)
+      .asAttributedString()
       .do(onNext: { (attributedNote) in
         self._attributedNote.value = attributedNote
       })
