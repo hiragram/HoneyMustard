@@ -21,7 +21,7 @@ public struct MastodonRepository {
   }
 
   private static func apiURL(forPath path: String, params: [String: String] = [:]) -> String {
-    return url(forPath: "/api/v1/") + path + "?" + params.map { "\($0.key)=\($0.value)" }.joined(separator: "&")
+    return url(forPath: "/api/v1/") + path + "?" + params.map { "\($0.key)=\($0.value.urlEncoded)" }.joined(separator: "&")
   }
 
   private static let oauthSwift = { _ -> OAuth2Swift in
@@ -44,12 +44,30 @@ public struct MastodonRepository {
     }
   }
 
-  public static func post(text: String) {
-    oauthSwift.client.post(apiURL(forPath: "statuses"), parameters: ["status": text], success: { (response) in
-      print(response)
-    }) { (error) in
-      print(error)
-    }
+  public static func postStatus(text: String, inReplyTo inReplyToStatusID: Int? = nil) -> Observable<MastodonStatusEntity> {
+    return Observable.create({ (observer) -> Disposable in
+      var params: [String: String] = [:]
+      params["status"] = text
+      if let id = inReplyToStatusID {
+        params["in_reply_to_id"] = "\(id)"
+      }
+      oauthSwift.client.post(apiURL(forPath: "/statuses", params: params), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          let status = try MastodonStatusEntity.init(json: json)
+          observer.onNext(status)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
   }
 
   public static func home(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonStatusEntity]> {

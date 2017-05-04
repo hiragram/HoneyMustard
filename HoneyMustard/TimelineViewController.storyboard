@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jdc-Ng-Y7B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jdc-Ng-Y7B">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -38,12 +38,34 @@
                             <constraint firstItem="9R7-es-01f" firstAttribute="top" secondItem="gKw-9W-hzz" secondAttribute="top" id="wdF-69-cH6"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="MXN-Wf-p0u">
+                        <barButtonItem key="rightBarButtonItem" title="投稿" id="Ei5-l8-Xjg"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="composeButton" destination="Ei5-l8-Xjg" id="Qju-MA-PBX"/>
                         <outlet property="refreshControl" destination="Dex-9s-54u" id="mkP-yC-FVo"/>
                         <outlet property="tableView" destination="9R7-es-01f" id="sVa-WN-KDc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nho-Rg-eR0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="920.79999999999995" y="114.69265367316342"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Bxa-Ax-sPC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AeH-Z1-odB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lXQ-1j-3EV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Jdc-Ng-Y7B" kind="relationship" relationship="rootViewController" id="Ufx-kW-Uig"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zag-vX-rEJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-18.399999999999999" y="114.69265367316342"/>
         </scene>

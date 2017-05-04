@@ -9,19 +9,54 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Models
 
 class TweetEditViewModel {
   private let bag = DisposeBag.init()
 
   let images = Variable<[UIImage]>.init([])
+  let text = Variable.init("")
+
+  typealias InReplyTo = (statusID: Int, iconURL: URL, displayName: String, screenName: String, body: NSAttributedString)
+
+  let inReplyTo: InReplyTo?
 
   // MARK: - delegates
   let imagePickerDelegate = ImagePickerDelegate.init()
 
-  init() {
+  fileprivate let submittedSubject = PublishSubject<Void>.init()
+
+  init(inReplyTo: InReplyTo? = nil) {
+    self.inReplyTo = inReplyTo
+    if let screenName = inReplyTo?.screenName {
+      text.value = "@\(screenName) "
+    }
     imagePickerDelegate.selectedImage.subscribe(onNext: { [weak self] (image) in
       self?.images.value.append(image)
     }).addDisposableTo(bag)
+  }
+}
+
+// MARK: - API for VC
+
+extension TweetEditViewModel {
+  var submit: Observable<Void> {
+    return text.asObservable()
+      .flatMap({ [unowned self] (text) -> Observable<MastodonStatusEntity> in
+        MastodonRepository.postStatus(text: text, inReplyTo: self.inReplyTo?.statusID)
+      })
+      .do(onNext: { [weak self] _ in
+        self?.submittedSubject.onNext(())
+      })
+      .map { _ in () }
+  }
+}
+
+// MARK: - API for other VC
+
+extension TweetEditViewModel {
+  var submitted: Observable<Void> {
+    return submittedSubject.asObservable().take(1)
   }
 }
 

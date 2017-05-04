@@ -21,33 +21,33 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPh-iW-bFO" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                        <rect key="frame" x="56" y="8" width="35.5" height="17"/>
+                        <rect key="frame" x="41" y="8" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bca-af-bxy" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                        <rect key="frame" x="56" y="32" width="95" height="21"/>
+                        <rect key="frame" x="41" y="32" width="95" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeF-jr-utc" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                        <rect key="frame" x="159" y="32" width="76" height="21"/>
+                        <rect key="frame" x="144" y="32" width="76" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DfR-Of-wE3" userLabel="contentText" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                        <rect key="frame" x="56" y="57" width="42" height="21"/>
+                        <rect key="frame" x="41" y="57" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CgG-89-Wfh">
-                        <rect key="frame" x="8" y="32" width="40" height="40"/>
+                        <rect key="frame" x="8" y="32" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="CJ2-1F-pck"/>
+                            <constraint firstAttribute="width" constant="25" id="CJ2-1F-pck"/>
                             <constraint firstAttribute="width" secondItem="CgG-89-Wfh" secondAttribute="height" multiplier="1:1" id="JBI-BX-Fla"/>
                         </constraints>
                     </imageView>
@@ -68,6 +68,7 @@
                     <constraint firstItem="CgG-89-Wfh" firstAttribute="leading" secondItem="iIF-JY-04N" secondAttribute="leadingMargin" id="rzl-s3-btH"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="contentTextLabel" destination="DfR-Of-wE3" id="VSq-sY-orR"/>
                 <outlet property="screennameLabel" destination="eeF-jr-utc" id="jfw-xd-6Ap"/>

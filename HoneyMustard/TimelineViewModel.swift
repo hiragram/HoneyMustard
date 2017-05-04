@@ -15,14 +15,14 @@ import RxDataSources
 class TimelineViewModel {
 
   private let bag = DisposeBag.init()
-  private let _openURL = PublishSubject<URLOpenStyle>.init()
-  var openURL: Observable<URLOpenStyle> {
-    return _openURL.asObservable()
+  private let _transition = PublishSubject<Transition>.init()
+  var transition: Observable<Transition> {
+    return _transition.asObservable()
   }
 
-  enum URLOpenStyle {
-    case modally(URL)
-    case push(URL)
+  enum Transition {
+    case safari(URL)
+    case reply(MastodonStatusEntity)
   }
 
   fileprivate let source: Source
@@ -78,7 +78,7 @@ class TimelineViewModel {
         cell.set(reblogged: status.reblogged)
 
         cell.tapLink.subscribe(onNext: { [weak self] (url) in
-          self?._openURL.onNext(.modally(url))
+          self?._transition.onNext(.safari(url))
         }).addDisposableTo(cell.bag)
 
         cell.rx.tapReblog.flatMap({ (_) -> Observable<MastodonStatusEntity> in
@@ -105,6 +105,8 @@ class TimelineViewModel {
         }).subscribe(onNext: { [weak self] (status) in
           self?.statuses.update(status)
         }).addDisposableTo(cell.bag)
+
+        cell.rx.tapReply.map { Transition.reply(status) }.bindTo(self._transition).addDisposableTo(cell.bag)
 
         let urls = status.mediaAttachments.map { $0.previewURL }
         let attachments: AttachedImage
