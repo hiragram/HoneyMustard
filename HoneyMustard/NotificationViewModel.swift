@@ -76,6 +76,9 @@ final class NotificationViewModel {
     tableView.registerNib(cellType: NotificationCell.self)
     items.bindTo(tableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
     tableView.estimatedRowHeight = 100 // FIXME
+    tableView.rx.scrolledToBottom
+      .flatMap { [unowned self] in self.fetchOlder }
+      .subscribe().addDisposableTo(bag)
   }
 }
 
@@ -86,6 +89,20 @@ extension NotificationViewModel {
     return MastodonRepository.notifications()
       .do(onNext: { [weak self] (notifications) in
         self?.notifications.refresh(notifications)
+      })
+      .map { _ in () }
+  }
+
+  var fetchOlder: Observable<Void> {
+    return MastodonRepository.notifications(maxID: notifications.last?.id)
+      .do(onNext: { [weak self] (notifications) in
+        let lastID = self?.notifications.last?.id
+        let appendingNotifications = notifications.split(whereSeparator: { (notification) -> Bool in
+          notification.id == lastID
+        }).last.map { Array($0) } ?? []
+        appendingNotifications.forEach {
+          self?.notifications.append($0)
+        }
       })
       .map { _ in () }
   }
