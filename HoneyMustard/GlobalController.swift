@@ -20,6 +20,7 @@ class GlobalController: UIViewController {
 
   override func loadView() {
     super.loadView()
+    try! Keychain.initialize()
 
     MastodonRepository.isAuthorized
       .filter { $0 == true }
@@ -77,14 +78,19 @@ class GlobalController: UIViewController {
       }).addDisposableTo(bag)
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-
+  override func viewDidLoad() {
+    super.viewDidLoad()
     MastodonRepository.isAuthorized.take(1).subscribe(onNext: { [unowned self] (isAuthorized) in
       if !isAuthorized {
-        MastodonRepository.oauth(parentVC: self)
+        DispatchQueue.main.async {
+          MastodonRepository.oauth(parentVC: self)
+        }
       }
     }).addDisposableTo(bag)
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
   }
 }
 

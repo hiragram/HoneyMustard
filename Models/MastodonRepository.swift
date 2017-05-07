@@ -36,7 +36,8 @@ public struct MastodonRepository {
 
 
   public static func oauth(parentVC: UIViewController) {
-    oauthSwift.authorizeURLHandler = SafariURLHandler.init(viewController: parentVC, oauthSwift: oauthSwift)
+    let handler = SafariURLHandler.init(viewController: parentVC, oauthSwift: oauthSwift)
+    oauthSwift.authorizeURLHandler = handler
     oauthSwift.authorize(withCallbackURL: "honeymustard://oauth-callback/mastodon", scope: "read write follow", state: "a", success: { (credential, response, parameters) in
       Keychain.set(accessToken: credential.oauthToken, accessTokenSecret: credential.oauthTokenSecret)
     }) { (error) in
@@ -326,10 +327,21 @@ public struct MastodonRepository {
   }
 
   public static var isAuthorized: Observable<Bool> {
-    guard let _ = Keychain.accessToken(), let _ = Keychain.accessTokenSecret() else {
-      return Observable.just(false)
+    let current: Observable<Bool>
+    if let _ = Keychain.accessToken(), let _ = Keychain.accessTokenSecret() {
+      current = Observable.just(true)
+    } else {
+      current = Observable.just(false)
     }
-    return Observable.just(true)
+
+    return Observable.of(current, Keychain.credential.map { _,_ in true }).merge()
+
+//    return Observable.combineLatest(current, Keychain.credential.map { _,_ in true }, resultSelector: { current, delayed in
+//      if current == true {
+//        return true
+//      }
+//      return delayed
+//    })
   }
 
   /*
