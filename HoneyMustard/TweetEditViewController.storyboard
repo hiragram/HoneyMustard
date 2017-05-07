@@ -23,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8a-7a-aAx" userLabel="textContainer">
-                                <rect key="frame" x="0.0" y="64" width="375" height="508"/>
+                                <rect key="frame" x="0.0" y="123" width="375" height="449"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="a0h-vS-zHo">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="441"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -112,9 +112,9 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdZ-x0-Hqn" userLabel="targetTweetContainer">
-                                <rect key="frame" x="0.0" y="64" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="59"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FUK-vr-vNL">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FUK-vr-vNL">
                                         <rect key="frame" x="8" y="8" width="30" height="30"/>
                                         <accessibility key="accessibilityConfiguration" identifier="inReplyToUserIcon"/>
                                         <constraints>
@@ -122,21 +122,21 @@
                                             <constraint firstAttribute="width" constant="30" id="ncA-FZ-u2z"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9T-B2-0Gd" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9T-B2-0Gd" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
                                         <rect key="frame" x="46" y="8" width="42" height="21"/>
                                         <accessibility key="accessibilityConfiguration" identifier="InReplyToDisplayNameLabel"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRl-UH-3Oz" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRl-UH-3Oz" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
                                         <rect key="frame" x="96" y="8" width="42" height="21"/>
                                         <accessibility key="accessibilityConfiguration" identifier="InReplyToScreenName"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQG-eo-yQu" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQG-eo-yQu" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
                                         <rect key="frame" x="46" y="30" width="42" height="21"/>
                                         <accessibility key="accessibilityConfiguration" identifier="InReplyToBody"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -156,7 +156,7 @@
                                     <constraint firstItem="IRl-UH-3Oz" firstAttribute="leading" secondItem="r9T-B2-0Gd" secondAttribute="trailing" constant="8" id="L9k-v4-pVU"/>
                                     <constraint firstAttribute="bottom" secondItem="FQG-eo-yQu" secondAttribute="bottom" priority="750" constant="8" id="P0B-iO-Hw8"/>
                                     <constraint firstItem="FUK-vr-vNL" firstAttribute="leading" secondItem="xdZ-x0-Hqn" secondAttribute="leading" constant="8" id="X4O-cg-XrI"/>
-                                    <constraint firstAttribute="height" priority="999" identifier="InReplyToContainerHeight" id="fE9-DG-fdt"/>
+                                    <constraint firstAttribute="height" priority="999" constant="59" identifier="InReplyToContainerHeight" id="fE9-DG-fdt"/>
                                     <constraint firstItem="FUK-vr-vNL" firstAttribute="top" secondItem="xdZ-x0-Hqn" secondAttribute="top" priority="750" constant="8" id="m82-bn-ryT"/>
                                 </constraints>
                             </view>
@@ -228,7 +228,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Close" width="20" height="20"/>
+        <image name="Close" width="15" height="15"/>
         <image name="Finish" width="20" height="20"/>
     </resources>
 </document>
