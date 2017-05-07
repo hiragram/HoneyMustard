@@ -118,6 +118,31 @@ public struct MastodonRepository {
     })
   }
 
+  public static func statuses(userID: Int, excludeReplies: Bool = false, maxID: Int? = nil, minID: Int? = nil, params _params: [String: String] = [:]) -> Observable<[MastodonStatusEntity]> {
+    return Observable.create({ (observer) -> Disposable in
+      var params = _params
+      params["since_id"] = minID == nil ? nil : "\(minID!)"
+      params["max_id"] = maxID == nil ? nil : "\(maxID!)"
+      params["exclude_replies"] = "\(excludeReplies)"
+      oauthSwift.client.get(apiURL(forPath: "/accounts/\(userID)/statuses", params: params), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [[String: Any]] else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          let statuses = try json.map { try MastodonStatusEntity.init(json: $0) }
+          observer.onNext(statuses)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
   public static func localTimeline(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonStatusEntity]> {
     return publicTimeline(params: ["local": "true"])
   }

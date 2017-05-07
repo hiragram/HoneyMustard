@@ -40,8 +40,14 @@ final class TweetCell: UITableViewCell {
       iconImageView.layer.masksToBounds = true
       iconImageView.layer.borderColor = UIColor.lightGray.cgColor
       iconImageView.layer.borderWidth = 0.5
+
+      let gesture = UITapGestureRecognizer.init()
+      iconImageView.addGestureRecognizer(gesture)
+      iconImageTapGesture = gesture
     }
   }
+  fileprivate var iconImageTapGesture: UITapGestureRecognizer!
+
   @IBOutlet fileprivate weak var replyButton: UIButton!
   @IBOutlet fileprivate weak var reblogButton: UIButton!
   @IBOutlet fileprivate weak var favoriteButton: UIButton!
@@ -276,6 +282,10 @@ extension Reactive where Base: TweetCell {
         break
       }
     })
+  }
+
+  var tapUser: Observable<Void> {
+    return base.iconImageTapGesture.rx.event.map { _ in () }
   }
 }
 

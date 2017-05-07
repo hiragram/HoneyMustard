@@ -70,6 +70,10 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
           let editNav = UINavigationController.init(rootViewController: editVC)
           _self.present(editNav, animated: true, completion: nil)
         }).addDisposableTo(_self.bag)
+      case .user(let user):
+        let userVC = UserProfileViewController.instantiateFromStoryboard()
+        userVC.vm = UserProfileViewModel.init(user: user)
+        _self.show(userVC, sender: nil)
       }
     }).addDisposableTo(bag)
   }

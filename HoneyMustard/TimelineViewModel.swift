@@ -12,7 +12,7 @@ import RxCocoa
 import Models
 import RxDataSources
 
-class TimelineViewModel {
+class TimelineViewModel: TweetCellRepresentable {
 
   private let bag = DisposeBag.init()
   private let _transition = PublishSubject<Transition>.init()
@@ -23,6 +23,7 @@ class TimelineViewModel {
   enum Transition {
     case safari(URL)
     case reply(MastodonStatusEntity)
+    case user(MastodonAccountEntity)
   }
 
   fileprivate let source: Source
@@ -30,12 +31,7 @@ class TimelineViewModel {
   let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
 //  let dataSource = TableViewDataSource<Section>.init()
 
-  fileprivate let statuses = EntityStorage<MastodonStatusEntity>.init()
-
-  private var clock: Observable<TimeInterval> = Observable<Observable<Int>>.of(Observable<Int>.interval(1.0, scheduler: MainScheduler.instance), Observable<Int>.just(1)).merge()
-    .map { (_) -> TimeInterval in
-      Date.init().timeIntervalSince1970
-    }.shareReplay(1)
+  let statuses = EntityStorage<MastodonStatusEntity>.init()
 
   var items: Observable<[Section]> {
     return statuses.items.map({ (statuses) -> [Section] in
@@ -54,90 +50,21 @@ class TimelineViewModel {
     self.source = source
     dataSource.configureCell = { [unowned self] (dataSource, tableView, indexPath, row) -> UITableViewCell in
       switch row {
-      case .status(let _status):
-        let status = _status.reblog ?? _status
+      case .status(let status):
         let cell: TweetCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-
-        status.attributedBody
-          .subscribe({ (event) in
-            switch event {
-            case .next(let attributedString):
-              cell.attributedBody = attributedString
-            case .error(let error):
-              print(error)
-              print("Parse error: \(status.content)")
-              cell.body = status.content
-            case .completed:
-              break
-            }
-          }).addDisposableTo(cell.bag)
-        cell.screenname = status.account.acct
-        cell.name = status.account.displayName
-        cell.set(imageURL: status.account.avatar)
-        cell.set(favorited: status.favourited)
-        cell.set(reblogged: status.reblogged)
+        self.setup(cell: cell, status: status)
 
         cell.tapLink.subscribe(onNext: { [weak self] (url) in
           self?._transition.onNext(.safari(url))
         }).addDisposableTo(cell.bag)
 
-        cell.rx.tapReblog.flatMap({ (_) -> Observable<MastodonStatusEntity> in
-          if status.reblogged {
-            return MastodonRepository.unreblog(statusID: status.id)
-              .do(onNext: { [weak self] (status) in
-                self?.statuses.update(status)
-              })
-
-          } else {
-            return MastodonRepository.reblog(statusID: status.id)
-              .do(onNext: { [weak self] (status) in
-                self?.statuses.prepend(status)
-              })
-          }
-        }).subscribe().addDisposableTo(cell.bag)
-
-        cell.rx.tapFavorite.flatMap({ (_) -> Observable<MastodonStatusEntity> in
-          if status.favourited {
-            return MastodonRepository.unfavorite(statusID: status.id)
-          } else {
-            return MastodonRepository.favorite(statusID: status.id)
-          }
-        }).subscribe(onNext: { [weak self] (status) in
-          self?.statuses.update(status)
-        }).addDisposableTo(cell.bag)
-
         cell.rx.tapReply.map { Transition.reply(status) }.bindTo(self._transition).addDisposableTo(cell.bag)
 
-        let urls = status.mediaAttachments.map { $0.previewURL }
-        let attachments: AttachedImage
-        switch urls.count {
-        case 1:
-          attachments = .one(urls.first!)
-        case 2:
-          attachments = .two(urls.first!, urls.dropFirst().first!)
-        case 3:
-          attachments = .three(urls.first!, urls.dropFirst(1).first!, urls.dropFirst(2).first!)
-        case 4:
-          attachments = .four(urls.first!, urls.dropFirst(1).first!, urls.dropFirst(2).first!, urls.dropFirst(3).first!)
-        default:
-          attachments = .none
-        }
-        cell.set(attachments: attachments)
-
-        self.clock.map({ (timestamp) -> DateTimeExpression in
-          let createdTimestamp = status.createdAt.timeIntervalSince1970
-          let diff = timestamp - createdTimestamp
-          switch diff {
-          case 0..<60:
-            return .seconds(Int.init(diff))
-          case 60..<3_600:
-            return .minutes(Int.init(diff / 60))
-          case 3_600..<86_400:
-            return .hours(Int.init(diff / 60 / 24))
-          default:
-            return .absolute(timestamp: createdTimestamp)
+        cell.rx.tapUser.map {
+          let status = status.reblog ?? status
+          return Transition.user(status.account)
           }
-        }).bindTo(cell.rx.date).addDisposableTo(cell.bag)
+          .bindTo(self._transition).addDisposableTo(cell.bag)
 
         return cell
       }
