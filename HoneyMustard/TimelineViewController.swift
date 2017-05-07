@@ -63,7 +63,8 @@ final class TimelineViewController: UIViewController, StoryboardInstantiatable {
       case .safari(let url):
         let safari = SFSafariViewController.init(url: url)
         self?.present(safari, animated: true, completion: nil)
-      case .reply(let status):
+      case .reply(let _status):
+        let status = _status.reblog ?? _status
         status.attributedBody.asAttributedString().subscribe(onNext: { (body) in
           let editVC = TweetEditViewController.instantiateFromStoryboard()
           editVC.vm = TweetEditViewModel.init(inReplyTo: (statusID: status.id, iconURL: status.account.avatar, displayName: status.account.displayName, screenName: status.account.acct, body: body))
