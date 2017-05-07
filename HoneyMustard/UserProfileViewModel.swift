@@ -16,7 +16,8 @@ final class UserProfileViewModel: TweetCellRepresentable {
   private let bag = DisposeBag.init()
   fileprivate let user: MastodonAccountEntity
 
-  var statuses = EntityStorage<MastodonStatusEntity>.init()
+  let statuses = EntityStorage<MastodonStatusEntity>.init()
+  fileprivate let relationship = Variable<MastodonRelationshipEntity?>.init(nil)
 
   private let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
 
@@ -59,6 +60,20 @@ final class UserProfileViewModel: TweetCellRepresentable {
         user.attributedNote.subscribe(onNext: { (note) in
           cell.note = note
         }).addDisposableTo(cell.bag)
+        self.relationship.asObservable().subscribe(onNext: { (relationship) in
+          guard let relationship = relationship else {
+            return
+          }
+          cell.relationshipDescription = relationship.followedBy ? "フォローされています" : "フォローされていません"
+          cell.set(followButtonStyle: relationship.following ? .unfollow : .follow)
+          cell.rx.tapFollowButton.subscribe(onNext: { [unowned self] (_) in
+            if relationship.following {
+              MastodonRepository.unfollow(userID: user.id).bindTo(self.relationship).addDisposableTo(cell.bag)
+            } else {
+              MastodonRepository.follow(userID: user.id).bindTo(self.relationship).addDisposableTo(cell.bag)
+            }
+          }).addDisposableTo(cell.bag)
+        }).addDisposableTo(cell.bag)
         cell.set(userIconURL: user.avatar)
         cell.set(headerImageURL: user.header)
         return cell
@@ -97,6 +112,14 @@ extension UserProfileViewModel {
     return MastodonRepository.statuses(userID: user.id, excludeReplies: true)
       .do(onNext: { [weak self] (statuses) in
         self?.statuses.refresh(statuses)
+      })
+      .map { _ in () }
+  }
+
+  var fetchRelationship: Observable<Void> {
+    return MastodonRepository.relashinship(userID: user.id)
+      .do(onNext: { [weak self] (relationship) in
+        self?.relationship.value = relationship
       })
       .map { _ in () }
   }

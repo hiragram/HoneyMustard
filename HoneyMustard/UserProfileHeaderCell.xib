@@ -93,11 +93,11 @@
                                 <rect key="frame" x="0.0" y="137" width="375" height="45.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drt-7W-Kr6">
-                                        <rect key="frame" x="156.5" y="0.0" width="61" height="20"/>
+                                        <rect key="frame" x="158" y="0.0" width="58" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="z94-v1-T0c"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
                                     </button>

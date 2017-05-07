@@ -143,8 +143,78 @@ public struct MastodonRepository {
     })
   }
 
+  public static func relashinship(userID: Int) -> Observable<MastodonRelationshipEntity> {
+    return Observable.create({ (observer) -> Disposable in
+      var params: [String: String] = [:]
+      params["id"] = "\(userID)"
+
+      oauthSwift.client.get(apiURL(forPath: "/accounts/relationships", params: params), success: { (response) in
+        do {
+          guard let _json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [[String: Any]] else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          guard let json = _json.first else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          let relationship = try MastodonRelationshipEntity.init(json: json)
+          observer.onNext(relationship)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
   public static func localTimeline(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonStatusEntity]> {
     return publicTimeline(params: ["local": "true"])
+  }
+
+  public static func follow(userID: Int) -> Observable<MastodonRelationshipEntity> {
+    return Observable.create({ (observer) -> Disposable in
+      oauthSwift.client.post(apiURL(forPath: "/accounts/\(userID)/follow"), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+            observer.onError(NSError.init()) // TODO
+            return
+          }
+          let status = try MastodonRelationshipEntity.init(json: json)
+          observer.onNext(status)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
+  public static func unfollow(userID: Int) -> Observable<MastodonRelationshipEntity> {
+    return Observable.create({ (observer) -> Disposable in
+      oauthSwift.client.post(apiURL(forPath: "/accounts/\(userID)/unfollow"), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+            observer.onError(NSError.init()) // TODO
+            return
+          }
+          let status = try MastodonRelationshipEntity.init(json: json)
+          observer.onNext(status)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
   }
 
   public static func reblog(statusID: Int) -> Observable<MastodonStatusEntity> {

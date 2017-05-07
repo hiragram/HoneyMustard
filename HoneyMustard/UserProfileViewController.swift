@@ -23,5 +23,6 @@ final class UserProfileViewController: UIViewController, StoryboardInstantiatabl
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     vm.fetchRecentPost.subscribe().addDisposableTo(bag)
+    vm.fetchRelationship.subscribe().addDisposableTo(bag)
   }
 }

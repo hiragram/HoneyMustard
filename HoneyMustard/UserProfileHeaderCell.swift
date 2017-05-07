@@ -35,6 +35,7 @@ final class UserProfileHeaderCell: UITableViewCell {
       followButton.layer.cornerRadius = 5
       followButton.layer.borderWidth = 0.5
       followButton.layer.borderColor = UIColor.white.cgColor
+      set(followButtonStyle: .fetching)
     }
   }
   @IBOutlet fileprivate weak var followStatusLabel: DesignedLabel! {
@@ -82,12 +83,41 @@ extension UserProfileHeaderCell {
     }
   }
 
-  func set(followsMe: Bool) {
-    fatalError()
+  var relationshipDescription: String? {
+    set {
+      followStatusLabel.text = newValue
+    }
+    get {
+      return followStatusLabel.text
+    }
   }
 
-  func set(following: Bool) {
-    fatalError()
+  func set(followButtonStyle style: FollowButtonStyle) {
+    let tintColor: UIColor
+    let text: String
+    let backgroundColor: UIColor
+    let borderColor: CGColor
+    switch style {
+    case .fetching:
+      tintColor = UIColor.lightGray
+      text = "フォロー状態を取得中"
+      backgroundColor = UIColor.clear
+      borderColor = UIColor.lightGray.cgColor
+    case .follow:
+      tintColor = UIColor.white
+      text = "フォローする"
+      backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+      borderColor = backgroundColor.cgColor
+    case .unfollow:
+      tintColor = UIColor.white
+      text = "フォローを解除する"
+      backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
+      borderColor = backgroundColor.cgColor
+    }
+    followButton.tintColor = tintColor
+    followButton.backgroundColor = backgroundColor
+    followButton.setTitle(text, for: .normal)
+    followButton.layer.borderColor = borderColor
   }
 
   var note: NSAttributedString? {
@@ -101,5 +131,21 @@ extension UserProfileHeaderCell {
 
   func set(userIconURL url: URL) {
     userIconImage.setImage(url: url)
+  }
+}
+
+// MARK: - Reactive API
+
+extension Reactive where Base: UserProfileHeaderCell {
+  var tapFollowButton: ControlEvent<Void> {
+    return base.followButton.rx.tap
+  }
+}
+
+extension UserProfileHeaderCell {
+  enum FollowButtonStyle {
+    case follow
+    case unfollow
+    case fetching
   }
 }

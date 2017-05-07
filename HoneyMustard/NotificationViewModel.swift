@@ -42,7 +42,7 @@ final class NotificationViewModel {
               cell.attributedBody = attributedString
             }).addDisposableTo(cell.bag)
           case .follow:
-            cell.title = "\(user.displayName)があなたをフォロー"
+            cell.title = "新しいフォロワー"
             cell.set(imageURL: user.avatar)
             cell.username = user.displayName
             cell.screenname = user.username
@@ -50,7 +50,7 @@ final class NotificationViewModel {
               cell.attributedBody = attributedString
             }).addDisposableTo(self.bag)
           case .mention:
-            cell.title = "\(user.displayName)からのトゥート"
+            cell.title = "あなた宛のトゥート"
             cell.set(imageURL: user.avatar)
             cell.username = user.displayName
             cell.screenname = user.username

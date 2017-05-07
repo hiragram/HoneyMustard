@@ -41,6 +41,7 @@
 		6020C9DA1EBECD72006AD0DB /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6020C9D91EBECD72006AD0DB /* Clock.swift */; };
 		6020C9DC1EBED6BA006AD0DB /* SectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6020C9DB1EBED6BA006AD0DB /* SectionHeaderCell.swift */; };
 		6020C9DE1EBED6D8006AD0DB /* SectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6020C9DD1EBED6D8006AD0DB /* SectionHeaderCell.xib */; };
+		6020C9E01EBEFF52006AD0DB /* MastodonRelationshipEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6020C9DF1EBEFF52006AD0DB /* MastodonRelationshipEntity.swift */; };
 		6025CE8F1E9BE9DC00244733 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025CE8E1E9BE9DC00244733 /* UIScrollView.swift */; };
 		602CCC161EA7B44B005A07C3 /* StatusContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602CCC151EA7B44B005A07C3 /* StatusContainer.swift */; };
 		602CCC181EA91E59005A07C3 /* MastodonStatusParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602CCC171EA91E59005A07C3 /* MastodonStatusParser.swift */; };
@@ -182,6 +183,7 @@
 		6020C9D91EBECD72006AD0DB /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		6020C9DB1EBED6BA006AD0DB /* SectionHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeaderCell.swift; sourceTree = "<group>"; };
 		6020C9DD1EBED6D8006AD0DB /* SectionHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderCell.xib; sourceTree = "<group>"; };
+		6020C9DF1EBEFF52006AD0DB /* MastodonRelationshipEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonRelationshipEntity.swift; sourceTree = "<group>"; };
 		6025CE8E1E9BE9DC00244733 /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		602CCC151EA7B44B005A07C3 /* StatusContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusContainer.swift; sourceTree = "<group>"; };
 		602CCC171EA91E59005A07C3 /* MastodonStatusParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonStatusParser.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 			children = (
 				60B60E5F1EA4FF2C00D491EC /* MastodonRepository.swift */,
 				60B60E641EA50C4500D491EC /* MastodonStatusEntity.swift */,
+				6020C9DF1EBEFF52006AD0DB /* MastodonRelationshipEntity.swift */,
 				60C7C67B1EB8709F0012A44B /* MastodonNotificationEntity.swift */,
 				60B60E6E1EA50F7000D491EC /* MastodonApplicationEntity.swift */,
 				60B60E6C1EA50F4E00D491EC /* MastodonTagEntity.swift */,
@@ -766,6 +769,7 @@
 				60B60E6D1EA50F4E00D491EC /* MastodonTagEntity.swift in Sources */,
 				60BE1DB41EAF5B8200317440 /* ObservablePaging.swift in Sources */,
 				602CCC181EA91E59005A07C3 /* MastodonStatusParser.swift in Sources */,
+				6020C9E01EBEFF52006AD0DB /* MastodonRelationshipEntity.swift in Sources */,
 				6042EEB51E7CD33C004C0485 /* Keychain.swift in Sources */,
 				601FAE571E7D311B00E6F23C /* JSONMappable.swift in Sources */,
 				60AE37331EB5C13400936680 /* EntityStorage.swift in Sources */,
