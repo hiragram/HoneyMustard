@@ -79,6 +79,10 @@ extension NotificationCell {
       return contentTextLabel.attributedText
     }
     set {
+      guard newValue?.string != "" else {
+        contentTextLabel.text = " "
+        return
+      }
       contentTextLabel.attributedText = newValue
     }
   }

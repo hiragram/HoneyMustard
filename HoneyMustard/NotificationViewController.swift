@@ -32,4 +32,16 @@ final class NotificationViewController: UIViewController, StoryboardInstantiatab
 
   var vm: NotificationViewModel!
   private let bag = DisposeBag.init()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    vm.transition.subscribe(onNext: { [weak self] (transition) in
+      switch transition {
+      case .user(let user):
+        let userVC = UserProfileViewController.instantiateFromStoryboard()
+        userVC.vm = UserProfileViewModel.init(user: user)
+        self?.show(userVC, sender: nil)
+      }
+    }).addDisposableTo(bag)
+  }
 }

@@ -18,6 +18,11 @@ final class NotificationViewModel {
   fileprivate let notifications = EntityStorage<MastodonNotificationEntity>.init()
   private let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
 
+  private let _transition = PublishSubject<Transition>.init()
+  var transition: Observable<Transition> {
+    return _transition.asObservable()
+  }
+
   var items: Observable<[Section]> {
     return notifications.items.map({ (notifications) -> [Section] in
       let rows = notifications.map { Row.notification($0) }
@@ -79,6 +84,16 @@ final class NotificationViewModel {
     tableView.rx.scrolledToBottom
       .flatMap { [unowned self] in self.fetchOlder }
       .subscribe().addDisposableTo(bag)
+    tableView.rx.modelSelected(Row.self).subscribe(onNext: { [weak self] (row) in
+      switch row {
+      case .notification(let notification):
+        self?._transition.onNext(.user(notification.account))
+      }
+    }).addDisposableTo(bag)
+  }
+
+  enum Transition {
+    case user(MastodonAccountEntity)
   }
 }
 
