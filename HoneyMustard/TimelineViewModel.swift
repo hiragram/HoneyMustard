@@ -55,7 +55,13 @@ class TimelineViewModel: TweetCellRepresentable {
         self.setup(cell: cell, status: status)
 
         cell.tapLink.subscribe(onNext: { [weak self] (url) in
-          self?._transition.onNext(.safari(url))
+          if let url = url {
+            self?._transition.onNext(.safari(url))
+          } else {
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            tableView.beginUpdates()
+            tableView.endUpdates()
+          }
         }).addDisposableTo(cell.bag)
 
         cell.rx.tapReply.map { Transition.reply(status) }.bindTo(self._transition).addDisposableTo(cell.bag)

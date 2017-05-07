@@ -84,7 +84,7 @@ final class TweetCell: UITableViewCell {
   @IBOutlet private weak var controlContainerHeight: NSLayoutConstraint!
   @IBOutlet fileprivate weak var mediaContainerHeight: NSLayoutConstraint!
   private let _colorRibbon = Variable<Ribbon?>.init(nil)
-  fileprivate let _linkTapped = PublishSubject<URL>.init()
+  fileprivate let _linkTapped = PublishSubject<URL?>.init()
 
   @IBOutlet fileprivate weak var mediaContainer: UIView! {
     didSet {
@@ -134,6 +134,7 @@ final class TweetCell: UITableViewCell {
 
   private func setLinkTapRecognizer() {
     let bodyTapGesture = UITapGestureRecognizer.init()
+
     let layoutManager = NSLayoutManager.init()
     let textContainer = NSTextContainer.init(size: .zero)
     layoutManager.addTextContainer(textContainer)
@@ -163,11 +164,11 @@ final class TweetCell: UITableViewCell {
         return url
       }
       return nil
-      }.flatMap { optionalURL -> Observable<URL> in
+      }.flatMap { [weak self] optionalURL -> Observable<URL?> in
         if let url = optionalURL {
           return Observable.just(url)
         } else {
-          return Observable<URL>.empty()
+          return Observable.just(nil)
         }
     }.bindTo(_linkTapped).addDisposableTo(bag)
   }
@@ -217,7 +218,7 @@ extension TweetCell {
     iconImageView.setImage(url: imageURL)
   }
 
-  var tapLink: Observable<URL> {
+  var tapLink: Observable<URL?> {
     return _linkTapped.asObservable()
   }
 
