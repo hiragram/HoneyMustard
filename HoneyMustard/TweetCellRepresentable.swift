@@ -40,17 +40,12 @@ extension TweetCellRepresentable {
     cell.rx.tapReblog.flatMap({ (_) -> Observable<MastodonStatusEntity> in
       if status.reblogged {
         return MastodonRepository.unreblog(statusID: status.id)
-          .do(onNext: { [weak self] (status) in
-            self?.statuses.update(status)
-          })
-
       } else {
         return MastodonRepository.reblog(statusID: status.id)
-          .do(onNext: { [weak self] (status) in
-            self?.statuses.prepend(status)
-          })
       }
-    }).subscribe().addDisposableTo(cell.bag)
+    }).subscribe(onNext: { [weak self] (status) in
+      self?.statuses.update(status)
+    }).addDisposableTo(cell.bag)
 
     cell.rx.tapFavorite.flatMap({ (_) -> Observable<MastodonStatusEntity> in
       if status.favourited {

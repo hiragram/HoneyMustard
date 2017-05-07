@@ -48,10 +48,27 @@ final class TweetCell: UITableViewCell {
   }
   fileprivate var iconImageTapGesture: UITapGestureRecognizer!
 
-  @IBOutlet fileprivate weak var replyButton: UIButton!
-  @IBOutlet fileprivate weak var reblogButton: UIButton!
-  @IBOutlet fileprivate weak var favoriteButton: UIButton!
-
+  @IBOutlet fileprivate weak var replyButton: UIButton! {
+    didSet {
+      replyButton.imageView?.contentMode = .scaleAspectFit
+      replyButton.setImage(#imageLiteral(resourceName: "Reply").withRenderingMode(.alwaysTemplate), for: .normal)
+      replyButton.tintColor = UIColor.gray
+    }
+  }
+  @IBOutlet fileprivate weak var reblogButton: UIButton! {
+    didSet {
+      reblogButton.imageView?.contentMode = .scaleAspectFit
+      reblogButton.setImage(#imageLiteral(resourceName: "Retweet").withRenderingMode(.alwaysTemplate), for: .normal)
+      reblogButton.tintColor = UIColor.gray
+    }
+  }
+  @IBOutlet fileprivate weak var favoriteButton: UIButton! {
+    didSet {
+      favoriteButton.imageView?.contentMode = .scaleAspectFit
+      favoriteButton.setImage(#imageLiteral(resourceName: "Favorite").withRenderingMode(.alwaysTemplate), for: .normal)
+      favoriteButton.tintColor = UIColor.gray
+    }
+  }
   @IBOutlet fileprivate weak var previewImage1: UIImageView!
   @IBOutlet fileprivate weak var previewImage2: UIImageView!
   @IBOutlet fileprivate weak var previewImage3: UIImageView!
@@ -105,7 +122,7 @@ final class TweetCell: UITableViewCell {
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {
-    let constant: CGFloat = selected ? 30 : 0
+    let constant: CGFloat = selected ? 20 : 0
     UIView.animate(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { [weak self] in
       self?.controlContainerHeight.constant = constant
       self?.layoutIfNeeded()
@@ -205,11 +222,23 @@ extension TweetCell {
   }
 
   func set(reblogged: Bool) {
-    reblogButton.backgroundColor = reblogged ? .red : .clear
+    let tintColor: UIColor
+    if reblogged {
+      tintColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+    } else {
+      tintColor = .gray
+    }
+    reblogButton.tintColor = tintColor
   }
 
   func set(favorited: Bool) {
-    favoriteButton.backgroundColor = favorited ? .red : .clear
+    let tintColor: UIColor
+    if favorited {
+      tintColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
+    } else {
+      tintColor = .gray
+    }
+    favoriteButton.tintColor = tintColor
   }
 
   func set(attachments: AttachedImage) {

@@ -43,6 +43,7 @@
 		6020C9DE1EBED6D8006AD0DB /* SectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6020C9DD1EBED6D8006AD0DB /* SectionHeaderCell.xib */; };
 		6020C9E01EBEFF52006AD0DB /* MastodonRelationshipEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6020C9DF1EBEFF52006AD0DB /* MastodonRelationshipEntity.swift */; };
 		6020C9E61EBF18FC006AD0DB /* TextRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6020C9E51EBF18FC006AD0DB /* TextRepresentation.swift */; };
+		6020C9E81EBF855D006AD0DB /* VectorIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6020C9E71EBF855D006AD0DB /* VectorIcons.xcassets */; };
 		6025CE8F1E9BE9DC00244733 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025CE8E1E9BE9DC00244733 /* UIScrollView.swift */; };
 		602CCC161EA7B44B005A07C3 /* StatusContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602CCC151EA7B44B005A07C3 /* StatusContainer.swift */; };
 		602CCC181EA91E59005A07C3 /* MastodonStatusParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602CCC171EA91E59005A07C3 /* MastodonStatusParser.swift */; };
@@ -186,6 +187,7 @@
 		6020C9DD1EBED6D8006AD0DB /* SectionHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderCell.xib; sourceTree = "<group>"; };
 		6020C9DF1EBEFF52006AD0DB /* MastodonRelationshipEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonRelationshipEntity.swift; sourceTree = "<group>"; };
 		6020C9E51EBF18FC006AD0DB /* TextRepresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRepresentation.swift; sourceTree = "<group>"; };
+		6020C9E71EBF855D006AD0DB /* VectorIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = VectorIcons.xcassets; sourceTree = "<group>"; };
 		6025CE8E1E9BE9DC00244733 /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		602CCC151EA7B44B005A07C3 /* StatusContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusContainer.swift; sourceTree = "<group>"; };
 		602CCC171EA91E59005A07C3 /* MastodonStatusParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MastodonStatusParser.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				601FAE4A1E7D282900E6F23C /* Protocols/Extensions */,
 				6011A38A1E7C5DD10061F3A6 /* Main.storyboard */,
 				6011A38D1E7C5DD10061F3A6 /* Assets.xcassets */,
+				6020C9E71EBF855D006AD0DB /* VectorIcons.xcassets */,
 				6011A38F1E7C5DD10061F3A6 /* LaunchScreen.storyboard */,
 				6011A3921E7C5DD10061F3A6 /* Info.plist */,
 			);
@@ -646,6 +649,7 @@
 				6068580E1E8D665A00E37AF7 /* TimelineStatusView.xib in Resources */,
 				60C7C6841EB9E47B0012A44B /* NotificationCell.xib in Resources */,
 				60C7C6801EB876560012A44B /* NotificationViewController.storyboard in Resources */,
+				6020C9E81EBF855D006AD0DB /* VectorIcons.xcassets in Resources */,
 				6020C9D61EBEBDCF006AD0DB /* SimpleTextCell.xib in Resources */,
 				6011A38E1E7C5DD10061F3A6 /* Assets.xcassets in Resources */,
 				6042EEB91E7CE3F7004C0485 /* TimelineViewController.storyboard in Resources */,
