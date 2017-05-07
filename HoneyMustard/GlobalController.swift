@@ -29,23 +29,27 @@ class GlobalController: UIViewController {
         homeVC.vm.refresh.subscribe().addDisposableTo(self.bag)
         homeVC.title = "ホーム"
         let homeNav = UINavigationController.init(rootViewController: homeVC)
+        homeNav.tabBarItem.image = #imageLiteral(resourceName: "Home")
 
         let publicVC = TimelineViewController.instantiateFromStoryboard()
         publicVC.vm = TimelineViewModel.init(source: .public)
         publicVC.vm.refresh.subscribe().addDisposableTo(self.bag)
         publicVC.title = "連合"
         let publicNav = UINavigationController.init(rootViewController: publicVC)
+        publicNav.tabBarItem.image = #imageLiteral(resourceName: "Internet")
 
         let localVC = TimelineViewController.instantiateFromStoryboard()
         localVC.vm = TimelineViewModel.init(source: .local)
         localVC.vm.refresh.subscribe().addDisposableTo(self.bag)
         localVC.title = "ローカル"
         let localNav = UINavigationController.init(rootViewController: localVC)
+        localNav.tabBarItem.image = #imageLiteral(resourceName: "Local")
 
         let notificationVC = NotificationViewController.instantiateFromStoryboard()
         notificationVC.vm = NotificationViewModel.init()
         notificationVC.vm.refresh.subscribe().addDisposableTo(self.bag)
         let notificationNav = UINavigationController.init(rootViewController: notificationVC)
+        notificationNav.tabBarItem.image = #imageLiteral(resourceName: "Notification")
 
         let tabVC = UITabBarController.init()
         tabVC.viewControllers = [homeNav, localNav, publicNav, notificationNav]
