@@ -13,20 +13,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Yl9-U6-R1L" customClass="UserProfileHeaderCell" customModule="HoneyMustard" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="235"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yl9-U6-R1L" id="CE9-Go-JaT">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="234.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="224.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jR3-w7-KXx" userLabel="backgroundContainer">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="235"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Sf-oF-PBW" userLabel="headerImage">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="235"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                             </imageView>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QyC-Fx-P2g">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="235"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -43,14 +43,14 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2yG-UW-AsM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="235"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6cG-OR-wpE" userLabel="icon">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OcA-Ge-8NB">
                                         <rect key="frame" x="147" y="5" width="80" height="80"/>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="OcA-Ge-8NB" secondAttribute="height" multiplier="1:1" id="ecz-bl-g5k"/>
                                             <constraint firstAttribute="width" constant="80" id="hQP-yD-sn0"/>
@@ -90,17 +90,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMW-TW-ars" userLabel="follow">
-                                <rect key="frame" x="0.0" y="137" width="375" height="55.5"/>
+                                <rect key="frame" x="0.0" y="137" width="375" height="45.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drt-7W-Kr6">
-                                        <rect key="frame" x="164" y="0.0" width="46" height="30"/>
+                                        <rect key="frame" x="156.5" y="0.0" width="61" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="z94-v1-T0c"/>
+                                            <constraint firstAttribute="height" constant="20" id="z94-v1-T0c"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2i-8G-530" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                                        <rect key="frame" x="167" y="32" width="42" height="20.5"/>
+                                        <rect key="frame" x="167" y="22" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -116,7 +118,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rER-Kz-xu5">
-                                <rect key="frame" x="0.0" y="192.5" width="375" height="42.5"/>
+                                <rect key="frame" x="0.0" y="182.5" width="375" height="42.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBU-L4-Ozi" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
                                         <rect key="frame" x="166" y="2" width="42" height="20.5"/>

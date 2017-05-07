@@ -30,7 +30,13 @@ final class UserProfileHeaderCell: UITableViewCell {
       screenNameLabel.typography = Style.current.screennameText.darkBackground
     }
   }
-  @IBOutlet fileprivate weak var followButton: UIButton!
+  @IBOutlet fileprivate weak var followButton: UIButton! {
+    didSet {
+      followButton.layer.cornerRadius = 5
+      followButton.layer.borderWidth = 0.5
+      followButton.layer.borderColor = UIColor.white.cgColor
+    }
+  }
   @IBOutlet fileprivate weak var followStatusLabel: DesignedLabel! {
     didSet {
       followStatusLabel.typography = Style.current.accessoryText.darkBackground
