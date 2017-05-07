@@ -57,7 +57,7 @@ final class UserProfileViewModel: TweetCellRepresentable {
         let cell: UserProfileHeaderCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.displayName = user.displayName
         cell.screenName = user.username
-        user.attributedNote.subscribe(onNext: { (note) in
+        user.attributedNote.asAttributedString().subscribe(onNext: { (note) in
           cell.note = note
         }).addDisposableTo(cell.bag)
         self.relationship.asObservable().subscribe(onNext: { (relationship) in

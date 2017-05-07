@@ -38,7 +38,7 @@ final class NotificationViewModel {
             cell.username = notification.status?.account.displayName
             cell.screenname = notification.status?.account.username
             cell.set(imageURL: notification.status?.account.avatar)
-            notification.status?.attributedBody.subscribe(onNext: { (attributedString) in
+            notification.status?.attributedBody.asAttributedString().subscribe(onNext: { (attributedString) in
               cell.attributedBody = attributedString
             }).addDisposableTo(cell.bag)
           case .follow:
@@ -46,7 +46,7 @@ final class NotificationViewModel {
             cell.set(imageURL: user.avatar)
             cell.username = user.displayName
             cell.screenname = user.username
-            user.attributedNote.subscribe(onNext: { (attributedString) in
+            user.attributedNote.asAttributedString().subscribe(onNext: { (attributedString) in
               cell.attributedBody = attributedString
             }).addDisposableTo(self.bag)
           case .mention:
@@ -54,7 +54,7 @@ final class NotificationViewModel {
             cell.set(imageURL: user.avatar)
             cell.username = user.displayName
             cell.screenname = user.username
-            notification.status?.attributedBody.subscribe(onNext: { (attributedString) in
+            notification.status?.attributedBody.asAttributedString().subscribe(onNext: { (attributedString) in
               cell.attributedBody = attributedString
             }).addDisposableTo(cell.bag)
           case .reblog:
@@ -62,7 +62,7 @@ final class NotificationViewModel {
             cell.set(imageURL: notification.status?.account.avatar)
             cell.username = notification.status?.account.displayName
             cell.screenname = notification.status?.account.username
-            notification.status?.attributedBody.subscribe(onNext: { (attributedString) in
+            notification.status?.attributedBody.asAttributedString().subscribe(onNext: { (attributedString) in
               cell.attributedBody = attributedString
             }).addDisposableTo(cell.bag)
           }

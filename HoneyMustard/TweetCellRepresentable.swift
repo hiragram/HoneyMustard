@@ -18,7 +18,7 @@ protocol TweetCellRepresentable: class {
 extension TweetCellRepresentable {
   func setup(cell: TweetCell, status _status: MastodonStatusEntity) {
     let status = _status.reblog ?? _status
-    status.attributedBody
+    status.attributedBody.asAttributedString()
       .subscribe({ (event) in
         switch event {
         case .next(let attributedString):

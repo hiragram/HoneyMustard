@@ -69,20 +69,19 @@ public struct MastodonAccountEntity: JSONMappable {
     }
   }
 
-  fileprivate var _attributedNote = Variable<NSAttributedString?>.init(nil)
+  fileprivate var _textRepresentation = Variable<[TextRepresentation]?>.init(nil)
 }
 
 // MARK: - Extended APIs
 
 public extension MastodonAccountEntity {
-  public var attributedNote: Observable<NSAttributedString> {
-    if let attributedNote = _attributedNote.value {
-      return Observable.just(attributedNote)
+  public var attributedNote: Observable<[TextRepresentation]> {
+    if let textRepresentation = _textRepresentation.value {
+      return Observable.just(textRepresentation)
     }
     return MastodonStatusParser.parse(xml: note)
-      .asAttributedString()
-      .do(onNext: { (attributedNote) in
-        self._attributedNote.value = attributedNote
+      .do(onNext: { (textRepresentation) in
+        self._textRepresentation.value = textRepresentation
       })
   }
 

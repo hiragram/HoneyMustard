@@ -79,20 +79,19 @@ public struct MastodonStatusEntity: JSONMappable, Identified {
     reblogDict = json["reblog"] as? [String: Any]
   }
 
-  fileprivate var _attributedBody = Variable<NSAttributedString?>.init(nil)
+  fileprivate var _textRepresentation = Variable<[TextRepresentation]?>.init(nil)
 }
 
 // MARK: - Extended APIs
 
 public extension MastodonStatusEntity {
-  public var attributedBody: Observable<NSAttributedString> {
-    if let attributedBody = _attributedBody.value {
-      return Observable.just(attributedBody)
+  public var attributedBody: Observable<[TextRepresentation]> {
+    if let textRepresentation = _textRepresentation.value {
+      return Observable.just(textRepresentation)
     }
     return MastodonStatusParser.parse(xml: content)
-      .asAttributedString()
-      .do(onNext: { (attributedBody) in
-        self._attributedBody.value = attributedBody
+      .do(onNext: { (textRepresentation) in
+        self._textRepresentation.value = textRepresentation
       })
   }
 }
