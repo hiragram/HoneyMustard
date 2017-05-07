@@ -180,8 +180,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4kI-xS-Tdq">
-                        <barButtonItem key="leftBarButtonItem" title="閉じる" id="IiB-8V-qGx"/>
-                        <barButtonItem key="rightBarButtonItem" title="送信" id="U4X-L4-egr"/>
+                        <barButtonItem key="leftBarButtonItem" image="Close" id="IiB-8V-qGx"/>
+                        <barButtonItem key="rightBarButtonItem" image="Finish" id="U4X-L4-egr"/>
                     </navigationItem>
                     <connections>
                         <outlet property="attachmentContainerHeight" destination="jhm-0T-w78" id="ZBW-yR-SaY"/>
@@ -227,4 +227,8 @@
             <point key="canvasLocation" x="548" y="-116.49175412293854"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Close" width="20" height="20"/>
+        <image name="Finish" width="20" height="20"/>
+    </resources>
 </document>

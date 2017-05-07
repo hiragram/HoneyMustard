@@ -43,7 +43,7 @@ class GlobalController: UIViewController {
         localVC.vm.refresh.subscribe().addDisposableTo(self.bag)
         localVC.title = "ローカル"
         let localNav = UINavigationController.init(rootViewController: localVC)
-        localNav.tabBarItem.image = #imageLiteral(resourceName: "Local")
+        localNav.tabBarItem.image = #imageLiteral(resourceName: "Server")
 
         let notificationVC = NotificationViewController.instantiateFromStoryboard()
         notificationVC.vm = NotificationViewModel.init()

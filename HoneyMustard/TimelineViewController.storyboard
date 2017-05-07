@@ -39,7 +39,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MXN-Wf-p0u">
-                        <barButtonItem key="rightBarButtonItem" title="投稿" id="Ei5-l8-Xjg"/>
+                        <barButtonItem key="rightBarButtonItem" image="Compose" id="Ei5-l8-Xjg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="composeButton" destination="Ei5-l8-Xjg" id="Qju-MA-PBX"/>
@@ -70,4 +70,7 @@
             <point key="canvasLocation" x="-18.399999999999999" y="114.69265367316342"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Compose" width="25" height="25"/>
+    </resources>
 </document>
