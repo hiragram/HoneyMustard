@@ -334,7 +334,7 @@ public struct MastodonRepository {
       current = Observable.just(false)
     }
 
-    return Observable.of(current, Keychain.credential.map { _,_ in true }).merge()
+    return Observable.of(current, Keychain.credential.map { _,_ in true }.delay(0.5, scheduler: MainScheduler.instance)).merge()
 
 //    return Observable.combineLatest(current, Keychain.credential.map { _,_ in true }, resultSelector: { current, delayed in
 //      if current == true {

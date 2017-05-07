@@ -15,6 +15,10 @@ import RxDataSources
 final class UserProfileViewModel: TweetCellRepresentable {
   private let bag = DisposeBag.init()
   fileprivate let user: MastodonAccountEntity
+  fileprivate let _transition = PublishSubject<Transition>.init()
+  var transition: Observable<Transition> {
+    return _transition.asObservable()
+  }
 
   let statuses = EntityStorage<MastodonStatusEntity>.init()
   fileprivate let relationship = Variable<MastodonRelationshipEntity?>.init(nil)
@@ -56,7 +60,7 @@ final class UserProfileViewModel: TweetCellRepresentable {
       case .header(let user):
         let cell: UserProfileHeaderCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.displayName = user.displayName
-        cell.screenName = user.username
+        cell.screenName = user.acct
         user.attributedNote.asAttributedString().subscribe(onNext: { (note) in
           cell.note = note
         }).addDisposableTo(cell.bag)
@@ -102,6 +106,21 @@ final class UserProfileViewModel: TweetCellRepresentable {
     tableView.registerNib(cellType: TweetCell.self)
     tableView.registerNib(cellType: SectionHeaderCell.self)
     items.bindTo(tableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
+    tableView.rx.modelSelected(Row.self).subscribe(onNext: { [weak self] (row) in
+      guard let _self = self else {
+        return
+      }
+      switch row {
+      case .statusCount:
+        _self._transition.onNext(.statuses(userID: _self.user.id))
+      default:
+        break
+      }
+    }).addDisposableTo(bag)
+  }
+
+  enum Transition {
+    case statuses(userID: Int)
   }
 }
 

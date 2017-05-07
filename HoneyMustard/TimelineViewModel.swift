@@ -197,5 +197,11 @@ extension TimelineViewModel {
     static let local = Source.init(refresh: MastodonRepository.localTimeline()) { (maxID) -> TimelineViewModel.Source.Stream in
       MastodonRepository.localTimeline(maxID: maxID)
     }
+
+    static func user(id: Int) -> Source {
+      return Source.init(refresh: MastodonRepository.statuses(userID: id), fetchOlder: { (maxID) -> TimelineViewModel.Source.Stream in
+        MastodonRepository.statuses(userID: id, maxID: maxID)
+      })
+    }
   }
 }

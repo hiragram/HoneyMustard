@@ -24,6 +24,7 @@ class GlobalController: UIViewController {
 
     MastodonRepository.isAuthorized
       .filter { $0 == true }
+      .take(1)
       .subscribe(onNext: { [unowned self] (_) in
         let homeVC = TimelineViewController.instantiateFromStoryboard()
         homeVC.vm = TimelineViewModel.init(source: .home)

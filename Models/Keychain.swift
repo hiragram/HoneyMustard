@@ -24,7 +24,6 @@ public struct Keychain {
     let key = "keychainInitialized"
     if userDefaults.value(forKey: key) == nil {
       try keychain.removeAll()
-      print(accessToken())
       userDefaults.set(true, forKey: key)
       userDefaults.synchronize()
     }
