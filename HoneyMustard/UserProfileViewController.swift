@@ -20,6 +20,22 @@ final class UserProfileViewController: UIViewController, StoryboardInstantiatabl
   var vm: UserProfileViewModel!
   private let bag = DisposeBag.init()
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    vm.transition.subscribe(onNext: { [weak self] (transition) in
+      guard let _self = self else {
+        return
+      }
+      switch transition {
+      case .statuses(userID: let userID):
+        let statusVC = TimelineViewController.instantiateFromStoryboard()
+        statusVC.vm = TimelineViewModel.init(source: .user(id: userID))
+        statusVC.vm.refresh.subscribe().addDisposableTo(_self.bag)
+        _self.show(statusVC, sender: nil)
+      }
+    }).addDisposableTo(bag)
+  }
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     vm.fetchRecentPost.subscribe().addDisposableTo(bag)
