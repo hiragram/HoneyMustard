@@ -94,8 +94,14 @@ final class TweetCell: UITableViewCell {
       mediaContainer.layer.borderColor = UIColor.lightGray.cgColor
     }
   }
+  @IBOutlet fileprivate weak var titleLabel: DesignedLabel! {
+    didSet {
+      titleLabel.typography = Style.current.accessoryText
+    }
+  }
   @IBOutlet fileprivate weak var preview1Height: NSLayoutConstraint!
   @IBOutlet fileprivate weak var preview1Width: NSLayoutConstraint!
+  @IBOutlet weak var titleContainerHeight: NSLayoutConstraint!
   // MARK: - Appearance properties
 
 //  var colorRibbon: Ribbon? {
@@ -285,6 +291,21 @@ extension TweetCell {
       previewImage4.setImage(url: url4)
     }
     setNeedsLayout()
+  }
+
+  var title: String? {
+    set {
+      titleLabel.text = newValue
+      if newValue == nil {
+        titleContainerHeight.constant = 0
+      } else {
+        titleContainerHeight.constant = 22
+      }
+      setNeedsLayout()
+    }
+    get {
+      return titleLabel.text
+    }
   }
 }
 

@@ -14,23 +14,44 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="109" id="Swp-g2-cWY" customClass="TweetCell" customModule="HoneyMustard" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="380" height="366"/>
+            <rect key="frame" x="0.0" y="0.0" width="380" height="387"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Swp-g2-cWY" id="1OT-6a-aHP">
-                <rect key="frame" x="0.0" y="0.0" width="380" height="365.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="380" height="386.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NRD-sf-8sB">
-                        <rect key="frame" x="8" y="8" width="364" height="349"/>
+                        <rect key="frame" x="8" y="8" width="364" height="370"/>
                         <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJf-6B-AsD" userLabel="titleContainer">
+                                <rect key="frame" x="0.0" y="0.0" width="364" height="22"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjs-dS-yg2" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                                        <rect key="frame" x="48" y="2.5" width="33" height="16"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="titleLabel"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <accessibility key="accessibilityConfiguration" identifier="titleContainer"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="1zL-tg-s0F"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bjs-dS-yg2" secondAttribute="bottom" priority="750" constant="6" id="7Yh-Nr-CvI"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bjs-dS-yg2" secondAttribute="trailing" constant="8" id="WS2-sU-MoM"/>
+                                    <constraint firstItem="Bjs-dS-yg2" firstAttribute="top" secondItem="KJf-6B-AsD" secondAttribute="top" priority="750" id="gTO-f8-Dgg"/>
+                                    <constraint firstItem="Bjs-dS-yg2" firstAttribute="centerY" secondItem="KJf-6B-AsD" secondAttribute="centerY" id="rQ2-l7-Fcx"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptq-Ez-gbc" userLabel="statusContainer">
-                                <rect key="frame" x="0.0" y="0.0" width="364" height="49"/>
+                                <rect key="frame" x="0.0" y="22" width="364" height="48"/>
                                 <subviews>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aPv-aB-wpi" userLabel="userIcon">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="userIcon"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="Jrw-Vd-yhQ"/>
+                                            <constraint firstAttribute="width" priority="999" constant="40" id="Jrw-Vd-yhQ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Name Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V85-qd-b9G" userLabel="usernameLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
@@ -46,7 +67,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zt-4r-DDQ" userLabel="bodyLabel" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
-                                        <rect key="frame" x="48" y="24" width="42" height="20.5"/>
+                                        <rect key="frame" x="48" y="24" width="42" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -58,6 +79,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <accessibility key="accessibilityConfiguration" identifier="statusContainer"/>
                                 <constraints>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="leading" secondItem="Ptq-Ez-gbc" secondAttribute="leading" id="0mg-4v-HfD"/>
                                     <constraint firstItem="aPv-aB-wpi" firstAttribute="width" secondItem="aPv-aB-wpi" secondAttribute="height" multiplier="1:1" id="0nu-lX-ZhO"/>
@@ -79,7 +101,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iF-oj-vp5" userLabel="mediaContainer">
-                                <rect key="frame" x="0.0" y="49" width="364" height="300"/>
+                                <rect key="frame" x="0.0" y="70" width="364" height="300"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lff-d3-UB1" userLabel="preview1">
                                         <rect key="frame" x="0.0" y="0.0" width="176" height="150"/>
@@ -164,7 +186,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Op0-dC-9bE" userLabel="controlContainer">
-                                <rect key="frame" x="0.0" y="349" width="364" height="0.0"/>
+                                <rect key="frame" x="0.0" y="370" width="364" height="0.0"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="k7y-Bz-iIc">
                                         <rect key="frame" x="188" y="0.0" width="176" height="0.0"/>
@@ -193,6 +215,7 @@
                             </view>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="Bjs-dS-yg2" firstAttribute="leading" secondItem="V85-qd-b9G" secondAttribute="leading" id="06y-w4-xEK"/>
                             <constraint firstItem="Op0-dC-9bE" firstAttribute="top" secondItem="5iF-oj-vp5" secondAttribute="bottom" id="jI0-lN-HMB"/>
                         </constraints>
                     </stackView>
@@ -224,6 +247,8 @@
                 <outlet property="reblogButton" destination="QLx-Mk-foD" id="oan-eS-Tfp"/>
                 <outlet property="replyButton" destination="mGY-Mo-JrR" id="4Vp-cj-9TU"/>
                 <outlet property="screennameLabel" destination="pNw-Yg-Pfj" id="Vaw-Hn-AOL"/>
+                <outlet property="titleContainerHeight" destination="1zL-tg-s0F" id="CmS-a0-2SQ"/>
+                <outlet property="titleLabel" destination="Bjs-dS-yg2" id="InQ-Jm-rvf"/>
             </connections>
             <point key="canvasLocation" x="-207" y="24"/>
         </tableViewCell>

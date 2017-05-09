@@ -73,6 +73,12 @@ extension TweetCellRepresentable {
     }
     cell.set(attachments: attachments)
 
+    if let reblogUserName = (_status.reblog != nil ? _status.account : nil)?.displayName {
+      cell.title = "\(reblogUserName)がブースト"
+    } else {
+      cell.title = nil
+    }
+
     Clock.current.map({ (timestamp) -> DateTimeExpression in
       let createdTimestamp = status.createdAt.timeIntervalSince1970
       let diff = timestamp - createdTimestamp
