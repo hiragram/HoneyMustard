@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxKeyboard
 import Models
 
 final class TweetEditViewController: UIViewController, StoryboardInstantiatable {
@@ -119,6 +120,7 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
       }
     }
   }
+  @IBOutlet private weak var bottomLayoutMargin: NSLayoutConstraint!
 
   let bag = DisposeBag.init()
   var vm: TweetEditViewModel!
@@ -165,6 +167,12 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
         self?.photo4Width.constant = 0
       }
     }).addDisposableTo(bag)
+
+    RxKeyboard.instance.visibleHeight.drive(onNext: { [weak self] (height) in
+      self?.bottomLayoutMargin.constant = height
+      self?.view.setNeedsLayout()
+      self?.view.layoutIfNeeded()
+    }).addDisposableTo(self.bag)
   }
 
   override func viewWillAppear(_ animated: Bool) {

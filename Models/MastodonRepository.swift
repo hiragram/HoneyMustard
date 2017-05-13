@@ -45,14 +45,15 @@ public struct MastodonRepository {
     }
   }
 
-  public static func postStatus(text: String, inReplyTo inReplyToStatusID: Int? = nil) -> Observable<MastodonStatusEntity> {
+  public static func postStatus(text: String, inReplyTo inReplyToStatusID: Int? = nil, mediaIDs: [Int] = []) -> Observable<MastodonStatusEntity> {
     return Observable.create({ (observer) -> Disposable in
-      var params: [String: String] = [:]
+      var params: [String: Any] = [:]
       params["status"] = text
       if let id = inReplyToStatusID {
         params["in_reply_to_id"] = "\(id)"
       }
-      oauthSwift.client.post(apiURL(forPath: "/statuses", params: params), success: { (response) in
+      params["media_ids"] = mediaIDs
+      oauthSwift.client.post(apiURL(forPath: "/statuses"), parameters: params, headers: ["Content-Type": "application/json"], success: { (response) in
         do {
           guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
             observer.onError(NSError.init()) // todo
@@ -60,6 +61,49 @@ public struct MastodonRepository {
           }
           let status = try MastodonStatusEntity.init(json: json)
           observer.onNext(status)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
+  public static func upload(image: UIImage) -> Observable<MastodonAttachmentEntity> {
+    guard let imageData = UIImageJPEGRepresentation(image, 1) else {
+      return Observable.error(NSError.init()) // TODO
+    }
+    return Observable.create({ (observer) -> Disposable in
+      var params: [String: String] = [:]
+//      oauthSwift.client.post(apiURL(forPath: "/media", params: params), success: { (response) in
+//        do {
+//          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+//            observer.onError(NSError.init()) // todo
+//            return
+//          }
+//          let media = try MastodonAttachmentEntity.init(json: json)
+//          observer.onNext(media)
+//          observer.onCompleted()
+//        } catch let error {
+//          observer.onError(error)
+//        }
+//      }, failure: { (error) in
+//        observer.onError(error)
+//      })
+//      return Disposables.create()
+//    })
+      let imageMultipart = OAuthSwiftMultipartData.init(name: "file", data: imageData, fileName: "hoge.jpg", mimeType: "image/jpeg")
+      oauthSwift.client.postMultiPartRequest(apiURL(forPath: "/media"), method: .POST, parameters: [:], headers: nil, multiparts: [imageMultipart], checkTokenExpiration: false, success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          let media = try MastodonAttachmentEntity.init(json: json)
+          observer.onNext(media)
           observer.onCompleted()
         } catch let error {
           observer.onError(error)

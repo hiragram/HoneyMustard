@@ -41,14 +41,42 @@ class TweetEditViewModel {
 
 extension TweetEditViewModel {
   var submit: Observable<Void> {
-    return text.asObservable()
-      .flatMap({ [unowned self] (text) -> Observable<MastodonStatusEntity> in
-        MastodonRepository.postStatus(text: text, inReplyTo: self.inReplyTo?.statusID)
+    let imageUpload = images.asObservable().map { images -> [Observable<UIImage>] in
+      print(images.count)
+      return images.map({ (image) -> Observable<UIImage> in
+        Observable.just(image)
       })
-      .do(onNext: { [weak self] _ in
-        self?.submittedSubject.onNext(())
+      }.flatMap { (observables) -> Observable<[MastodonAttachmentEntity]> in
+        guard !observables.isEmpty else {
+          return Observable.just([])
+        }
+        let o = observables.map({ (observable) -> Observable<MastodonAttachmentEntity> in
+          return observable.flatMap({ (image) -> Observable<MastodonAttachmentEntity> in
+            MastodonRepository.upload(image: image)
+          })
+        })
+        return Observable.zip(o)
+    }
+
+//    return images.asObservable().map { $0.first }.flatMap { (image) -> Observable<UIImage> in
+//      if let image = image {
+//        return Observable.just(image)
+//      } else {
+//        return Observable.empty()
+//      }
+//      }.flatMap { (image) -> Observable<MastodonAttachmentEntity> in
+//        MastodonRepository.upload(image: image)
+//      }.map { _ in () }
+    return imageUpload.flatMap { [unowned self] (attachments) -> Observable<Void> in
+      print(attachments)
+      return self.text.asObservable().flatMap({ [unowned self] (text) -> Observable<MastodonStatusEntity> in
+        MastodonRepository.postStatus(text: text, inReplyTo: self.inReplyTo?.statusID, mediaIDs: attachments.map { $0.id })
       })
-      .map { _ in () }
+        .do(onNext: { [weak self] _ in
+          self?.submittedSubject.onNext(())
+        })
+        .map { _ in () }
+    }
   }
 }
 

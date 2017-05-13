@@ -185,6 +185,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="attachmentContainerHeight" destination="jhm-0T-w78" id="ZBW-yR-SaY"/>
+                        <outlet property="bottomLayoutMargin" destination="kS7-VD-XyS" id="G17-Zu-TRv"/>
                         <outlet property="closeButton" destination="IiB-8V-qGx" id="EKQ-Je-BaX"/>
                         <outlet property="imagePickerButton" destination="cs0-z5-sdI" id="l1Y-yZ-y7W"/>
                         <outlet property="inReplyToBody" destination="FQG-eo-yQu" id="ULd-U5-gdF"/>
