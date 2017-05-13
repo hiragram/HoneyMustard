@@ -99,6 +99,8 @@
 		60DD30191E7FCE0700FFBE08 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601FAE5A1E7D3C7B00E6F23C /* OAuthSwift.framework */; };
 		60E0669A1EC6E8E20052C2A2 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E066991EC6E8E20052C2A2 /* SVProgressHUD.framework */; };
 		60E0669C1EC6E9470052C2A2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E0669B1EC6E9470052C2A2 /* UIViewController.swift */; };
+		60E066A01EC7221A0052C2A2 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E0669E1EC722190052C2A2 /* Fabric.framework */; };
+		60E066A11EC7221A0052C2A2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E0669F1EC7221A0052C2A2 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +243,8 @@
 		60DD30171E7FC31300FFBE08 /* TweetEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetEditViewModel.swift; sourceTree = "<group>"; };
 		60E066991EC6E8E20052C2A2 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		60E0669B1EC6E9470052C2A2 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		60E0669E1EC722190052C2A2 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		60E0669F1EC7221A0052C2A2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +254,7 @@
 			files = (
 				60E0669A1EC6E8E20052C2A2 /* SVProgressHUD.framework in Frameworks */,
 				6042EEA31E7CCC7F004C0485 /* Models.framework in Frameworks */,
+				60E066A11EC7221A0052C2A2 /* Crashlytics.framework in Frameworks */,
 				6011A3B01E7C61450061F3A6 /* RxSwift.framework in Frameworks */,
 				6011A3AF1E7C61450061F3A6 /* RxCocoa.framework in Frameworks */,
 				6011A3AC1E7C61450061F3A6 /* CommonCrypto.framework in Frameworks */,
@@ -259,6 +264,7 @@
 				601FAE431E7CFEDA00E6F23C /* SplitViewController.framework in Frameworks */,
 				601FAE4E1E7D2A5200E6F23C /* RxDataSources.framework in Frameworks */,
 				6011A3B51E7CCAE60061F3A6 /* RxKeyboard.framework in Frameworks */,
+				60E066A01EC7221A0052C2A2 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +356,8 @@
 		6011A3B21E7C614B0061F3A6 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				60E0669E1EC722190052C2A2 /* Fabric.framework */,
+				60E0669F1EC7221A0052C2A2 /* Crashlytics.framework */,
 				60E066991EC6E8E20052C2A2 /* SVProgressHUD.framework */,
 				60D6E6C71EACD2290075492A /* Attributed.framework */,
 				602CCC1D1EA925AC005A07C3 /* Nimble.framework */,
@@ -522,6 +530,7 @@
 				6011A3811E7C5DD10061F3A6 /* Resources */,
 				6011A3B31E7C616B0061F3A6 /* Carthage */,
 				6042EEA41E7CCC7F004C0485 /* Embed Frameworks */,
+				60E0669D1EC721D30052C2A2 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -718,6 +727,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "carthage copy-frameworks";
+		};
+		60E0669D1EC721D30052C2A2 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 79ffaa700bdfbc0d7b2f36b9eb60231bbfc30a97 d6d48cae1fb62ff5948d93dab978a21c25d9632dcf15be4dd4a42e61c63b8c98";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -951,6 +974,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = HoneyMustard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -969,6 +993,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = HoneyMustard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
