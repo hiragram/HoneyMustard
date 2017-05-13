@@ -19,6 +19,16 @@ public struct Keychain {
 
   private static let keychain = KeychainAccess.Keychain.init(service: "me.yura.HoneyMustard")
 
+  public static func initialize() throws {
+    let userDefaults = UserDefaults.standard
+    let key = "keychainInitialized"
+    if userDefaults.value(forKey: key) == nil {
+      try keychain.removeAll()
+      userDefaults.set(true, forKey: key)
+      userDefaults.synchronize()
+    }
+  }
+
   static func accessToken() -> String? {
     return get(key: "accessToken")
   }

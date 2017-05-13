@@ -11,9 +11,15 @@ import UIKit
 struct Typography {
   let font: UIFont
   let color: UIColor
+  private let colorForDarkBackground: UIColor?
 
-  init(font: UIFont, color: UIColor) {
+  init(font: UIFont, color: UIColor, colorForDarkBackground: UIColor? = nil) {
     self.font = font
     self.color = color
+    self.colorForDarkBackground = colorForDarkBackground
+  }
+
+  var darkBackground: Typography {
+    return Typography.init(font: font, color: colorForDarkBackground ?? color)
   }
 }

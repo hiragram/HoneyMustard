@@ -10,8 +10,12 @@ import UIKit
 
 struct DefaultStyle: StyleDefinition {
   // text color
-  let generalText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 14), color: UIColor.black)
-  let clickableText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 14), color: UIColor.black)
-  let usernameText: Typography = Typography.init(font: UIFont.boldSystemFont(ofSize: 14), color: UIColor.black)
-  let screennameText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: UIColor.darkGray)
+  let generalText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 14), color: #colorLiteral(red: 0.132778734, green: 0.132778734, blue: 0.132778734, alpha: 1), colorForDarkBackground: UIColor.white)
+  let clickableText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 14), color: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
+  let usernameText: Typography = Typography.init(font: UIFont.boldSystemFont(ofSize: 14), color: UIColor.black, colorForDarkBackground: UIColor.white)
+  let screennameText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: UIColor.darkGray, colorForDarkBackground: UIColor.lightGray)
+  let dateTimeText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 12), color: UIColor.darkGray)
+  let accessoryText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: UIColor.darkGray, colorForDarkBackground: UIColor.lightGray)
+  let cellContentText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 13), color: #colorLiteral(red: 0.2694122791, green: 0.2694122791, blue: 0.2694122791, alpha: 1))
+  let sectionHeaderText: Typography = Typography.init(font: UIFont.systemFont(ofSize: 12), color: UIColor.darkGray)
 }

@@ -14,4 +14,8 @@ protocol StyleDefinition {
   var clickableText: Typography { get }
   var usernameText: Typography { get }
   var screennameText: Typography { get }
+  var dateTimeText: Typography { get }
+  var accessoryText: Typography { get }
+  var cellContentText: Typography { get }
+  var sectionHeaderText: Typography { get }
 }

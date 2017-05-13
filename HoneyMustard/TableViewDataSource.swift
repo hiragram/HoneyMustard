@@ -25,10 +25,6 @@ extension TableViewDataSource: RxTableViewDataSourceType {
         let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
         for difference in differences {
           dataSource.setSections(difference.finalSections)
-//          UIView.setAnimationsEnabled(false)
-//          tableView.performBatchUpdates(difference, animationConfiguration: AnimationConfiguration.init(insertAnimation: .none, reloadAnimation: .automatic, deleteAnimation: .automatic))
-//          UIView.setAnimationsEnabled(true)
-
           UIView.setAnimationsEnabled(false)
           tableView.beginUpdates()
           // delete sections

@@ -16,8 +16,15 @@ public extension Dictionary {
     return value
   }
 
-  func get<T>(valueForKey key: Key) throws -> Optional<T> {
+  func get<T: JSONPrimitive>(valueForKey key: Key) throws -> T? {
     return self[key] as? T
+  }
+
+  func get<T: JSONPrimitive>(valueForKey key: Key) throws -> [T] {
+    guard let array = self[key] as? [T] else {
+      throw DictionaryExtractionError.castFailed(key: String.init(describing: key), actualValue: self[key])
+    }
+    return array
   }
 
   func get<T: JSONMappable>(valueForKey key: Key) throws -> T {
@@ -25,9 +32,23 @@ public extension Dictionary {
     return try T.init(json: dict)
   }
 
+  func get<T: JSONMappable>(valueForKey key: Key) throws -> T? {
+    return try? get(valueForKey: key)
+  }
+
+  func get<T: JSONMappable>(valueForKey key: Key) throws -> [T] {
+    guard let array = self[key] as? [[String: Any]] else {
+      throw DictionaryExtractionError.castFailed(key: String.init(describing: key), actualValue: self[key])
+    }
+
+    return try array.map({ (dict) -> T in
+      return try T.init(json: dict)
+    })
+  }
+
   func get(valueForKey key: Key) throws -> [String: Any] {
     guard let dict = self[key] as? [String: Any] else {
-      throw JSONMappingError.mappingFailed(message: "Failed to extract dictionary.")
+      throw JSONMappingError.mappingFailed(message: "Failed to extract dictionary. key: \(key) value: \(self[key])")
     }
     return dict
   }
@@ -40,9 +61,17 @@ public extension Dictionary {
     return date
   }
 
+  func getMastodonDate(valueForKey key: Key) throws -> Date {
+    let dateStr: String = try get(valueForKey: key)
+    guard let date = Date.init(mastodonDateString: dateStr) else {
+      throw JSONMappingError.mappingFailed(message: "Failed to parse date string. actual value: (\(dateStr))")
+    }
+    return date
+  }
+
   func get(valueForKey key: Key) throws -> URL {
     guard let url = try get(valueForKey: key) as URL? else {
-      throw JSONMappingError.mappingFailed(message: "Failed to parse url.")
+      throw JSONMappingError.mappingFailed(message: "Failed to parse url. actual: \(self[key]) self: \(self) key: \(key)")
     }
 
     return url
@@ -68,3 +97,6 @@ public protocol JSONPrimitive {}
 extension String: JSONPrimitive {}
 extension Int: JSONPrimitive {}
 extension Double: JSONPrimitive {}
+extension Array: JSONPrimitive {}
+extension Bool: JSONPrimitive {}
+extension Dictionary: JSONPrimitive {}

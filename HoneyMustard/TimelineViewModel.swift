@@ -12,92 +12,120 @@ import RxCocoa
 import Models
 import RxDataSources
 
-class TimelineViewModel {
+class TimelineViewModel: TweetCellRepresentable {
 
   private let bag = DisposeBag.init()
+  private let _transition = PublishSubject<Transition>.init()
+  var transition: Observable<Transition> {
+    return _transition.asObservable()
+  }
 
-//  let dataSource = RxTableViewSectionedAnimatedDataSource<Section>.init()
-  let dataSource = TableViewDataSource<Section>.init()
+  enum Transition {
+    case safari(URL)
+    case reply(MastodonStatusEntity)
+    case user(MastodonAccountEntity)
+  }
 
-  private let _streamingIsConnected = BehaviorSubject.init(value: false)
-  var streamingIsConnected: ControlProperty<Bool>! = nil
+  fileprivate let source: Source
 
-  private let tweets = Variable<[TweetEntity]>.init([])
+  let dataSource = RxTableViewSectionedReloadDataSource<Section>.init()
+//  let dataSource = TableViewDataSource<Section>.init()
+
+  let statuses = EntityStorage<MastodonStatusEntity>.init()
 
   var items: Observable<[Section]> {
-    return tweets.asObservable().map({ (tweets) -> [Section] in
-      let rows = tweets.reversed().map { Row.tweet($0) }
-      return [Section.tweets(rows)]
+    return statuses.items.map({ (statuses) -> [Section] in
+      let rows = statuses.map { Row.status($0) }
+      return [Section.statuses(rows)]
     })
   }
+
+  private var selectedIndexPath: IndexPath?
 
   private var userstreamDisposable: Disposable?
 
   private var friendIDs: [Int] = []
 
-  init() {
-    streamingIsConnected = ControlProperty<Bool>.init(values: _streamingIsConnected.asObservable(), valueSink: _streamingIsConnected.asObserver())
-
-    _streamingIsConnected.subscribe(onNext: { [unowned self] (value) in
-      if value == true {
-        guard self.userstreamDisposable == nil else {
-          return
-        }
-        self.userstreamDisposable = try! TweetRepository.userstream()
-          .subscribe({ [unowned self] (event) in
-            switch event {
-            case .next(let event):
-              switch event {
-              case .newStatus(rawEvent: let raw):
-                do {
-                  let tweet = try TweetEntity.init(json: raw)
-                  self.tweets.value.append(tweet)
-                } catch let e {
-                  print(e)
-                }
-              case .deleteStatus(rawEvent: let raw):
-                let delete: [String: Any] = try! raw.get(valueForKey: "delete")
-                let status: [String: Any] = try! delete.get(valueForKey: "status")
-                let id: Int = try! status.get(valueForKey: "id")
-                let tweets = self.tweets.value
-                self.tweets.value = tweets.filter { $0.id != id }
-              case .friends(rawEvent: let raw):
-                self.friendIDs = try! raw.get(valueForKey: "friends") ?? []
-              default:
-                break
-              }
-            case .error(let error):
-              print(error.localizedDescription)
-            case .completed:
-              print("completed")
-            }
-          })
-      } else {
-        self.userstreamDisposable?.dispose()
-        self.userstreamDisposable = nil
-      }
-    }).addDisposableTo(bag)
-
+  init(source: Source) {
+    self.source = source
     dataSource.configureCell = { [unowned self] (dataSource, tableView, indexPath, row) -> UITableViewCell in
       switch row {
-      case .tweet(let tweet):
+      case .status(let status):
         let cell: TweetCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.body = tweet.text
-        cell.screenname = "@\(tweet.user.screenname)"
-        cell.name = tweet.user.name
-        cell.set(imageURL: tweet.user.iconImageURL)
-        cell.colorRibbon = self.friendIDs.contains(tweet.user.id) ? nil : .notFriend
+        self.setup(cell: cell, status: status)
+
+        cell.tapLink.subscribe(onNext: { [weak self] (url) in
+          if let url = url {
+            self?._transition.onNext(.safari(url))
+          } else {
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            tableView.beginUpdates()
+            tableView.endUpdates()
+          }
+        }).addDisposableTo(cell.bag)
+
+        cell.rx.tapReply.map { Transition.reply(status) }.bindTo(self._transition).addDisposableTo(cell.bag)
+
+        cell.rx.tapUser.map {
+          let status = status.reblog ?? status
+          return Transition.user(status.account)
+          }
+          .bindTo(self._transition).addDisposableTo(cell.bag)
+
         return cell
       }
     }
   }
+
+  func setup(tableView: UITableView) {
+    tableView.registerNib(cellType: TweetCell.self)
+    items.bindTo(tableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
+    tableView.estimatedRowHeight = 100 // FIXME
+    tableView.rx.scrolledToBottom.flatMap { [weak self] (_) -> Observable<Void> in
+      return self?.fetchOlder ?? Observable.empty()
+      }.subscribe().addDisposableTo(bag)
+
+    tableView.rx.itemSelected.asObservable().subscribe(onNext: { [weak self] (indexPath) in
+      tableView.beginUpdates()
+      tableView.endUpdates()
+    }).addDisposableTo(bag)
+
+    tableView.rx.itemDeselected.asObservable().subscribe(onNext: { (_) in
+      tableView.beginUpdates()
+      tableView.endUpdates()
+    }).addDisposableTo(bag)
+  }
 }
 
-// - MARK: Fetch from REST API
+// MARK: - Fetch from REST API
 
 extension TimelineViewModel {
   var refresh: Observable<Void> {
-    fatalError()
+    return source.refresh
+      .do(onNext: { [weak self] (statuses) in
+        self?.statuses.refresh(statuses)
+      })
+      .map { _ in () }
+  }
+
+  @available(*, unavailable)
+  var fetchNewer: Observable<Void> {
+    return MastodonRepository.home(minID: statuses.first?.id)
+      .map { _ in () }
+  }
+
+  var fetchOlder: Observable<Void> {
+    return source.fetchOlder(statuses.last?.id)
+      .do(onNext: { [weak self] (statuses) in
+        let lastID = self?.statuses.last?.id
+        let appendingStatuses = statuses.split(whereSeparator: { (status) -> Bool in
+          status.id == lastID
+        }).last.map { Array($0) } ?? []
+        appendingStatuses.forEach {
+          self?.statuses.append($0)
+        }
+      })
+      .map { _ in () }
   }
 }
 
@@ -105,47 +133,75 @@ extension TimelineViewModel {
 
 extension TimelineViewModel {
   enum Section: AnimatableSectionModelType {
-    case tweets([Row])
+    case statuses([Row])
 
     typealias Item = Row
     typealias Identity = Int
 
     var identity: Int {
       switch self {
-      case .tweets:
+      case .statuses:
         return 1
       }
     }
 
     var items: [Row] {
       switch self {
-      case .tweets(let rows):
+      case .statuses(let rows):
         return rows
       }
     }
 
     init(original: Section, items: [Item]) {
       switch original {
-      case .tweets:
-        self = .tweets(items)
+      case .statuses:
+        self = .statuses(items)
       }
     }
   }
 
   enum Row: IdentifiableType, Equatable {
-    case tweet(TweetEntity)
+    case status(MastodonStatusEntity)
 
     typealias Identity = Int
 
     var identity: Int {
       switch self {
-      case .tweet(let tweet):
+      case .status(let tweet):
         return tweet.id
       }
     }
 
     static func ==(lhs: TimelineViewModel.Row, rhs: TimelineViewModel.Row) -> Bool {
       return lhs.identity == rhs.identity
+    }
+  }
+}
+
+// MARK: - ViewModel configuration
+
+extension TimelineViewModel {
+  struct Source {
+    typealias Stream = Observable<[MastodonStatusEntity]>
+    let refresh: Stream
+    let fetchOlder: (_ minID: Int?) -> Stream
+
+    static let home = Source.init(refresh: MastodonRepository.home()) { (maxID) -> TimelineViewModel.Source.Stream in
+      MastodonRepository.home(maxID: maxID)
+    }
+
+    static let `public` = Source.init(refresh: MastodonRepository.publicTimeline()) { (maxID) -> TimelineViewModel.Source.Stream in
+      MastodonRepository.publicTimeline(maxID: maxID)
+    }
+
+    static let local = Source.init(refresh: MastodonRepository.localTimeline()) { (maxID) -> TimelineViewModel.Source.Stream in
+      MastodonRepository.localTimeline(maxID: maxID)
+    }
+
+    static func user(id: Int) -> Source {
+      return Source.init(refresh: MastodonRepository.statuses(userID: id), fetchOlder: { (maxID) -> TimelineViewModel.Source.Stream in
+        MastodonRepository.statuses(userID: id, maxID: maxID)
+      })
     }
   }
 }
