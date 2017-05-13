@@ -355,6 +355,7 @@ enum DateTimeExpression: CustomStringConvertible {
   case seconds(Int)
   case minutes(Int)
   case hours(Int)
+  case days(Int)
   case absolute(timestamp: TimeInterval)
 
   var description: String {
@@ -365,6 +366,8 @@ enum DateTimeExpression: CustomStringConvertible {
       return "\(minutes)分前" // TODO ローカライズ
     case .hours(let hours):
       return "\(hours)時間前" // TODO ローカライズ
+    case .days(let days):
+      return "\(days)日前"
     case .absolute(timestamp: let timestamp):
       return "\(Date.init(timeIntervalSince1970: timestamp))"
     }

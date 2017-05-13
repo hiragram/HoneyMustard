@@ -90,7 +90,7 @@ extension TweetCellRepresentable {
       case 3_600..<86_400:
         return .hours(Int.init(diff / 60 / 24))
       default:
-        return .absolute(timestamp: createdTimestamp)
+        return .days(Int.init(diff / 86_400))
       }
     }).bindTo(cell.rx.date).addDisposableTo(cell.bag)
   }

@@ -978,7 +978,7 @@
 				);
 				INFOPLIST_FILE = HoneyMustard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.yura.HoneyMustard;
+				PRODUCT_BUNDLE_IDENTIFIER = me.yura.HoneyMustard.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
