@@ -33,7 +33,9 @@ final class TweetEditViewController: UIViewController, StoryboardInstantiatable 
     didSet {
       submitButton.rx.tap.asObservable()
         .flatMap { [unowned self] (_) -> Observable<Void> in
-          self.vm.submit.do(onNext: { [weak self] (_) in
+          self.vm.submit
+            .showProgress()
+            .do(onCompleted: { [weak self] in
             self?.dismiss(animated: true, completion: nil)
           })
         }
