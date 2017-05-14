@@ -32,6 +32,16 @@ final class UserProfileViewController: UIViewController, StoryboardInstantiatabl
         statusVC.vm = TimelineViewModel.init(source: .user(id: userID))
         statusVC.vm.refresh.subscribe().addDisposableTo(_self.bag)
         _self.show(statusVC, sender: nil)
+      case .followers(user: let user):
+        let vm = UserListViewModel<UserCell>.init(source: .follower(ofUserID: user.id), title: "\(user.username)のフォロワー")
+        let vc = UserListViewController.instantiateFromStoryboard()
+        vc.vm = vm
+        self?.show(vc, sender: nil)
+      case .followings(user: let user):
+        let vm = UserListViewModel<UserCell>.init(source: .following(ofUserID: user.id), title: "\(user.username)のフォロー")
+        let vc = UserListViewController.instantiateFromStoryboard()
+        vc.vm = vm
+        self?.show(vc, sender: nil)
       }
     }).addDisposableTo(bag)
   }

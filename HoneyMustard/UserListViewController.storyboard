@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qzM-7O-kyQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--User List View Controller-->
+        <scene sceneID="Ro6-yw-5xq">
+            <objects>
+                <viewController id="qzM-7O-kyQ" customClass="UserListViewController" customModule="HoneyMustard" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7aX-f6-LZe"/>
+                        <viewControllerLayoutGuide type="bottom" id="hRP-Ab-PiZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="37X-zo-1x0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2GL-z6-F3Q">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2GL-z6-F3Q" firstAttribute="top" secondItem="37X-zo-1x0" secondAttribute="top" id="4l2-LO-o7R"/>
+                            <constraint firstItem="2GL-z6-F3Q" firstAttribute="leading" secondItem="37X-zo-1x0" secondAttribute="leading" id="YRM-Hd-OIo"/>
+                            <constraint firstItem="hRP-Ab-PiZ" firstAttribute="top" secondItem="2GL-z6-F3Q" secondAttribute="bottom" id="a4h-0R-KC6"/>
+                            <constraint firstAttribute="trailing" secondItem="2GL-z6-F3Q" secondAttribute="trailing" id="f0N-Fd-wiE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="2GL-z6-F3Q" id="db3-4n-Pci"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vNc-GP-dfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-207.19999999999999" y="178.56071964017991"/>
+        </scene>
+    </scenes>
+</document>

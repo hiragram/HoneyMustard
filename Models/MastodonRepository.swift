@@ -78,23 +78,6 @@ public struct MastodonRepository {
     }
     return Observable.create({ (observer) -> Disposable in
       var params: [String: String] = [:]
-//      oauthSwift.client.post(apiURL(forPath: "/media", params: params), success: { (response) in
-//        do {
-//          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
-//            observer.onError(NSError.init()) // todo
-//            return
-//          }
-//          let media = try MastodonAttachmentEntity.init(json: json)
-//          observer.onNext(media)
-//          observer.onCompleted()
-//        } catch let error {
-//          observer.onError(error)
-//        }
-//      }, failure: { (error) in
-//        observer.onError(error)
-//      })
-//      return Disposables.create()
-//    })
       let imageMultipart = OAuthSwiftMultipartData.init(name: "file", data: imageData, fileName: "hoge.jpg", mimeType: "image/jpeg")
       oauthSwift.client.postMultiPartRequest(apiURL(forPath: "/media"), method: .POST, parameters: [:], headers: nil, multiparts: [imageMultipart], checkTokenExpiration: false, success: { (response) in
         do {
@@ -104,6 +87,52 @@ public struct MastodonRepository {
           }
           let media = try MastodonAttachmentEntity.init(json: json)
           observer.onNext(media)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
+  public static func follower(userID: Int, minID: Int? = nil) -> Observable<[MastodonAccountEntity]> {
+    return Observable.create({ (observer) -> Disposable in
+      var params: [String: String] = [:]
+      params["since_id"] = minID == nil ? nil : "\(minID!)"
+      oauthSwift.client.get(apiURL(forPath: "/accounts/\(userID)/followers", params: params), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [[String: Any]] else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          let users = try json.map { try MastodonAccountEntity.init(json: $0) }
+          observer.onNext(users)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
+  public static func following(userID: Int, minID: Int? = nil) -> Observable<[MastodonAccountEntity]> {
+    return Observable.create({ (observer) -> Disposable in
+      var params: [String: String] = [:]
+      params["since_id"] = minID == nil ? nil : "\(minID!)"
+      oauthSwift.client.get(apiURL(forPath: "/accounts/\(userID)/following", params: params), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [[String: Any]] else {
+            observer.onError(NSError.init()) // todo
+            return
+          }
+          let users = try json.map { try MastodonAccountEntity.init(json: $0) }
+          observer.onNext(users)
           observer.onCompleted()
         } catch let error {
           observer.onError(error)

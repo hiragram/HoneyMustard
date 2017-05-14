@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-public struct MastodonAccountEntity: JSONMappable {
+public struct MastodonAccountEntity: JSONMappable, Identified {
   public var id: Int
   public var username: String
   public var acct: String

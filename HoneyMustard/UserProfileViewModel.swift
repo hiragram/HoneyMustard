@@ -113,6 +113,10 @@ final class UserProfileViewModel: TweetCellRepresentable {
       switch row {
       case .statusCount:
         _self._transition.onNext(.statuses(userID: _self.user.id))
+      case .follower:
+        _self._transition.onNext(.followers(user: _self.user))
+      case .following:
+        _self._transition.onNext(.followings(user: _self.user))
       default:
         break
       }
@@ -121,6 +125,8 @@ final class UserProfileViewModel: TweetCellRepresentable {
 
   enum Transition {
     case statuses(userID: Int)
+    case followers(user: MastodonAccountEntity)
+    case followings(user: MastodonAccountEntity)
   }
 }
 
