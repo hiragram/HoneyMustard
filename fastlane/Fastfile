@@ -7,6 +7,9 @@ platform :ios do
   # Learn more here: https://github.com/fastlane/setups/blob/master/samples-ios/distribute-beta-build.md 🚀
   #
   lane :beta do |values|
+    increment_build_number
+
+
     # Fabric generated this lane for deployment to Crashlytics Beta
     # set 'export_method' to 'ad-hoc' if your Crashlytics Beta distribution uses ad-hoc provisioning
     gym(scheme: 'HoneyMustard', export_method: 'development', configuration: 'Debug')
@@ -20,7 +23,6 @@ platform :ios do
                    groups: groups,
                     notes: 'Distributed with fastlane', # Check out the changelog_from_git_commits action
             notifications: true) # Should this distribution notify your testers via email?
-    increment_build_number
 
     # for all available options run `fastlane action crashlytics`
 
