@@ -1,0 +1,29 @@
+name: OAuthSwift, nameSpecified: , owner: OAuthSwift, version: 1.1.1
+
+name: Nimble, nameSpecified: , owner: Quick, version: v6.1.0
+
+name: RxSwift, nameSpecified: , owner: ReactiveX, version: 3.3.1
+
+name: RxDataSources, nameSpecified: , owner: RxSwiftCommunity, version: 1.0.3
+
+name: RxKeyboard, nameSpecified: , owner: RxSwiftCommunity, version: 0.4.1
+
+name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.1.2
+
+name: Attributed, nameSpecified: , owner: hiragram, version: db3a44c
+
+name: Somen, nameSpecified: , owner: hiragram, version: 6a9dc8a
+
+name: SplitViewController, nameSpecified: , owner: hiragram, version: v0.1.2
+
+name: KeychainAccess, nameSpecified: , owner: kishikawakatsumi, version: v3.0.2
+
+name: SDWebImage, nameSpecified: , owner: rs, version: 041842b
+
+name: CommonCrypto, nameSpecified: , owner: soffes, version: v1.1.0
+
+name: Crypto, nameSpecified: , owner: soffes, version: v0.5.1
+
+add-version-numbers: false
+
+LicensePlist Version: 1.3.5
