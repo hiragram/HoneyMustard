@@ -25,7 +25,10 @@ class GlobalController: UIViewController {
     MastodonRepository.isAuthorized
       .filter { $0 == true }
       .take(1)
-      .subscribe(onNext: { [unowned self] (_) in
+      .flatMap({ (_) -> Observable<MastodonAccountEntity> in
+        return MastodonRepository.verifyCredentials()
+      })
+      .subscribe(onNext: { [unowned self] (user) in
         let homeVC = TimelineViewController.instantiateFromStoryboard()
         homeVC.vm = TimelineViewModel.init(source: .home)
         homeVC.vm.refresh.subscribe().addDisposableTo(self.bag)
@@ -53,8 +56,14 @@ class GlobalController: UIViewController {
         let notificationNav = UINavigationController.init(rootViewController: notificationVC)
         notificationNav.tabBarItem.image = #imageLiteral(resourceName: "Notification")
 
+        let profileVC = UserProfileViewController.instantiateFromStoryboard()
+        profileVC.vm = UserProfileViewModel.init(user: user)
+        let profileNav = UINavigationController.init(rootViewController: profileVC)
+        profileVC.title = "プロフィール"
+        profileNav.tabBarItem.image = #imageLiteral(resourceName: "Profile")
+
         let tabVC = UITabBarController.init()
-        tabVC.viewControllers = [homeNav, localNav, publicNav, notificationNav]
+        tabVC.viewControllers = [homeNav, localNav, publicNav, notificationNav, profileNav]
 
         self.addChildViewController(tabVC)
         self.view.addSubview(tabVC.view)

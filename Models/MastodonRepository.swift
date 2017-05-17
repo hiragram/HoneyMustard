@@ -249,6 +249,27 @@ public struct MastodonRepository {
     return publicTimeline(maxID: maxID, minID: minID, params: ["local": "true"])
   }
 
+  public static func verifyCredentials() -> Observable<MastodonAccountEntity> {
+    return Observable.create({ (observer) -> Disposable in
+      oauthSwift.client.get(apiURL(forPath: "/accounts/verify_credentials"), success: { (response) in
+        do {
+          guard let json = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any] else {
+            observer.onError(NSError.init()) // TODO
+            return
+          }
+          let status = try MastodonAccountEntity.init(json: json)
+          observer.onNext(status)
+          observer.onCompleted()
+        } catch let error {
+          observer.onError(error)
+        }
+      }, failure: { (error) in
+        observer.onError(error)
+      })
+      return Disposables.create()
+    })
+  }
+
   public static func follow(userID: Int) -> Observable<MastodonRelationshipEntity> {
     return Observable.create({ (observer) -> Disposable in
       oauthSwift.client.post(apiURL(forPath: "/accounts/\(userID)/follow"), success: { (response) in
