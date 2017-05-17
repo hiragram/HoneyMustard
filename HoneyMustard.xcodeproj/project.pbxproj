@@ -106,7 +106,7 @@
 		60E0669C1EC6E9470052C2A2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E0669B1EC6E9470052C2A2 /* UIViewController.swift */; };
 		60E066A01EC7221A0052C2A2 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E0669E1EC722190052C2A2 /* Fabric.framework */; };
 		60E066A11EC7221A0052C2A2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E0669F1EC7221A0052C2A2 /* Crashlytics.framework */; };
-		60E6F2A11EC9FE330028B7D2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60E6F2A01EC9FE330028B7D2 /* Settings.bundle */; };
+		60E6F2A31ECCEC8A0028B7D2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 60E6F2A21ECCEC8A0028B7D2 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,7 +256,7 @@
 		60E0669B1EC6E9470052C2A2 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		60E0669E1EC722190052C2A2 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		60E0669F1EC7221A0052C2A2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		60E6F2A01EC9FE330028B7D2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		60E6F2A21ECCEC8A0028B7D2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +316,7 @@
 		6011A37A1E7C5DD10061F3A6 = {
 			isa = PBXGroup;
 			children = (
+				60E6F2A21ECCEC8A0028B7D2 /* Settings.bundle */,
 				6011A3851E7C5DD10061F3A6 /* HoneyMustard */,
 				6011A39A1E7C5DD10061F3A6 /* HoneyMustardTests */,
 				6042EE8F1E7CCC7F004C0485 /* Models */,
@@ -352,7 +353,6 @@
 				6020C9E71EBF855D006AD0DB /* VectorIcons.xcassets */,
 				6011A38F1E7C5DD10061F3A6 /* LaunchScreen.storyboard */,
 				6011A3921E7C5DD10061F3A6 /* Info.plist */,
-				60E6F2A01EC9FE330028B7D2 /* Settings.bundle */,
 			);
 			path = HoneyMustard;
 			sourceTree = "<group>";
@@ -676,7 +676,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60E6F2A11EC9FE330028B7D2 /* Settings.bundle in Resources */,
+				60E6F2A31ECCEC8A0028B7D2 /* Settings.bundle in Resources */,
 				6020C9D01EBB844E006AD0DB /* UserProfileHeaderCell.xib in Resources */,
 				6020C9CC1EBB837F006AD0DB /* UserProfileViewController.storyboard in Resources */,
 				6020C9DE1EBED6D8006AD0DB /* SectionHeaderCell.xib in Resources */,
