@@ -246,7 +246,7 @@ public struct MastodonRepository {
   }
 
   public static func localTimeline(maxID: Int? = nil, minID: Int? = nil) -> Observable<[MastodonStatusEntity]> {
-    return publicTimeline(params: ["local": "true"])
+    return publicTimeline(maxID: maxID, minID: minID, params: ["local": "true"])
   }
 
   public static func follow(userID: Int) -> Observable<MastodonRelationshipEntity> {

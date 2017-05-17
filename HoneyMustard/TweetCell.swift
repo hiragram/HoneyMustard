@@ -16,6 +16,7 @@ final class TweetCell: UITableViewCell {
   @IBOutlet fileprivate weak var nameLabel: DesignedLabel! {
     didSet {
       nameLabel.typography = Style.current.usernameText
+      nameLabel.text = ""
     }
   }
   @IBOutlet fileprivate weak var screennameLabel: DesignedLabel! {
@@ -188,7 +189,7 @@ extension TweetCell {
       return nameLabel.text
     }
     set {
-      nameLabel.text = newValue
+      nameLabel.text = newValue ?? ""
     }
   }
 
