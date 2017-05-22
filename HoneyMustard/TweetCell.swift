@@ -177,7 +177,7 @@ final class TweetCell: UITableViewCell {
         } else {
           return Observable.just(nil)
         }
-    }.bindTo(_linkTapped).addDisposableTo(bag)
+      }.bindTo(_linkTapped).addDisposableTo(bag)
   }
 }
 

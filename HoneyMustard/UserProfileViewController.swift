@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SafariServices
 
 final class UserProfileViewController: UIViewController, StoryboardInstantiatable {
   @IBOutlet private weak var tableView: UITableView! {
@@ -43,6 +44,9 @@ final class UserProfileViewController: UIViewController, StoryboardInstantiatabl
         let vc = UserListViewController.instantiateFromStoryboard()
         vc.vm = vm
         self?.show(vc, sender: nil)
+      case .safari(let url):
+        let safari = SFSafariViewController.init(url: url)
+        self?.present(safari, animated: true, completion: nil)
       }
     }).addDisposableTo(bag)
   }

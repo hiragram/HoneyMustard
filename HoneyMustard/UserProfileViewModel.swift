@@ -78,6 +78,16 @@ final class UserProfileViewModel: TweetCellRepresentable {
             }
           }).addDisposableTo(cell.bag)
         }).addDisposableTo(cell.bag)
+        cell.tapLink.flatMap({ (url) -> Observable<URL> in
+          guard let url = url else {
+            return .empty()
+          }
+          return .just(url)
+        })
+          .map {
+            return Transition.safari($0)
+        }
+        .bindTo(self._transition).addDisposableTo(cell.bag)
         cell.set(userIconURL: user.avatar)
         cell.set(headerImageURL: user.header)
         return cell
@@ -127,6 +137,7 @@ final class UserProfileViewModel: TweetCellRepresentable {
     case statuses(userID: Int)
     case followers(user: MastodonAccountEntity)
     case followings(user: MastodonAccountEntity)
+    case safari(URL)
   }
 }
 
