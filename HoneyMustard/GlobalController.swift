@@ -61,6 +61,14 @@ class GlobalController: UIViewController {
         let profileNav = UINavigationController.init(rootViewController: profileVC)
         profileVC.title = "プロフィール"
         profileNav.tabBarItem.image = #imageLiteral(resourceName: "Profile")
+        let settingsButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Settings"), style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        settingsButton.rx.tap.subscribe(onNext: { (_) in
+          let vc = TableViewController.instantiateFromStoryboard()
+          vc.vm = SettingsViewModel.init()
+          let nav = UINavigationController.init(rootViewController: vc)
+          profileVC.present(nav, animated: true, completion: nil)
+        }).addDisposableTo(self.bag)
+//        profileVC.navigationItem.setRightBarButton(settingsButton, animated: true)
 
         let tabVC = UITabBarController.init()
         tabVC.viewControllers = [homeNav, localNav, publicNav, notificationNav, profileNav]

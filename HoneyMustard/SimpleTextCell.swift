@@ -21,6 +21,12 @@ final class SimpleTextCell: UITableViewCell {
       contentLabel.typography = Style.current.cellContentText
     }
   }
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    title = nil
+    content = nil
+  }
 }
 
 // MARK: - API

@@ -22,6 +22,7 @@ final class UserProfileViewController: UIViewController, StoryboardInstantiatabl
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
     vm.transition.subscribe(onNext: { [weak self] (transition) in
       guard let _self = self else {
         return
