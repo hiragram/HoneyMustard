@@ -30,14 +30,17 @@ final class UserProfileViewModel: TweetCellRepresentable {
       .map { (user) -> [Section] in
         [Section.user(user)]
     }
-    let statuses = self.statuses.items.map { (statuses) -> [Row] in
-      [Row.sectionHeader(title: "最近の投稿")] + statuses.map { Row.status($0) }
-    }.map { (rows) -> [Section] in
-      [Section.recentPosts(rows)]
-    }
+//    let statuses = self.statuses.items.map { (statuses) -> [Row] in
+//      [Row.sectionHeader(title: "最近の投稿")] + statuses.map { Row.status($0) }
+//    }.map { (rows) -> [Section] in
+//      [Section.recentPosts(rows)]
+//    }
+    let statuses = Observable<[Section]>.just([])
+
+    let operations = [Section.userOperations()]
 
     return Observable.combineLatest(user, statuses) { (userSection, statusesSection) -> [Section] in
-      return userSection + statusesSection
+      return userSection + statusesSection + operations
     }
   }
 
@@ -68,10 +71,12 @@ final class UserProfileViewModel: TweetCellRepresentable {
           guard let relationship = relationship else {
             return
           }
-          cell.relationshipDescription = relationship.followedBy ? "フォローされています" : "フォローされていません"
-          cell.set(followButtonStyle: relationship.following ? .unfollow : .follow)
+          cell.relationshipDescription = relationship.blocking ? "ブロックしています" : relationship.followedBy ? "フォローされています" : "フォローされていません"
+          cell.set(followButtonStyle: relationship.blocking ? .blocking : relationship.following ? .unfollow : .follow)
           cell.rx.tapFollowButton.subscribe(onNext: { [unowned self] (_) in
-            if relationship.following {
+            if relationship.blocking {
+              self.unblock.subscribe().addDisposableTo(self.bag)
+            } else if relationship.following {
               MastodonRepository.unfollow(userID: user.id).bindTo(self.relationship).addDisposableTo(cell.bag)
             } else {
               MastodonRepository.follow(userID: user.id).bindTo(self.relationship).addDisposableTo(cell.bag)
@@ -105,6 +110,10 @@ final class UserProfileViewModel: TweetCellRepresentable {
         let cell: SectionHeaderCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
         cell.title = title
         return cell
+      case .block:
+        let cell: SimpleTextCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        cell.title = "ブロック"
+        return cell
       }
     }
   }
@@ -127,6 +136,15 @@ final class UserProfileViewModel: TweetCellRepresentable {
         _self._transition.onNext(.followers(user: _self.user))
       case .following:
         _self._transition.onNext(.followings(user: _self.user))
+      case .block:
+        guard let relationship = _self.relationship.value else {
+          return
+        }
+        if relationship.blocking {
+          _self._transition.onNext(.unblock)
+        } else {
+          _self._transition.onNext(.block)
+        }
       default:
         break
       }
@@ -138,6 +156,8 @@ final class UserProfileViewModel: TweetCellRepresentable {
     case followers(user: MastodonAccountEntity)
     case followings(user: MastodonAccountEntity)
     case safari(URL)
+    case block
+    case unblock
   }
 }
 
@@ -146,6 +166,12 @@ final class UserProfileViewModel: TweetCellRepresentable {
 extension UserProfileViewModel {
   var fetchRecentPost: Observable<Void> {
     return MastodonRepository.statuses(userID: user.id, excludeReplies: true)
+      .map({ (statuses) -> [MastodonStatusEntity] in
+        guard let first = statuses.first else {
+          return []
+        }
+        return [first]
+      })
       .do(onNext: { [weak self] (statuses) in
         self?.statuses.refresh(statuses)
       })
@@ -159,6 +185,22 @@ extension UserProfileViewModel {
       })
       .map { _ in () }
   }
+
+  var block: Observable<Void> {
+    return MastodonRepository.block(userID: user.id)
+      .do(onNext: { [weak self] (relationship) in
+        self?.relationship.value = relationship
+      })
+      .map { _ in () }
+  }
+
+  var unblock: Observable<Void> {
+    return MastodonRepository.unblock(userID: user.id)
+      .do(onNext: { [weak self] (relationship) in
+        self?.relationship.value = relationship
+      })
+      .map { _ in () }
+  }
 }
 
 // MARK: - RxDataSources
@@ -167,6 +209,7 @@ extension UserProfileViewModel {
   enum Section: SectionModelType {
     case userProfile([Row])
     case recentPosts([Row])
+    case operations([Row])
 
     typealias Item = Row
 
@@ -175,6 +218,8 @@ extension UserProfileViewModel {
       case .recentPosts(let rows):
         return rows
       case .userProfile(let rows):
+        return rows
+      case .operations(let rows):
         return rows
       }
     }
@@ -185,6 +230,8 @@ extension UserProfileViewModel {
         self = .recentPosts(items)
       case .userProfile:
         self = .userProfile(items)
+      case .operations:
+        self = .operations(items)
       }
     }
 
@@ -197,6 +244,13 @@ extension UserProfileViewModel {
       ]
       return Section.userProfile(rows)
     }
+
+    static func userOperations() -> Section {
+      return Section.operations([
+        .sectionHeader(title: "操作"),
+        .block
+        ])
+    }
   }
 
   enum Row {
@@ -207,5 +261,7 @@ extension UserProfileViewModel {
     case follower(Int)
     case statusCount(Int)
     case status(MastodonStatusEntity)
+
+    case block
   }
 }

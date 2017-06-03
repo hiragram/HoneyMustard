@@ -31,7 +31,7 @@
                             <constraint firstItem="bKA-Qb-CGo" firstAttribute="top" secondItem="wwF-3x-fE4" secondAttribute="top" id="7Jt-cm-oEZ"/>
                             <constraint firstItem="bKA-Qb-CGo" firstAttribute="leading" secondItem="wwF-3x-fE4" secondAttribute="leading" id="9uT-wp-9wj"/>
                             <constraint firstAttribute="trailing" secondItem="bKA-Qb-CGo" secondAttribute="trailing" id="b2q-1z-RNd"/>
-                            <constraint firstItem="I1O-Gc-Jee" firstAttribute="top" secondItem="bKA-Qb-CGo" secondAttribute="bottom" id="iEE-A8-ZvH"/>
+                            <constraint firstAttribute="bottom" secondItem="bKA-Qb-CGo" secondAttribute="bottom" id="gRH-Nk-S9y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UIa-e8-5Ma"/>

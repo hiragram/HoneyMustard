@@ -166,6 +166,11 @@ extension UserProfileHeaderCell {
       text = "フォローを解除する"
       backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
       borderColor = backgroundColor.cgColor
+    case .blocking:
+      tintColor = UIColor.white
+      text = "ブロックを解除する"
+      backgroundColor = .darkGray
+      borderColor = backgroundColor.cgColor
     }
     followButton.tintColor = tintColor
     followButton.backgroundColor = backgroundColor
@@ -199,6 +204,7 @@ extension UserProfileHeaderCell {
   enum FollowButtonStyle {
     case follow
     case unfollow
+    case blocking
     case fetching
   }
 }

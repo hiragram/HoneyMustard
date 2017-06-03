@@ -47,6 +47,30 @@ final class UserProfileViewController: UIViewController, StoryboardInstantiatabl
       case .safari(let url):
         let safari = SFSafariViewController.init(url: url)
         self?.present(safari, animated: true, completion: nil)
+      case .block:
+        let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        let ok = UIAlertAction.init(title: "ブロック", style: .destructive, handler: { [weak self] (_) in
+          guard let _self = self else {
+            return
+          }
+          _self.vm.block.subscribe().addDisposableTo(_self.bag)
+        })
+        let cancel = UIAlertAction.init(title: "キャンセル", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        self?.present(alert, animated: true, completion: nil)
+      case .unblock:
+        let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        let ok = UIAlertAction.init(title: "ブロック解除", style: .destructive, handler: { [weak self] (_) in
+          guard let _self = self else {
+            return
+          }
+          _self.vm.unblock.subscribe().addDisposableTo(_self.bag)
+        })
+        let cancel = UIAlertAction.init(title: "キャンセル", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        self?.present(alert, animated: true, completion: nil)
       }
     }).addDisposableTo(bag)
   }
