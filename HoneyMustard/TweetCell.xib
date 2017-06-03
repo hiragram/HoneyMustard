@@ -165,6 +165,26 @@
                                             <constraint firstAttribute="bottom" secondItem="LY7-w3-nWa" secondAttribute="bottom" id="f9O-c9-2vI"/>
                                         </constraints>
                                     </view>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Unj-dw-2Ef">
+                                        <rect key="frame" x="0.0" y="0.0" width="364" height="300"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fme-nB-GkH">
+                                            <rect key="frame" x="0.0" y="0.0" width="364" height="300"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タップすると表示されます" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvr-Vt-Mm3" customClass="DesignedLabel" customModule="HoneyMustard" customModuleProvider="target">
+                                                    <rect key="frame" x="78" y="140" width="208" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qvr-Vt-Mm3" firstAttribute="centerX" secondItem="fme-nB-GkH" secondAttribute="centerX" id="Tnz-sF-bxQ"/>
+                                                <constraint firstItem="qvr-Vt-Mm3" firstAttribute="centerY" secondItem="fme-nB-GkH" secondAttribute="centerY" id="lGj-Bq-Gjs"/>
+                                            </constraints>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                    </visualEffectView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -176,10 +196,14 @@
                                     <constraint firstAttribute="trailing" secondItem="hfU-4c-fXw" secondAttribute="trailing" identifier="Preview4Trailing" id="MZP-WX-FJL"/>
                                     <constraint firstItem="oAP-UA-bQu" firstAttribute="leading" secondItem="5iF-oj-vp5" secondAttribute="leading" id="Ncf-WD-Ujw"/>
                                     <constraint firstItem="lff-d3-UB1" firstAttribute="trailing" secondItem="oAP-UA-bQu" secondAttribute="trailing" identifier="Preview3Trailing" id="TCL-Vs-98N"/>
+                                    <constraint firstItem="Unj-dw-2Ef" firstAttribute="trailing" secondItem="hfU-4c-fXw" secondAttribute="trailing" id="TMS-8k-QAF"/>
                                     <constraint firstAttribute="trailing" secondItem="v9g-cU-9gi" secondAttribute="trailing" id="WBD-2A-5AF"/>
+                                    <constraint firstItem="Unj-dw-2Ef" firstAttribute="bottom" secondItem="hfU-4c-fXw" secondAttribute="bottom" id="YUj-2q-Zog"/>
                                     <constraint firstItem="hfU-4c-fXw" firstAttribute="leading" secondItem="v9g-cU-9gi" secondAttribute="leading" identifier="Preview4Leading-Preview2Leading" id="Z1l-vS-AOW"/>
                                     <constraint firstAttribute="bottom" secondItem="hfU-4c-fXw" secondAttribute="bottom" id="ZYW-X9-aCF"/>
                                     <constraint firstItem="v9g-cU-9gi" firstAttribute="top" secondItem="5iF-oj-vp5" secondAttribute="top" identifier="Preview3Top" id="ZxO-s4-Tug"/>
+                                    <constraint firstItem="Unj-dw-2Ef" firstAttribute="top" secondItem="lff-d3-UB1" secondAttribute="top" id="chp-o3-3aw"/>
+                                    <constraint firstItem="Unj-dw-2Ef" firstAttribute="leading" secondItem="lff-d3-UB1" secondAttribute="leading" id="e8n-jt-9ZH"/>
                                     <constraint firstItem="lff-d3-UB1" firstAttribute="bottom" secondItem="v9g-cU-9gi" secondAttribute="bottom" id="ep3-xp-wLh"/>
                                     <constraint firstAttribute="bottom" secondItem="oAP-UA-bQu" secondAttribute="bottom" identifier="Preview3Bottom" id="hej-F8-jId"/>
                                     <constraint firstItem="lff-d3-UB1" firstAttribute="trailing" secondItem="v9g-cU-9gi" secondAttribute="leading" identifier="Preview1Trailing" id="y3D-GT-jBy"/>
@@ -230,6 +254,7 @@
             <inset key="separatorInset" minX="56" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="bodyLabel" destination="3Zt-4r-DDQ" id="C7L-my-HCT"/>
+                <outlet property="cautionLabel" destination="qvr-Vt-Mm3" id="zMs-30-tXo"/>
                 <outlet property="controlContainer" destination="Op0-dC-9bE" id="Y6z-cR-wEM"/>
                 <outlet property="controlContainerHeight" destination="Nc6-E0-naz" id="f1n-zu-2lb"/>
                 <outlet property="dateLabel" destination="23s-yh-erO" id="Shn-LE-nQr"/>
@@ -237,6 +262,7 @@
                 <outlet property="iconImageView" destination="aPv-aB-wpi" id="80T-ku-CDY"/>
                 <outlet property="mediaContainer" destination="5iF-oj-vp5" id="vlc-oY-7Ea"/>
                 <outlet property="mediaContainerHeight" destination="4as-6w-DWN" id="cLf-tb-KaD"/>
+                <outlet property="mediaCoverView" destination="Unj-dw-2Ef" id="GHM-PF-Nmd"/>
                 <outlet property="nameLabel" destination="V85-qd-b9G" id="04j-E2-jgG"/>
                 <outlet property="preview1Height" destination="OZA-Pf-XYL" id="nG0-TF-zgw"/>
                 <outlet property="preview1Width" destination="qHT-IX-qjc" id="zVi-Xg-jW5"/>
@@ -250,7 +276,7 @@
                 <outlet property="titleContainerHeight" destination="1zL-tg-s0F" id="CmS-a0-2SQ"/>
                 <outlet property="titleLabel" destination="Bjs-dS-yg2" id="InQ-Jm-rvf"/>
             </connections>
-            <point key="canvasLocation" x="-207" y="24"/>
+            <point key="canvasLocation" x="-207" y="23.5"/>
         </tableViewCell>
     </objects>
     <resources>

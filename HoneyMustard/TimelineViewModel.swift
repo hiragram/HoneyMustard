@@ -46,6 +46,8 @@ class TimelineViewModel: TweetCellRepresentable {
 
   private var friendIDs: [Int] = []
 
+  private var allowedSensitiveStatusIDs: [Int: Bool] = [:]
+
   init(source: Source) {
     self.source = source
     dataSource.configureCell = { [unowned self] (dataSource, tableView, indexPath, row) -> UITableViewCell in
@@ -72,6 +74,14 @@ class TimelineViewModel: TweetCellRepresentable {
           }
           .bindTo(self._transition).addDisposableTo(cell.bag)
 
+        let mediaHidden = status.sensitive == true && self.hidesMedia(status: status)
+        cell.set(mediaHidden: mediaHidden)
+
+        cell.rx.tapCover.subscribe(onNext: { [weak self] (_) in
+          self?.allowedSensitiveStatusIDs[status.id] = true
+          cell.set(mediaHidden: false)
+        }).addDisposableTo(cell.bag)
+
         return cell
       }
     }
@@ -94,6 +104,10 @@ class TimelineViewModel: TweetCellRepresentable {
       tableView.beginUpdates()
       tableView.endUpdates()
     }).addDisposableTo(bag)
+  }
+
+  private func hidesMedia(status: MastodonStatusEntity) -> Bool {
+    return !(allowedSensitiveStatusIDs[status.id] == true)
   }
 }
 

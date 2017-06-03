@@ -114,7 +114,21 @@ final class TweetCell: UITableViewCell {
 //      return _colorRibbon.value
 //    }
 //  }
+  @IBOutlet fileprivate weak var mediaCoverView: UIVisualEffectView! {
+    didSet {
+      let gesture = UITapGestureRecognizer.init()
+      mediaCoverView.addGestureRecognizer(gesture)
+      mediaCoverTapGesture = gesture
+    }
+  }
 
+  @IBOutlet fileprivate weak var cautionLabel: DesignedLabel! {
+    didSet {
+      cautionLabel.typography = Style.current.generalText
+    }
+  }
+
+  fileprivate var mediaCoverTapGesture: UITapGestureRecognizer! = nil
   // MARK: - Lifecycle
 
   override func prepareForReuse() {
@@ -249,6 +263,16 @@ extension TweetCell {
     favoriteButton.tintColor = tintColor
   }
 
+  func set(mediaHidden: Bool) {
+    if mediaHidden {
+      mediaCoverView.isHidden = false
+      cautionLabel.isHidden = false
+    } else {
+      mediaCoverView.isHidden = true
+      cautionLabel.isHidden = true
+    }
+  }
+
   func set(attachments: AttachedImage) {
     let mediaContainerSize = mediaContainer.bounds.size
     switch attachments {
@@ -338,6 +362,10 @@ extension Reactive where Base: TweetCell {
 
   var tapUser: Observable<Void> {
     return base.iconImageTapGesture.rx.event.map { _ in () }
+  }
+
+  var tapCover: Observable<Void> {
+    return base.mediaCoverTapGesture.rx.event.map { _ in () }
   }
 }
 
